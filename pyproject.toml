@@ -1,0 +1,60 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "virtue-social-rl"
+version = "0.0.1"
+description = "Virtue ethics with social reinforcement learning: measuring and acquiring ethical dispositions in multi-agent environments"
+readme = "README.md"
+requires-python = ">=3.10,<3.13"
+authors = [{ name = "Majid Ghasemi" }]
+# Versions follow SocialJax's own pins (third_party/SocialJax/requirements.txt)
+# for every package its environments import.
+dependencies = [
+    "jax==0.6.2",
+    "jaxlib==0.6.2",
+    "flax==0.10.7",
+    "chex==0.1.84",
+    "optax==0.1.7",
+    "distrax==0.1.5",
+    "gymnax==0.0.8",
+    "numpy==1.26.4",
+    "scipy==1.12.0",
+    "pillow==11.1.0",
+    "safetensors==0.5.2",
+    "pyyaml==6.0.2",
+    "pandas==2.2.3",
+    "matplotlib==3.10.0",
+]
+
+[project.optional-dependencies]
+# GPU (CUDA 12) build of the same JAX version.
+gpu = ["jax[cuda12]==0.6.2"]
+dev = ["pytest>=8"]
+tracking = ["wandb==0.27.2"]
+
+# Our code lives in src/. SocialJax is a git submodule that is not packaged
+# upstream, so we expose its `socialjax` package from the submodule directly.
+[tool.setuptools.package-dir]
+virtue_rl = "src/virtue_rl"
+socialjax = "third_party/SocialJax/socialjax"
+
+[tool.setuptools]
+packages = [
+    "virtue_rl",
+    "socialjax",
+    "socialjax.environments",
+    "socialjax.environments.cleanup",
+    "socialjax.environments.coin_game",
+    "socialjax.environments.common_harvest",
+    "socialjax.environments.coop_mining",
+    "socialjax.environments.gift",
+    "socialjax.environments.lb_foraging",
+    "socialjax.environments.mushrooms",
+    "socialjax.environments.pd_arena",
+    "socialjax.environments.territory",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

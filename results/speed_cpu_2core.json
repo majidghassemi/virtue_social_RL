@@ -1,0 +1,14 @@
+{
+  "env": "harvest_common_open",
+  "num_agents": 7,
+  "num_envs": 1024,
+  "num_steps": 1000,
+  "device": "TFRT_CPU_0",
+  "platform": "Linux-6.18.44-fc-v165-x86_64-with-glibc2.39",
+  "jax_version": "0.6.2",
+  "compile_plus_first_run_s": 63.5,
+  "run_s": 48.95,
+  "env_steps_per_s": 20917,
+  "agent_steps_per_s": 146422,
+  "random_policy_total_reward": 971614.0
+}
