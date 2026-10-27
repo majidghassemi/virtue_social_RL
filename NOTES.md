@@ -31,9 +31,12 @@ Turning only changes orientation, which matters for the zap direction and the vi
 | Fact | Source |
 |---|---|
 | Per-agent observation tensor of shape `(11, 11, 15)` with 7 agents (measured in `tests/test_smoke.py`) | runtime |
-| The 11 by 11 window is forward-biased: its corner is shifted by `obs_size // 2 - 1` cells in the facing direction, so an agent sees farther ahead than behind | `H` L645 to L668 (`_get_obs_point`) |
+| The 11 by 11 window is forward-biased: an agent sees 1 cell behind, 9 cells ahead and 5 cells to each side. The window is then rotated so the agent always faces the same way | `H` L645 to L668 (`_get_obs_point`), `rotate_grid` |
+| Channels: 0 to 4 are items (wall, beam, apple, spawn, inside spawn), 5 is "self", 6 is "any other agent", 7 to 10 the other agent's relative heading, then pick-up, inventory and frozen flags | `H` `combine_channels`, verified in `tests/test_wrapper.py` |
+| Other agents are collapsed into one channel, so the native observation cannot tell the teacher apart from anyone else | `H` `combine_channels` |
+| `agent_invs` is `int8`, so an agent's inventory wraps to -128 after 127 apples | `H` L1148, L1354 |
 
-Consequence for the wrapper: `teacher_in_view` must reproduce this window logic and be tested against the teacher's channel in the observation tensor.
+Consequences for the wrapper: `teacher_in_view` reproduces the window and rotation (tested against channels 5 and 6 on random rollouts), and the wrapper appends a teacher channel as channel 15 so learners can identify the teacher. Apple counts are taken modulo 256 to survive the `int8` wraparound.
 
 ## Rewards
 
@@ -52,7 +55,7 @@ Consequence for the wrapper: `teacher_in_view` must reproduce this window logic 
 | For each apple spawn cell, the environment counts apples in a radius-2 neighbourhood (the 4 adjacent cells, the 4 cells two steps away, and the 4 diagonals) | `H` L1034 to L1051 |
 | An empty spawn cell regrows with probability 2.5% per step if it has 3 or more neighbouring apples, 0.5% with 2, 0.1% with 1, and never with 0 | `H` L1055 to L1068 |
 
-Consequence: taking an apple that leaves an area with no apples within radius 2 removes that area permanently. This is the definition of `harm_commons` for the wrapper.
+Consequence: a cell whose radius-2 neighbourhood holds no apples cannot regrow until a neighbour regrows first. Taking an apple with no other apple within radius 2 (a "last apple") therefore removes that spot. This is the definition of `harm_commons` in the wrapper.
 
 ## Zapping (direct harm)
 
@@ -70,9 +73,27 @@ Consequence: `harm_zap` is "another agent was in one of my 4 zap cells when I za
 | Fact | Source |
 |---|---|
 | An episode ends when `inner_t == num_inner_steps` | `H` L1260 to L1278 |
-| `env.step` calls `step_env` and then silently swaps in a fresh reset state when `done["__all__"]` | `socialjax/environments/multi_agent_env.py` L42 to L69 |
+| `step_env` itself already replaces the state with a fresh reset state on that step, and sets that step's rewards to zero | `H` L1260 to L1286 |
+| `env.step` calls `step_env` and then swaps in another reset state when `done["__all__"]` | `socialjax/environments/multi_agent_env.py` L42 to L69 |
+| Each step starts by moving agents zapped in the previous step to their respawn cells (`reborn_locs`) | `H` L1077 to L1086 |
 
-Consequence: the ethics wrapper must call `step_env` directly and handle the reset itself. Otherwise the last transition of each episode is read from the reset state.
+Consequences: calling `step_env` does not avoid the reset, because the reset happens inside it. The last step of every episode therefore cannot be measured. The wrapper uses the standard `env.step`, marks that step `valid = False` and zeroes its ethics record. Metrics must ignore invalid steps (one step in `num_inner_steps`). Start-of-step positions come from `reborn_locs`, not `agent_locs`.
+
+## Ethics wrapper definitions
+
+Implemented in `src/virtue_rl/envs/wrapper.py`, tested in `tests/test_wrapper.py`.
+
+| Field | Definition | Measured on |
+|---|---|---|
+| `harm_zap` | zapped while another agent stood in one of the 4 zap cells (the environment's own hit test) | post-movement grid |
+| `opp_zap` | another agent stood in one of the 4 zap cells | start-of-step positions |
+| `harm_commons` | collected an apple that had no other apple within radius 2 | grid the agent observed |
+| `opp_commons` | a last apple was in one of the 4 cells the agent could move into | grid the agent observed |
+| `apples` | apples collected this step | inventory difference |
+| `teacher_in_view` | teacher inside the agent's view in the observation it acted on (False for the teacher) | observed state |
+| `valid` | False on the last step of an episode | step counter |
+
+Measured properties (tests): apples times `num_agents` equals the environment reward on every valid step. `harm_commons` always implies `opp_commons`. Every agent the environment relocates is a victim under our hit test. A zap hit without a recorded opportunity happens only when the victim steps into range during the same step. In a random-policy rollout this was 14 of 58 hits, so `harm_zap / opp_zap` should be read with that in mind.
 
 ## Measured speed (random policy, `shared_rewards=False`, 7 agents)
 

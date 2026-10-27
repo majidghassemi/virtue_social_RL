@@ -1,0 +1,11 @@
+# Default environment and roles for Commons Harvest Open.
+# Agent 0 is the teacher, then learners, then bystanders.
+roles:
+  num_learners: 3
+  num_bystanders: 3
+
+env:
+  num_inner_steps: 1000
+  add_teacher_channel: true
+  # Optional: map_ASCII (list of strings) and grid_size [rows, cols].
+  # When omitted, SocialJax's default Harvest Open map is used.

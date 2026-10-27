@@ -38,11 +38,13 @@ tracking = ["wandb==0.27.2"]
 # upstream, so we expose its `socialjax` package from the submodule directly.
 [tool.setuptools.package-dir]
 virtue_rl = "src/virtue_rl"
+"virtue_rl.envs" = "src/virtue_rl/envs"
 socialjax = "third_party/SocialJax/socialjax"
 
 [tool.setuptools]
 packages = [
     "virtue_rl",
+    "virtue_rl.envs",
     "socialjax",
     "socialjax.environments",
     "socialjax.environments.cleanup",

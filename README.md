@@ -35,7 +35,7 @@ For a CUDA 12 GPU, install the GPU extra instead: `pip install -e ".[dev,gpu]"`.
 | Path | Contents |
 |---|---|
 | `third_party/SocialJax` | SocialJax, pinned as a git submodule at commit `18e2171` |
-| `src/virtue_rl` | this project's code |
+| `src/virtue_rl` | this project's code (`envs/` holds the ethics wrapper) |
 | `scripts/` | runnable entry points |
 | `tests/` | unit tests |
 | `results/` | small result files (benchmarks, summaries) |
