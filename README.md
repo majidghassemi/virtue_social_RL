@@ -30,6 +30,13 @@ For a CUDA 12 GPU, install the GPU extra instead: `pip install -e ".[dev,gpu]"`.
 .venv/bin/python scripts/smoke_test.py # random-policy speed benchmark
 ```
 
+## Maps
+
+```bash
+.venv/bin/python scripts/make_maps.py --preview results/maps_suite_v1.png  # regenerate the suite
+.venv/bin/python scripts/check_maps.py                                    # invariants on every map
+```
+
 ## Layout
 
 | Path | Contents |
@@ -38,7 +45,9 @@ For a CUDA 12 GPU, install the GPU extra instead: `pip install -e ".[dev,gpu]"`.
 | `src/virtue_rl` | this project's code (`envs/` holds the ethics wrapper) |
 | `scripts/` | runnable entry points |
 | `tests/` | unit tests |
-| `results/` | small result files (benchmarks, summaries) |
+| `configs/` | YAML configs (roles, environment, map suite) |
+| `maps/` | generated map suites (JSON) |
+| `results/` | small result files (benchmarks, map checks, previews) |
 | `NOTES.md` | environment facts this project relies on, with source line numbers |
 
 SocialJax is not packaged upstream, so `pyproject.toml` exposes its `socialjax` package directly from the submodule. Dependency versions follow SocialJax's own pins.

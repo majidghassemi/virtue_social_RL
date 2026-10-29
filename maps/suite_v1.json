@@ -1,0 +1,2703 @@
+{
+ "meta": {
+  "config": {
+   "num_agents": 7,
+   "patch": {
+    "num_patches": [
+     5,
+     8
+    ],
+    "radii": [
+     0,
+     1,
+     2
+    ]
+   },
+   "splits": {
+    "seen": {
+     "families": [
+      "open"
+     ],
+     "count": 12,
+     "first_seed": 0
+    },
+    "heldout_position": {
+     "families": [
+      "open"
+     ],
+     "count": 6,
+     "first_seed": 1000,
+     "max_apple_overlap": 0.5
+    },
+    "heldout_structure": {
+     "families": [
+      "divided",
+      "rooms"
+     ],
+     "count": 6,
+     "first_seed": 2000
+    }
+   },
+   "out": "maps/suite_v1.json"
+  },
+  "band_cuts_structural_cost": [
+   0.18103333333333332,
+   0.24206666666666668
+  ],
+  "band_note": "provisional, from structural cost; Phase 3 measures it empirically",
+  "grid_size": [
+   18,
+   34
+  ]
+ },
+ "maps": [
+  {
+   "name": "seen_00_open",
+   "split": "seen",
+   "family": "open",
+   "seed": 0,
+   "ascii_present": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W A       A    A       WWWWWWWWWWW",
+    "W        AAA      A    WWWWWWWWWWW",
+    "W       AAAAA          WWWWWWWWWWW",
+    "W        AAA           WWWWWWWWWWW",
+    "W      A  A       A    WWWWWWWWWWW",
+    "W A   AAA        AAA   WWWWWWWWWWW",
+    "W      A        AAAAA  WWWWWWWWWWW",
+    "W           A    AAA   WWWWWWWWWWW",
+    "W          AAA    A    WWWWWWWWW W",
+    "W           A          WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W           Q          WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "ascii_absent": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W A       A    A       WWWWWWWWWWW",
+    "W        AAA      A    WWWWWWWWWWW",
+    "W       AAAAA          WWWWWWWWWWW",
+    "W        AAA           WWWWWWWWWWW",
+    "W      A  A       A    WWWWWWWWWWW",
+    "W A   AAA        AAA   WWWWWWWWWWW",
+    "W      A        AAAAA  WWWWWWWWWWW",
+    "W           A    AAA   WWWWWWWWWWW",
+    "W          AAA    A    WWWWWWWWWQW",
+    "W           A          WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "stats": {
+    "apples": 40,
+    "components": 8,
+    "structural_virtue_cost": 0.2,
+    "arena_walls": 0,
+    "patches": [
+     {
+      "center": [
+       5,
+       6
+      ],
+      "radius": 1,
+      "size": 5
+     },
+     {
+      "center": [
+       0,
+       1
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       1,
+       17
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       8,
+       11
+      ],
+      "radius": 1,
+      "size": 5
+     },
+     {
+      "center": [
+       2,
+       9
+      ],
+      "radius": 2,
+      "size": 13
+     },
+     {
+      "center": [
+       6,
+       17
+      ],
+      "radius": 2,
+      "size": 13
+     },
+     {
+      "center": [
+       5,
+       1
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       0,
+       14
+      ],
+      "radius": 0,
+      "size": 1
+     }
+    ]
+   },
+   "band": "medium"
+  },
+  {
+   "name": "seen_01_open",
+   "split": "seen",
+   "family": "open",
+   "seed": 1,
+   "ascii_present": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W       A          A   WWWWWWWWWWW",
+    "W      AAA             WWWWWWWWWWW",
+    "W     AAAAA            WWWWWWWWWWW",
+    "W  A   AAA        A    WWWWWWWWWWW",
+    "W AAA   A              WWWWWWWWWWW",
+    "W  A                 A WWWWWWWWWWW",
+    "W                   AAAWWWWWWWWWWW",
+    "W                A   A WWWWWWWWW W",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W           Q          WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "ascii_absent": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W       A          A   WWWWWWWWWWW",
+    "W      AAA             WWWWWWWWWWW",
+    "W     AAAAA            WWWWWWWWWWW",
+    "W  A   AAA        A    WWWWWWWWWWW",
+    "W AAA   A              WWWWWWWWWWW",
+    "W  A                 A WWWWWWWWWWW",
+    "W                   AAAWWWWWWWWWWW",
+    "W                A   A WWWWWWWWWQW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "stats": {
+    "apples": 26,
+    "components": 6,
+    "structural_virtue_cost": 0.2308,
+    "arena_walls": 0,
+    "patches": [
+     {
+      "center": [
+       7,
+       20
+      ],
+      "radius": 1,
+      "size": 5
+     },
+     {
+      "center": [
+       1,
+       18
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       3,
+       7
+      ],
+      "radius": 2,
+      "size": 13
+     },
+     {
+      "center": [
+       5,
+       2
+      ],
+      "radius": 1,
+      "size": 5
+     },
+     {
+      "center": [
+       8,
+       16
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       4,
+       17
+      ],
+      "radius": 0,
+      "size": 1
+     }
+    ]
+   },
+   "band": "medium"
+  },
+  {
+   "name": "seen_02_open",
+   "split": "seen",
+   "family": "open",
+   "seed": 2,
+   "ascii_present": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W                    A WWWWWWWWWWW",
+    "W      A         A  AAAWWWWWWWWWWW",
+    "W                    A WWWWWWWWWWW",
+    "W             A        WWWWWWWWWWW",
+    "W                   A  WWWWWWWWWWW",
+    "W                  AAA WWWWWWWWWWW",
+    "W     A    A      AAAAAWWWWWWWWWWW",
+    "W    AAA  AAA      AAA WWWWWWWWWWW",
+    "W A   A    A        A  WWWWWWWWW W",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W           Q          WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "ascii_absent": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W                    A WWWWWWWWWWW",
+    "W      A         A  AAAWWWWWWWWWWW",
+    "W                    A WWWWWWWWWWW",
+    "W             A        WWWWWWWWWWW",
+    "W                   A  WWWWWWWWWWW",
+    "W                  AAA WWWWWWWWWWW",
+    "W     A    A      AAAAAWWWWWWWWWWW",
+    "W    AAA  AAA      AAA WWWWWWWWWWW",
+    "W A   A    A        A  WWWWWWWWWQW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "stats": {
+    "apples": 32,
+    "components": 8,
+    "structural_virtue_cost": 0.25,
+    "arena_walls": 0,
+    "patches": [
+     {
+      "center": [
+       1,
+       6
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       7,
+       10
+      ],
+      "radius": 1,
+      "size": 5
+     },
+     {
+      "center": [
+       3,
+       13
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       6,
+       19
+      ],
+      "radius": 2,
+      "size": 13
+     },
+     {
+      "center": [
+       8,
+       1
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       1,
+       16
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       1,
+       20
+      ],
+      "radius": 1,
+      "size": 5
+     },
+     {
+      "center": [
+       7,
+       5
+      ],
+      "radius": 1,
+      "size": 5
+     }
+    ]
+   },
+   "band": "high"
+  },
+  {
+   "name": "seen_03_open",
+   "split": "seen",
+   "family": "open",
+   "seed": 3,
+   "ascii_present": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W     A                WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "WA                     WWWWWWWWWWW",
+    "W  A     A    A        WWWWWWWWWWW",
+    "W AAA                  WWWWWWWWWWW",
+    "WAAAAA         A       WWWWWWWWWWW",
+    "W AAA            A     WWWWWWWWWWW",
+    "W  A                A  WWWWWWWWW W",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W           Q          WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "ascii_absent": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W     A                WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "WA                     WWWWWWWWWWW",
+    "W  A     A    A        WWWWWWWWWWW",
+    "W AAA                  WWWWWWWWWWW",
+    "WAAAAA         A       WWWWWWWWWWW",
+    "W AAA            A     WWWWWWWWWWW",
+    "W  A                A  WWWWWWWWWQW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "stats": {
+    "apples": 20,
+    "components": 8,
+    "structural_virtue_cost": 0.4,
+    "arena_walls": 0,
+    "patches": [
+     {
+      "center": [
+       1,
+       5
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       8,
+       19
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       4,
+       13
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       6,
+       2
+      ],
+      "radius": 2,
+      "size": 13
+     },
+     {
+      "center": [
+       4,
+       8
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       7,
+       16
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       6,
+       14
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       3,
+       0
+      ],
+      "radius": 0,
+      "size": 1
+     }
+    ]
+   },
+   "band": "high"
+  },
+  {
+   "name": "seen_04_open",
+   "split": "seen",
+   "family": "open",
+   "seed": 4,
+   "ascii_present": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W           A    A     WWWWWWWWWWW",
+    "W   A           AAA    WWWWWWWWWWW",
+    "W     A          A     WWWWWWWWWWW",
+    "W    AAA      A        WWWWWWWWWWW",
+    "W   AAAAA   A       A  WWWWWWWWWWW",
+    "W    AAA   AAA     AAA WWWWWWWWWWW",
+    "W     A   AAAAA   AAAAAWWWWWWWWWWW",
+    "W          AAA     AAA WWWWWWWWW W",
+    "W           A       A  WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W           Q          WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "ascii_absent": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W           A    A     WWWWWWWWWWW",
+    "W   A           AAA    WWWWWWWWWWW",
+    "W     A          A     WWWWWWWWWWW",
+    "W    AAA      A        WWWWWWWWWWW",
+    "W   AAAAA   A       A  WWWWWWWWWWW",
+    "W    AAA   AAA     AAA WWWWWWWWWWW",
+    "W     A   AAAAA   AAAAAWWWWWWWWWWW",
+    "W          AAA     AAA WWWWWWWWWQW",
+    "W           A       A  WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "stats": {
+    "apples": 47,
+    "components": 7,
+    "structural_virtue_cost": 0.1489,
+    "arena_walls": 0,
+    "patches": [
+     {
+      "center": [
+       7,
+       11
+      ],
+      "radius": 2,
+      "size": 13
+     },
+     {
+      "center": [
+       7,
+       19
+      ],
+      "radius": 2,
+      "size": 13
+     },
+     {
+      "center": [
+       4,
+       13
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       5,
+       5
+      ],
+      "radius": 2,
+      "size": 13
+     },
+     {
+      "center": [
+       2,
+       16
+      ],
+      "radius": 1,
+      "size": 5
+     },
+     {
+      "center": [
+       1,
+       11
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       2,
+       3
+      ],
+      "radius": 0,
+      "size": 1
+     }
+    ]
+   },
+   "band": "low"
+  },
+  {
+   "name": "seen_05_open",
+   "split": "seen",
+   "family": "open",
+   "seed": 5,
+   "ascii_present": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W   A            A     WWWWWWWWWWW",
+    "W A     A       AAA    WWWWWWWWWWW",
+    "WAAA   AAA     AAAAA   WWWWWWWWWWW",
+    "W A   AAAAA     AAA    WWWWWWWWWWW",
+    "W      AAA    A  A     WWWWWWWWWWW",
+    "W       A    AAA       WWWWWWWWWWW",
+    "W             A        WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                 A    WWWWWWWWW W",
+    "W A                    WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W           Q          WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "ascii_absent": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W   A            A     WWWWWWWWWWW",
+    "W A     A       AAA    WWWWWWWWWWW",
+    "WAAA   AAA     AAAAA   WWWWWWWWWWW",
+    "W A   AAAAA     AAA    WWWWWWWWWWW",
+    "W      AAA    A  A     WWWWWWWWWWW",
+    "W       A    AAA       WWWWWWWWWWW",
+    "W             A        WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                 A    WWWWWWWWWQW",
+    "W A                    WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "stats": {
+    "apples": 39,
+    "components": 7,
+    "structural_virtue_cost": 0.1795,
+    "arena_walls": 0,
+    "patches": [
+     {
+      "center": [
+       2,
+       16
+      ],
+      "radius": 2,
+      "size": 13
+     },
+     {
+      "center": [
+       5,
+       13
+      ],
+      "radius": 1,
+      "size": 5
+     },
+     {
+      "center": [
+       9,
+       1
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       2,
+       1
+      ],
+      "radius": 1,
+      "size": 5
+     },
+     {
+      "center": [
+       0,
+       3
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       3,
+       7
+      ],
+      "radius": 2,
+      "size": 13
+     },
+     {
+      "center": [
+       8,
+       17
+      ],
+      "radius": 0,
+      "size": 1
+     }
+    ]
+   },
+   "band": "low"
+  },
+  {
+   "name": "seen_06_open",
+   "split": "seen",
+   "family": "open",
+   "seed": 6,
+   "ascii_present": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W             A        WWWWWWWWWWW",
+    "W            AAA     A WWWWWWWWWWW",
+    "W       A   AAAAA   AAAWWWWWWWWWWW",
+    "W      AAA   AAA  A  A WWWWWWWWWWW",
+    "W A     A     A  AAA   WWWWWWWWWWW",
+    "W               AAAAA  WWWWWWWWWWW",
+    "W                AAA   WWWWWWWWW W",
+    "W                 A   AWWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W           Q          WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "ascii_absent": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W             A        WWWWWWWWWWW",
+    "W            AAA     A WWWWWWWWWWW",
+    "W       A   AAAAA   AAAWWWWWWWWWWW",
+    "W      AAA   AAA  A  A WWWWWWWWWWW",
+    "W A     A     A  AAA   WWWWWWWWWWW",
+    "W               AAAAA  WWWWWWWWWWW",
+    "W                AAA   WWWWWWWWWQW",
+    "W                 A   AWWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "stats": {
+    "apples": 38,
+    "components": 6,
+    "structural_virtue_cost": 0.1579,
+    "arena_walls": 0,
+    "patches": [
+     {
+      "center": [
+       5,
+       7
+      ],
+      "radius": 1,
+      "size": 5
+     },
+     {
+      "center": [
+       4,
+       13
+      ],
+      "radius": 2,
+      "size": 13
+     },
+     {
+      "center": [
+       4,
+       20
+      ],
+      "radius": 1,
+      "size": 5
+     },
+     {
+      "center": [
+       6,
+       1
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       7,
+       17
+      ],
+      "radius": 2,
+      "size": 13
+     },
+     {
+      "center": [
+       9,
+       21
+      ],
+      "radius": 0,
+      "size": 1
+     }
+    ]
+   },
+   "band": "low"
+  },
+  {
+   "name": "seen_07_open",
+   "split": "seen",
+   "family": "open",
+   "seed": 7,
+   "ascii_present": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W      A               WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W               A      WWWWWWWWWWW",
+    "W              AAA     WWWWWWWWWWW",
+    "W            A  A      WWWWWWWWWWW",
+    "W           AAA    A   WWWWWWWWWWW",
+    "W       A    A    AAA  WWWWWWWWWWW",
+    "W  A   AAA         A   WWWWWWWWWWW",
+    "W       A            A WWWWWWWWW W",
+    "W         A            WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W           Q          WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "ascii_absent": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W      A               WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W               A      WWWWWWWWWWW",
+    "W              AAA     WWWWWWWWWWW",
+    "W            A  A      WWWWWWWWWWW",
+    "W           AAA    A   WWWWWWWWWWW",
+    "W       A    A    AAA  WWWWWWWWWWW",
+    "W  A   AAA         A   WWWWWWWWWWW",
+    "W       A            A WWWWWWWWWQW",
+    "W         A            WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "stats": {
+    "apples": 24,
+    "components": 8,
+    "structural_virtue_cost": 0.3333,
+    "arena_walls": 0,
+    "patches": [
+     {
+      "center": [
+       6,
+       18
+      ],
+      "radius": 1,
+      "size": 5
+     },
+     {
+      "center": [
+       0,
+       6
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       8,
+       20
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       7,
+       2
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       7,
+       7
+      ],
+      "radius": 1,
+      "size": 5
+     },
+     {
+      "center": [
+       3,
+       15
+      ],
+      "radius": 1,
+      "size": 5
+     },
+     {
+      "center": [
+       9,
+       9
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       5,
+       12
+      ],
+      "radius": 1,
+      "size": 5
+     }
+    ]
+   },
+   "band": "high"
+  },
+  {
+   "name": "seen_08_open",
+   "split": "seen",
+   "family": "open",
+   "seed": 8,
+   "ascii_present": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W           A          WWWWWWWWWWW",
+    "W                     AWWWWWWWWWWW",
+    "W    A   A     A  A    WWWWWWWWWWW",
+    "W       AAA      AAA   WWWWWWWWWWW",
+    "W        A      AAAAA  WWWWWWWWWWW",
+    "W                AAA   WWWWWWWWWWW",
+    "W     A           A    WWWWWWWWWWW",
+    "W    AAA               WWWWWWWWW W",
+    "W     A                WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W           Q          WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "ascii_absent": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W           A          WWWWWWWWWWW",
+    "W                     AWWWWWWWWWWW",
+    "W    A   A     A  A    WWWWWWWWWWW",
+    "W       AAA      AAA   WWWWWWWWWWW",
+    "W        A      AAAAA  WWWWWWWWWWW",
+    "W                AAA   WWWWWWWWWWW",
+    "W     A           A    WWWWWWWWWWW",
+    "W    AAA               WWWWWWWWWQW",
+    "W     A                WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "stats": {
+    "apples": 27,
+    "components": 7,
+    "structural_virtue_cost": 0.2593,
+    "arena_walls": 0,
+    "patches": [
+     {
+      "center": [
+       2,
+       21
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       3,
+       14
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       5,
+       17
+      ],
+      "radius": 2,
+      "size": 13
+     },
+     {
+      "center": [
+       4,
+       8
+      ],
+      "radius": 1,
+      "size": 5
+     },
+     {
+      "center": [
+       1,
+       11
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       8,
+       5
+      ],
+      "radius": 1,
+      "size": 5
+     },
+     {
+      "center": [
+       3,
+       4
+      ],
+      "radius": 0,
+      "size": 1
+     }
+    ]
+   },
+   "band": "high"
+  },
+  {
+   "name": "seen_09_open",
+   "split": "seen",
+   "family": "open",
+   "seed": 9,
+   "ascii_present": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W                 A    WWWWWWWWWWW",
+    "W          A           WWWWWWWWWWW",
+    "W         AAA          WWWWWWWWWWW",
+    "W        AAAAA         WWWWWWWWWWW",
+    "W         AAA          WWWWWWWWWWW",
+    "W       A  A       A   WWWWWWWWWWW",
+    "W      AAA     A  AAA  WWWWWWWWWWW",
+    "W     AAAAA      AAAAA WWWWWWWWWWW",
+    "W      AAA        AAA  WWWWWWWWW W",
+    "W  A    A          A   WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W           Q          WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "ascii_absent": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W                 A    WWWWWWWWWWW",
+    "W          A           WWWWWWWWWWW",
+    "W         AAA          WWWWWWWWWWW",
+    "W        AAAAA         WWWWWWWWWWW",
+    "W         AAA          WWWWWWWWWWW",
+    "W       A  A       A   WWWWWWWWWWW",
+    "W      AAA     A  AAA  WWWWWWWWWWW",
+    "W     AAAAA      AAAAA WWWWWWWWWWW",
+    "W      AAA        AAA  WWWWWWWWWQW",
+    "W  A    A          A   WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "stats": {
+    "apples": 42,
+    "components": 6,
+    "structural_virtue_cost": 0.1429,
+    "arena_walls": 0,
+    "patches": [
+     {
+      "center": [
+       7,
+       7
+      ],
+      "radius": 2,
+      "size": 13
+     },
+     {
+      "center": [
+       6,
+       14
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       7,
+       18
+      ],
+      "radius": 2,
+      "size": 13
+     },
+     {
+      "center": [
+       0,
+       17
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       3,
+       10
+      ],
+      "radius": 2,
+      "size": 13
+     },
+     {
+      "center": [
+       9,
+       2
+      ],
+      "radius": 0,
+      "size": 1
+     }
+    ]
+   },
+   "band": "low"
+  },
+  {
+   "name": "seen_10_open",
+   "split": "seen",
+   "family": "open",
+   "seed": 10,
+   "ascii_present": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W     A   A            WWWWWWWWWWW",
+    "W    AAA          A    WWWWWWWWWWW",
+    "W   AAAAA        AAA   WWWWWWWWWWW",
+    "W A  AAA    A   AAAAA  WWWWWWWWWWW",
+    "W     A    AAA   AAA   WWWWWWWWWWW",
+    "W         AAAAA   A    WWWWWWWWWWW",
+    "W  A       AAA      A  WWWWWWWWWWW",
+    "W           A          WWWWWWWWW W",
+    "W     A                WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W           Q          WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "ascii_absent": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W     A   A            WWWWWWWWWWW",
+    "W    AAA          A    WWWWWWWWWWW",
+    "W   AAAAA        AAA   WWWWWWWWWWW",
+    "W A  AAA    A   AAAAA  WWWWWWWWWWW",
+    "W     A    AAA   AAA   WWWWWWWWWWW",
+    "W         AAAAA   A    WWWWWWWWWWW",
+    "W  A       AAA      A  WWWWWWWWWWW",
+    "W           A          WWWWWWWWWQW",
+    "W     A                WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "stats": {
+    "apples": 44,
+    "components": 8,
+    "structural_virtue_cost": 0.1818,
+    "arena_walls": 0,
+    "patches": [
+     {
+      "center": [
+       3,
+       5
+      ],
+      "radius": 2,
+      "size": 13
+     },
+     {
+      "center": [
+       6,
+       11
+      ],
+      "radius": 2,
+      "size": 13
+     },
+     {
+      "center": [
+       1,
+       9
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       4,
+       17
+      ],
+      "radius": 2,
+      "size": 13
+     },
+     {
+      "center": [
+       9,
+       5
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       7,
+       2
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       7,
+       19
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       4,
+       1
+      ],
+      "radius": 0,
+      "size": 1
+     }
+    ]
+   },
+   "band": "medium"
+  },
+  {
+   "name": "seen_11_open",
+   "split": "seen",
+   "family": "open",
+   "seed": 11,
+   "ascii_present": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W   A           A      WWWWWWWWWWW",
+    "W         A    AAA  A  WWWWWWWWWWW",
+    "W               A  AAA WWWWWWWWWWW",
+    "W          A      AAAAAWWWWWWWWWWW",
+    "W                  AAA WWWWWWWWW W",
+    "W                   A  WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W           Q          WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "ascii_absent": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W   A           A      WWWWWWWWWWW",
+    "W         A    AAA  A  WWWWWWWWWWW",
+    "W               A  AAA WWWWWWWWWWW",
+    "W          A      AAAAAWWWWWWWWWWW",
+    "W                  AAA WWWWWWWWWQW",
+    "W                   A  WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "stats": {
+    "apples": 21,
+    "components": 5,
+    "structural_virtue_cost": 0.2381,
+    "arena_walls": 0,
+    "patches": [
+     {
+      "center": [
+       7,
+       10
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       5,
+       15
+      ],
+      "radius": 1,
+      "size": 5
+     },
+     {
+      "center": [
+       4,
+       3
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       7,
+       19
+      ],
+      "radius": 2,
+      "size": 13
+     },
+     {
+      "center": [
+       5,
+       9
+      ],
+      "radius": 0,
+      "size": 1
+     }
+    ]
+   },
+   "band": "medium"
+  },
+  {
+   "name": "heldout_position_00_open",
+   "split": "heldout_position",
+   "family": "open",
+   "seed": 1001,
+   "ascii_present": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W     A                WWWWWWWWWWW",
+    "W   A      A     A     WWWWWWWWWWW",
+    "W  AAA    AAA   AAA    WWWWWWWWWWW",
+    "W AAAAA    A     A     WWWWWWWWWWW",
+    "W  AAA                AWWWWWWWWWWW",
+    "W   A                  WWWWWWWWWWW",
+    "W A     A              WWWWWWWWWWW",
+    "WAAA                   WWWWWWWWWWW",
+    "W A                    WWWWWWWWW W",
+    "W       A              WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W           Q          WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "ascii_absent": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W     A                WWWWWWWWWWW",
+    "W   A      A     A     WWWWWWWWWWW",
+    "W  AAA    AAA   AAA    WWWWWWWWWWW",
+    "W AAAAA    A     A     WWWWWWWWWWW",
+    "W  AAA                AWWWWWWWWWWW",
+    "W   A                  WWWWWWWWWWW",
+    "W A     A              WWWWWWWWWWW",
+    "WAAA                   WWWWWWWWWWW",
+    "W A                    WWWWWWWWWQW",
+    "W       A              WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "stats": {
+    "apples": 32,
+    "components": 8,
+    "structural_virtue_cost": 0.25,
+    "arena_walls": 0,
+    "patches": [
+     {
+      "center": [
+       7,
+       1
+      ],
+      "radius": 1,
+      "size": 5
+     },
+     {
+      "center": [
+       2,
+       16
+      ],
+      "radius": 1,
+      "size": 5
+     },
+     {
+      "center": [
+       3,
+       3
+      ],
+      "radius": 2,
+      "size": 13
+     },
+     {
+      "center": [
+       2,
+       10
+      ],
+      "radius": 1,
+      "size": 5
+     },
+     {
+      "center": [
+       4,
+       21
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       9,
+       7
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       6,
+       7
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       0,
+       5
+      ],
+      "radius": 0,
+      "size": 1
+     }
+    ]
+   },
+   "band": "high"
+  },
+  {
+   "name": "heldout_position_01_open",
+   "split": "heldout_position",
+   "family": "open",
+   "seed": 1002,
+   "ascii_present": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "WA                     WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                   A  WWWWWWWWWWW",
+    "W             A    AAA WWWWWWWWWWW",
+    "W            AAA    A  WWWWWWWWWWW",
+    "W   A    A  AAAAA      WWWWWWWWWWW",
+    "W       AAA  AAA       WWWWWWWWWWW",
+    "W  A     A    A  A     WWWWWWWWW W",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W           Q          WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "ascii_absent": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "WA                     WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                   A  WWWWWWWWWWW",
+    "W             A    AAA WWWWWWWWWWW",
+    "W            AAA    A  WWWWWWWWWWW",
+    "W   A    A  AAAAA      WWWWWWWWWWW",
+    "W       AAA  AAA       WWWWWWWWWWW",
+    "W  A     A    A  A     WWWWWWWWWQW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "stats": {
+    "apples": 27,
+    "components": 7,
+    "structural_virtue_cost": 0.2593,
+    "arena_walls": 0,
+    "patches": [
+     {
+      "center": [
+       7,
+       8
+      ],
+      "radius": 1,
+      "size": 5
+     },
+     {
+      "center": [
+       6,
+       13
+      ],
+      "radius": 2,
+      "size": 13
+     },
+     {
+      "center": [
+       8,
+       2
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       4,
+       19
+      ],
+      "radius": 1,
+      "size": 5
+     },
+     {
+      "center": [
+       0,
+       0
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       8,
+       16
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       6,
+       3
+      ],
+      "radius": 0,
+      "size": 1
+     }
+    ]
+   },
+   "band": "high"
+  },
+  {
+   "name": "heldout_position_02_open",
+   "split": "heldout_position",
+   "family": "open",
+   "seed": 1008,
+   "ascii_present": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W      A               WWWWWWWWWWW",
+    "W  A      A            WWWWWWWWWWW",
+    "W AAA    AAA           WWWWWWWWWWW",
+    "W  A    AAAAA          WWWWWWWWWWW",
+    "W        AAA      A    WWWWWWWWWWW",
+    "W         A            WWWWWWWWWWW",
+    "W    A                 WWWWWWWWWWW",
+    "W   AAA                WWWWWWWWWWW",
+    "W    A  A              WWWWWWWWW W",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W           Q          WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "ascii_absent": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W      A               WWWWWWWWWWW",
+    "W  A      A            WWWWWWWWWWW",
+    "W AAA    AAA           WWWWWWWWWWW",
+    "W  A    AAAAA          WWWWWWWWWWW",
+    "W        AAA      A    WWWWWWWWWWW",
+    "W         A            WWWWWWWWWWW",
+    "W    A                 WWWWWWWWWWW",
+    "W   AAA                WWWWWWWWWWW",
+    "W    A  A              WWWWWWWWWQW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "stats": {
+    "apples": 26,
+    "components": 6,
+    "structural_virtue_cost": 0.2308,
+    "arena_walls": 0,
+    "patches": [
+     {
+      "center": [
+       4,
+       17
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       2,
+       2
+      ],
+      "radius": 1,
+      "size": 5
+     },
+     {
+      "center": [
+       8,
+       7
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       3,
+       9
+      ],
+      "radius": 2,
+      "size": 13
+     },
+     {
+      "center": [
+       7,
+       4
+      ],
+      "radius": 1,
+      "size": 5
+     },
+     {
+      "center": [
+       0,
+       6
+      ],
+      "radius": 0,
+      "size": 1
+     }
+    ]
+   },
+   "band": "medium"
+  },
+  {
+   "name": "heldout_position_03_open",
+   "split": "heldout_position",
+   "family": "open",
+   "seed": 1010,
+   "ascii_present": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W  A      A    A       WWWWWWWWWWW",
+    "W AAA    AAA  AAA      WWWWWWWWWWW",
+    "W  A      A  AAAAA     WWWWWWWWWWW",
+    "W             AAA      WWWWWWWWWWW",
+    "W              A       WWWWWWWWWWW",
+    "W                 A   AWWWWWWWWWWW",
+    "W           A    AAA   WWWWWWWWWWW",
+    "W               AAAAA  WWWWWWWWWWW",
+    "W                AAA   WWWWWWWWW W",
+    "W  A              A    WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W           Q          WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "ascii_absent": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W  A      A    A       WWWWWWWWWWW",
+    "W AAA    AAA  AAA      WWWWWWWWWWW",
+    "W  A      A  AAAAA     WWWWWWWWWWW",
+    "W             AAA      WWWWWWWWWWW",
+    "W              A       WWWWWWWWWWW",
+    "W                 A   AWWWWWWWWWWW",
+    "W           A    AAA   WWWWWWWWWWW",
+    "W               AAAAA  WWWWWWWWWWW",
+    "W                AAA   WWWWWWWWWQW",
+    "W  A              A    WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "stats": {
+    "apples": 39,
+    "components": 7,
+    "structural_virtue_cost": 0.1795,
+    "arena_walls": 0,
+    "patches": [
+     {
+      "center": [
+       6,
+       11
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       9,
+       2
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       7,
+       17
+      ],
+      "radius": 2,
+      "size": 13
+     },
+     {
+      "center": [
+       1,
+       2
+      ],
+      "radius": 1,
+      "size": 5
+     },
+     {
+      "center": [
+       5,
+       21
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       2,
+       14
+      ],
+      "radius": 2,
+      "size": 13
+     },
+     {
+      "center": [
+       1,
+       9
+      ],
+      "radius": 1,
+      "size": 5
+     }
+    ]
+   },
+   "band": "low"
+  },
+  {
+   "name": "heldout_position_04_open",
+   "split": "heldout_position",
+   "family": "open",
+   "seed": 1012,
+   "ascii_present": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                 A    WWWWWWWWWWW",
+    "W       A  A    A      WWWWWWWWWWW",
+    "W      AAA     AAA     WWWWWWWWWWW",
+    "W       A     AAAAA    WWWWWWWWWWW",
+    "W          A   AAA     WWWWWWWWWWW",
+    "W         AAA   A      WWWWWWWWWWW",
+    "W   A    AAAAA         WWWWWWWWWWW",
+    "W  AAA    AAA        A WWWWWWWWW W",
+    "W   A      A           WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W           Q          WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "ascii_absent": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                 A    WWWWWWWWWWW",
+    "W       A  A    A      WWWWWWWWWWW",
+    "W      AAA     AAA     WWWWWWWWWWW",
+    "W       A     AAAAA    WWWWWWWWWWW",
+    "W          A   AAA     WWWWWWWWWWW",
+    "W         AAA   A      WWWWWWWWWWW",
+    "W   A    AAAAA         WWWWWWWWWWW",
+    "W  AAA    AAA        A WWWWWWWWWQW",
+    "W   A      A           WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "stats": {
+    "apples": 39,
+    "components": 7,
+    "structural_virtue_cost": 0.1795,
+    "arena_walls": 0,
+    "patches": [
+     {
+      "center": [
+       1,
+       17
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       2,
+       10
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       7,
+       10
+      ],
+      "radius": 2,
+      "size": 13
+     },
+     {
+      "center": [
+       8,
+       3
+      ],
+      "radius": 1,
+      "size": 5
+     },
+     {
+      "center": [
+       4,
+       15
+      ],
+      "radius": 2,
+      "size": 13
+     },
+     {
+      "center": [
+       8,
+       20
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       3,
+       7
+      ],
+      "radius": 1,
+      "size": 5
+     }
+    ]
+   },
+   "band": "low"
+  },
+  {
+   "name": "heldout_position_05_open",
+   "split": "heldout_position",
+   "family": "open",
+   "seed": 1014,
+   "ascii_present": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                A     WWWWWWWWWWW",
+    "W               AAA    WWWWWWWWWWW",
+    "W            A   A     WWWWWWWWWWW",
+    "W           AAA        WWWWWWWWWWW",
+    "W      A     A      A  WWWWWWWWWWW",
+    "W     AAA              WWWWWWWWWWW",
+    "W A  AAAAA  A          WWWWWWWWWWW",
+    "WAAA  AAA  AAA  A      WWWWWWWWW W",
+    "W A    A    A          WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W           Q          WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "ascii_absent": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                A     WWWWWWWWWWW",
+    "W               AAA    WWWWWWWWWWW",
+    "W            A   A     WWWWWWWWWWW",
+    "W           AAA        WWWWWWWWWWW",
+    "W      A     A      A  WWWWWWWWWWW",
+    "W     AAA              WWWWWWWWWWW",
+    "W A  AAAAA  A          WWWWWWWWWWW",
+    "WAAA  AAA  AAA  A      WWWWWWWWWQW",
+    "W A    A    A          WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "stats": {
+    "apples": 35,
+    "components": 7,
+    "structural_virtue_cost": 0.2,
+    "arena_walls": 0,
+    "patches": [
+     {
+      "center": [
+       4,
+       12
+      ],
+      "radius": 1,
+      "size": 5
+     },
+     {
+      "center": [
+       7,
+       6
+      ],
+      "radius": 2,
+      "size": 13
+     },
+     {
+      "center": [
+       2,
+       16
+      ],
+      "radius": 1,
+      "size": 5
+     },
+     {
+      "center": [
+       8,
+       11
+      ],
+      "radius": 1,
+      "size": 5
+     },
+     {
+      "center": [
+       5,
+       19
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       8,
+       1
+      ],
+      "radius": 1,
+      "size": 5
+     },
+     {
+      "center": [
+       8,
+       15
+      ],
+      "radius": 0,
+      "size": 1
+     }
+    ]
+   },
+   "band": "medium"
+  },
+  {
+   "name": "heldout_structure_00_rooms",
+   "split": "heldout_structure",
+   "family": "rooms",
+   "seed": 2000,
+   "ascii_present": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W   A   WA     W       WWWWWWWWWWW",
+    "W  AAA  W      W       WWWWWWWWWWW",
+    "W AAAAA W   A          WWWWWWWWWWW",
+    "W  AAA  W              WWWWWWWWWWW",
+    "W   A   W  A   W       WWWWWWWWWWW",
+    "W         AAA  W       WWWWWWWWWWW",
+    "W          A   W       WWWWWWWWWWW",
+    "W       W      W    A  WWWWWWWWWWW",
+    "W       W      W   AAA WWWWWWWWW W",
+    "W       W      W    A  WWWWWWWWWWW",
+    "W       W      W       WWWWWWWWWWW",
+    "WW  WWWWWWW  WWWW  WWWWWWWWWWWWWWW",
+    "W           Q          WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "ascii_absent": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W   A   WA     W       WWWWWWWWWWW",
+    "W  AAA  W      W       WWWWWWWWWWW",
+    "W AAAAA W   A          WWWWWWWWWWW",
+    "W  AAA  W              WWWWWWWWWWW",
+    "W   A   W  A   W       WWWWWWWWWWW",
+    "W         AAA  W       WWWWWWWWWWW",
+    "W          A   W       WWWWWWWWWWW",
+    "W       W      W    A  WWWWWWWWWWW",
+    "W       W      W   AAA WWWWWWWWWQW",
+    "W       W      W    A  WWWWWWWWWWW",
+    "W       W      W       WWWWWWWWWWW",
+    "WW  WWWWWWW  WWWW  WWWWWWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "stats": {
+    "apples": 25,
+    "components": 5,
+    "structural_virtue_cost": 0.2,
+    "arena_walls": 34,
+    "patches": [
+     {
+      "center": [
+       5,
+       10
+      ],
+      "radius": 1,
+      "size": 5
+     },
+     {
+      "center": [
+       8,
+       19
+      ],
+      "radius": 1,
+      "size": 5
+     },
+     {
+      "center": [
+       2,
+       3
+      ],
+      "radius": 2,
+      "size": 13
+     },
+     {
+      "center": [
+       2,
+       11
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       0,
+       8
+      ],
+      "radius": 0,
+      "size": 1
+     }
+    ]
+   },
+   "band": "medium"
+  },
+  {
+   "name": "heldout_structure_01_divided",
+   "split": "heldout_structure",
+   "family": "divided",
+   "seed": 2001,
+   "ascii_present": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W           W        A WWWWWWWWWWW",
+    "W           W       AAAWWWWWWWWWWW",
+    "W           W        A WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "WA  A                  WWWWWWWWWWW",
+    "W  AAA      W        A WWWWWWWWWWW",
+    "W   A       W       AAAWWWWWWWWWWW",
+    "W         A W A      A WWWWWWWWWWW",
+    "W           W          WWWWWWWWW W",
+    "W           W          WWWWWWWWWWW",
+    "W           W          WWWWWWWWWWW",
+    "WW  WWWWWW  WWWWWWWWWWWWWWWWWWWWWW",
+    "W           Q          WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "ascii_absent": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W           W        A WWWWWWWWWWW",
+    "W           W       AAAWWWWWWWWWWW",
+    "W           W        A WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "WA  A                  WWWWWWWWWWW",
+    "W  AAA      W        A WWWWWWWWWWW",
+    "W   A       W       AAAWWWWWWWWWWW",
+    "W         A W A      A WWWWWWWWWWW",
+    "W           W          WWWWWWWWWQW",
+    "W           W          WWWWWWWWWWW",
+    "W           W          WWWWWWWWWWW",
+    "WW  WWWWWW  WWWWWWWWWWWWWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "stats": {
+    "apples": 18,
+    "components": 6,
+    "structural_virtue_cost": 0.3333,
+    "arena_walls": 27,
+    "patches": [
+     {
+      "center": [
+       1,
+       20
+      ],
+      "radius": 1,
+      "size": 5
+     },
+     {
+      "center": [
+       4,
+       0
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       6,
+       20
+      ],
+      "radius": 1,
+      "size": 5
+     },
+     {
+      "center": [
+       7,
+       9
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       7,
+       13
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       5,
+       3
+      ],
+      "radius": 1,
+      "size": 5
+     }
+    ]
+   },
+   "band": "high"
+  },
+  {
+   "name": "heldout_structure_02_rooms",
+   "split": "heldout_structure",
+   "family": "rooms",
+   "seed": 2002,
+   "ascii_present": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W    A  W      W A     WWWWWWWWWWW",
+    "W   AAA W     AW       WWWWWWWWWWW",
+    "W  AAAAAW      W   A   WWWWWWWWWWW",
+    "W   AAA W   A  W  AAA  WWWWWWWWWWW",
+    "W    A  W      W   A   WWWWWWWWWWW",
+    "W       W      W       WWWWWWWWWWW",
+    "W       W      W       WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                   A  WWWWWWWWW W",
+    "W    A  W      W       WWWWWWWWWWW",
+    "W       W      W       WWWWWWWWWWW",
+    "WWWWWW  WWWWW  W  WWWWWWWWWWWWWWWW",
+    "W           Q          WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "ascii_absent": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W    A  W      W A     WWWWWWWWWWW",
+    "W   AAA W     AW       WWWWWWWWWWW",
+    "W  AAAAAW      W   A   WWWWWWWWWWW",
+    "W   AAA W   A  W  AAA  WWWWWWWWWWW",
+    "W    A  W      W   A   WWWWWWWWWWW",
+    "W       W      W       WWWWWWWWWWW",
+    "W       W      W       WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                   A  WWWWWWWWWQW",
+    "W    A  W      W       WWWWWWWWWWW",
+    "W       W      W       WWWWWWWWWWW",
+    "WWWWWW  WWWWW  W  WWWWWWWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "stats": {
+    "apples": 23,
+    "components": 7,
+    "structural_virtue_cost": 0.3043,
+    "arena_walls": 34,
+    "patches": [
+     {
+      "center": [
+       1,
+       13
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       2,
+       4
+      ],
+      "radius": 2,
+      "size": 13
+     },
+     {
+      "center": [
+       3,
+       11
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       8,
+       19
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       3,
+       18
+      ],
+      "radius": 1,
+      "size": 5
+     },
+     {
+      "center": [
+       9,
+       4
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       0,
+       16
+      ],
+      "radius": 0,
+      "size": 1
+     }
+    ]
+   },
+   "band": "high"
+  },
+  {
+   "name": "heldout_structure_03_divided",
+   "split": "heldout_structure",
+   "family": "divided",
+   "seed": 2005,
+   "ascii_present": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "WA          W  A       WWWWWWWWWWW",
+    "W           W AAA      WWWWWWWWWWW",
+    "W       A   WAAAAA     WWWWWWWWWWW",
+    "W      AAA  W AAA  A   WWWWWWWWWWW",
+    "W       A      A  AAA  WWWWWWWWWWW",
+    "W                AAAAA WWWWWWWWWWW",
+    "W    A    A W     AAA  WWWWWWWWWWW",
+    "W           W      A   WWWWWWWWWWW",
+    "W           W          WWWWWWWWW W",
+    "W  A    A   W          WWWWWWWWWWW",
+    "W           W          WWWWWWWWWWW",
+    "WWWWWWW  WWWWWW  WWWWWWWWWWWWWWWWW",
+    "W           Q          WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "ascii_absent": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "WA          W  A       WWWWWWWWWWW",
+    "W           W AAA      WWWWWWWWWWW",
+    "W       A   WAAAAA     WWWWWWWWWWW",
+    "W      AAA  W AAA  A   WWWWWWWWWWW",
+    "W       A      A  AAA  WWWWWWWWWWW",
+    "W                AAAAA WWWWWWWWWWW",
+    "W    A    A W     AAA  WWWWWWWWWWW",
+    "W           W      A   WWWWWWWWWWW",
+    "W           W          WWWWWWWWWQW",
+    "W  A    A   W          WWWWWWWWWWW",
+    "W           W          WWWWWWWWWWW",
+    "WWWWWWW  WWWWWW  WWWWWWWWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "stats": {
+    "apples": 36,
+    "components": 8,
+    "structural_virtue_cost": 0.2222,
+    "arena_walls": 27,
+    "patches": [
+     {
+      "center": [
+       5,
+       18
+      ],
+      "radius": 2,
+      "size": 13
+     },
+     {
+      "center": [
+       0,
+       0
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       6,
+       4
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       9,
+       7
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       2,
+       14
+      ],
+      "radius": 2,
+      "size": 13
+     },
+     {
+      "center": [
+       3,
+       7
+      ],
+      "radius": 1,
+      "size": 5
+     },
+     {
+      "center": [
+       9,
+       2
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       6,
+       9
+      ],
+      "radius": 0,
+      "size": 1
+     }
+    ]
+   },
+   "band": "medium"
+  },
+  {
+   "name": "heldout_structure_04_rooms",
+   "split": "heldout_structure",
+   "family": "rooms",
+   "seed": 2010,
+   "ascii_present": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W       W      W       WWWWWWWWWWW",
+    "W  A    W  A   W       WWWWWWWWWWW",
+    "W AAA   W AAA  W   A   WWWWWWWWWWW",
+    "W  A    WAAAAA W       WWWWWWWWWWW",
+    "W    A  W AAA  W A     WWWWWWWWWWW",
+    "W   AAA    A   WAAA    WWWWWWWWWWW",
+    "W  AAAAA     A   A     WWWWWWWWWWW",
+    "W   AAA W   AAA        WWWWWWWWWWW",
+    "W    A  W    A W       WWWWWWWWW W",
+    "W       W      W       WWWWWWWWWWW",
+    "W       W      W       WWWWWWWWWWW",
+    "WWWWW  WWW  WWWWWWWW  WWWWWWWWWWWW",
+    "W           Q          WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "ascii_absent": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W       W      W       WWWWWWWWWWW",
+    "W  A    W  A   W       WWWWWWWWWWW",
+    "W AAA   W AAA  W   A   WWWWWWWWWWW",
+    "W  A    WAAAAA W       WWWWWWWWWWW",
+    "W    A  W AAA  W A     WWWWWWWWWWW",
+    "W   AAA    A   WAAA    WWWWWWWWWWW",
+    "W  AAAAA     A   A     WWWWWWWWWWW",
+    "W   AAA W   AAA        WWWWWWWWWWW",
+    "W    A  W    A W       WWWWWWWWWQW",
+    "W       W      W       WWWWWWWWWWW",
+    "W       W      W       WWWWWWWWWWW",
+    "WWWWW  WWW  WWWWWWWW  WWWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "stats": {
+    "apples": 42,
+    "components": 6,
+    "structural_virtue_cost": 0.1429,
+    "arena_walls": 34,
+    "patches": [
+     {
+      "center": [
+       3,
+       10
+      ],
+      "radius": 2,
+      "size": 13
+     },
+     {
+      "center": [
+       6,
+       4
+      ],
+      "radius": 2,
+      "size": 13
+     },
+     {
+      "center": [
+       2,
+       2
+      ],
+      "radius": 1,
+      "size": 5
+     },
+     {
+      "center": [
+       5,
+       16
+      ],
+      "radius": 1,
+      "size": 5
+     },
+     {
+      "center": [
+       7,
+       12
+      ],
+      "radius": 1,
+      "size": 5
+     },
+     {
+      "center": [
+       2,
+       18
+      ],
+      "radius": 0,
+      "size": 1
+     }
+    ]
+   },
+   "band": "low"
+  },
+  {
+   "name": "heldout_structure_05_divided",
+   "split": "heldout_structure",
+   "family": "divided",
+   "seed": 2013,
+   "ascii_present": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W           W          WWWWWWWWWWW",
+    "W  A        W       A  WWWWWWWWWWW",
+    "W AAA     A W      AAA WWWWWWWWWWW",
+    "WAAAAA   AAA    A   A  WWWWWWWWWWW",
+    "W AAA   AAAAA  AAA     WWWWWWWWWWW",
+    "W  A  A  AAAW   A    A WWWWWWWWWWW",
+    "W    AAA  A W          WWWWWWWWWWW",
+    "W   AAAAA   WA         WWWWWWWWWWW",
+    "W    AAA    W         AWWWWWWWWW W",
+    "W     A     W          WWWWWWWWWWW",
+    "W           W          WWWWWWWWWWW",
+    "WWWWWWW  W  WWWWWWWWWWWWWWWWWWWWWW",
+    "W           Q          WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "ascii_absent": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W           W          WWWWWWWWWWW",
+    "W  A        W       A  WWWWWWWWWWW",
+    "W AAA     A W      AAA WWWWWWWWWWW",
+    "WAAAAA   AAA    A   A  WWWWWWWWWWW",
+    "W AAA   AAAAA  AAA     WWWWWWWWWWW",
+    "W  A  A  AAAW   A    A WWWWWWWWWWW",
+    "W    AAA  A W          WWWWWWWWWWW",
+    "W   AAAAA   WA         WWWWWWWWWWW",
+    "W    AAA    W         AWWWWWWWWWQW",
+    "W     A     W          WWWWWWWWWWW",
+    "W           W          WWWWWWWWWWW",
+    "WWWWWWW  W  WWWWWWWWWWWWWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "stats": {
+    "apples": 52,
+    "components": 8,
+    "structural_virtue_cost": 0.1538,
+    "arena_walls": 27,
+    "patches": [
+     {
+      "center": [
+       5,
+       20
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       8,
+       21
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       4,
+       9
+      ],
+      "radius": 2,
+      "size": 13
+     },
+     {
+      "center": [
+       3,
+       2
+      ],
+      "radius": 2,
+      "size": 13
+     },
+     {
+      "center": [
+       2,
+       19
+      ],
+      "radius": 1,
+      "size": 5
+     },
+     {
+      "center": [
+       7,
+       5
+      ],
+      "radius": 2,
+      "size": 13
+     },
+     {
+      "center": [
+       4,
+       15
+      ],
+      "radius": 1,
+      "size": 5
+     },
+     {
+      "center": [
+       7,
+       12
+      ],
+      "radius": 0,
+      "size": 1
+     }
+    ]
+   },
+   "band": "low"
+  }
+ ]
+}

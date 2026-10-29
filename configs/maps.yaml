@@ -1,0 +1,23 @@
+# Map suite for the ECE 750 study.
+# Seeds in different splits never overlap, and held-out-position maps are
+# additionally checked to share at most `max_apple_overlap` of their apple
+# cells with any seen map.
+num_agents: 7
+patch:
+  num_patches: [5, 8]
+  radii: [0, 1, 2]          # 0 = single apple, 1 = plus shape, 2 = diamond
+splits:
+  seen:
+    families: [open]
+    count: 12
+    first_seed: 0
+  heldout_position:
+    families: [open]
+    count: 6
+    first_seed: 1000
+    max_apple_overlap: 0.5
+  heldout_structure:
+    families: [divided, rooms]
+    count: 6
+    first_seed: 2000
+out: maps/suite_v1.json
