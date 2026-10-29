@@ -357,3 +357,34 @@ def test_roles_from_config():
     assert masks["teacher"].tolist() == [True] + [False] * 6
     assert masks["learner"].tolist() == [False, True, True, True, False, False, False]
     assert masks["bystander"].tolist() == [False] * 4 + [True] * 3
+
+
+# ------------------------------------------------------------ seen by teacher
+@pytest.mark.parametrize("teacher, learner, seen, sees", [
+    # Teacher at (4,5) facing dir 0 (+row): it sees 1 behind and 9 ahead.
+    ((4, 5, 0), (7, 5, 0), True, False),   # learner 3 ahead of teacher, facing away: seen, does not see
+    ((4, 5, 0), (2, 5, 0), False, True),   # learner 2 behind teacher, facing it: sees, unseen
+    ((4, 5, 2), (7, 5, 0), False, False),  # back to back: neither sees the other
+])
+def test_seen_by_teacher_is_not_symmetric(small, teacher, learner, seen, sees):
+    s = make_state(small, agents=[teacher, learner, (8, 9, 0)], apples=[])
+    assert bool(small.seen_by_teacher(s)[1]) == seen
+    assert bool(small.teacher_in_view(s)[1]) == sees
+    assert not bool(small.seen_by_teacher(s)[TEACHER])
+
+
+def test_seen_by_teacher_matches_teacher_observation(rollout):
+    """seen_by_teacher[i] equals 'agent i appears in the teacher's raw view'."""
+    w, traj = rollout
+    grid = _flat(traj["state"].grid)
+    locs = _flat(traj["state"].agent_locs)
+    views = jax.vmap(geo.agent_views, in_axes=(0, 0, None))(grid, locs, w.obs_size)[:, TEACHER]
+    expected = jnp.any(views[:, None] == w.agent_ids[None, :, None, None], axis=(2, 3))
+    expected = expected.at[:, TEACHER].set(False)
+    got = _flat(traj["ethics"].seen_by_teacher)
+    valid = _flat(traj["ethics"].valid)
+    assert jnp.array_equal(got & valid, expected & valid)
+    # The teacher's "other agent" observation channel agrees too.
+    obs_other = _flat(traj["obs"])[:, TEACHER, ..., 6]
+    assert jnp.array_equal(jnp.any(obs_other > 0, axis=(1, 2)) & valid[:, 0],
+                           jnp.any(expected, axis=1) & valid[:, 0])

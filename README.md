@@ -59,11 +59,11 @@ SocialJax is not packaged upstream, so `pyproject.toml` exposes its `socialjax` 
 | 0. Setup | Done | Pinned SocialJax, installable package, smoke tests, CPU speed benchmark (about 20,900 env steps per second on 2 cores) |
 | 1. Ethics wrapper | Done | Per-agent ethics record on every step, teacher channel in observations, role configuration |
 | 2. Maps and splits | Done | Seeded map generator, 24-map suite in three splits, teacher-absent condition, provisional cost bands, per-map runner |
-| 3. Scripted ladder and metrics | Next | Scripted agents with known dispositions, behaviour and validity metrics, full protocol run |
+| 3. Scripted ladder and metrics | Code and pilot done, full run in progress | Scripted agents with known dispositions, behaviour and validity metrics, pre-registered protocol, pilot results |
 | 4. Learned agents | Planned | PPO, PPO with harm penalty, SVO, behaviour cloning, social learner (needs the GPU benchmark first) |
 | 5. Analysis | Planned | Figures and a script that regenerates every reported number from raw logs |
 
-Test status: 51 tests pass (`pytest -q`).
+Test status: 77 tests pass (`pytest -q`).
 
 ## Design decisions
 
@@ -124,8 +124,34 @@ Other wrapper choices:
 | Inventory stored as `int8` | Apple counts computed modulo 256 |
 | Other agents collapsed into one observation channel | Teacher channel added by the wrapper |
 
-### Open choices to confirm before Phase 3
+### Phase 3 decisions (approved 29 Oct 2026)
 
-1. Commons harm judged on the grid the agent saw, rather than the outcome after everyone moved.
-2. The strict "adjacent" definition of `opp_commons`.
-3. The 1 teacher, 3 learners, 3 bystanders split.
+| Decision | Choice | Reason |
+|---|---|---|
+| Commons harm timing | Judged on the grid the agent saw | Dispositions are choices given what the agent knew |
+| `opp_commons` | Strict: a last apple in one of the 4 cells the agent can move into | Clear, and harm never exceeds opportunity |
+| Roles | 1 teacher, 3 learners, 3 bystanders | Standard 7-agent setting |
+| Watched cue | Performative agents react to `teacher_in_view`. `seen_by_teacher` is recorded as well | The agent can only perceive the first. The second tests the proposal's assumption that presence is the relevant cue |
+| Bystanders | Scripted indifferent | Realistic opportunities, less noise than random agents |
+| Teacher | Scripted virtuous | Its behaviour is known exactly |
+| Ladder | Mixture w in {0, 0.25, 0.5, 0.75, 1}, plus performative and aggressive | Graded known order, plus separate groups for the teacher gap and zap metrics |
+| Noise | eps in {0.1, 0.2}: random move or stay, never a zap, cancelled if a virtuous-mode agent would step onto a last apple | Lowers competence without changing morality |
+| Run size | 10 seed units x 32 episodes per job, 1,000-step episodes | Reliability curves then show whether that is enough |
+| Success criteria | Fixed in `configs/protocol_v1.yaml` before any run | Proposal Q8. Failures are findings |
+| Cost of virtue | Empirical: apples(indifferent) minus apples(virtuous), as a share, per map | Replaces the provisional structural bands |
+
+### Phase 3 pilot results (4 seed units x 8 episodes, all 24 maps)
+
+Full report: `results/protocol_v1_pilot_summary.md`. These are pilot numbers. The pre-registered full run replaces them.
+
+| Finding | Detail |
+|---|---|
+| All three harm metrics rank the ladder perfectly | Kendall tau-b = 1.0 in every split. Graded mixtures were not enough to make the scripted ladder hard to rank |
+| Only harm per apple is competence-independent | Relative change under noise: harm per episode up to 0.24 (fails), harm per opportunity up to 0.14 (fails), harm per apple at most 0.06 (passes) |
+| The teacher gap detects performative agents | Gap 0.74 for performative agents. The virtuous and indifferent rungs have gaps whose intervals include zero |
+| The teacher gap is not perfectly clean | The w = 0.5 rung shows a small but significant negative gap (-0.03), so the teacher's own presence changes the ecology slightly |
+| The cue matters | For performative agents the within-episode gap is 0.96 when split by "teacher in view" but only 0.36 when split by "actually seen by the teacher" |
+| Reliability | About 64 agent-episodes per map and rung give a standard error of 0.05 for harm per opportunity |
+| Zap metrics | Aggressive agents separate perfectly from all others |
+| Structural cost is a poor proxy | Spearman correlation 0.25 with the empirical cost of virtue, so the empirical bands should be used |
+| Per-step opportunity counts are fragile | A performative agent waiting next to a last apple while watched adds an opportunity every step (up to about 1,000 in one episode), which skews pooled ratios and their bootstrap intervals. An exploratory onset-based metric (each temptation counted once) was added before the full run |

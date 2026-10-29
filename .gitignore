@@ -10,3 +10,4 @@ runs/
 logs/
 *.npz
 .DS_Store
+*.log

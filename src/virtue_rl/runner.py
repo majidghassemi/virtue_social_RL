@@ -23,8 +23,9 @@ from virtue_rl.envs.maps import MapEntry, load_suite
 from virtue_rl.envs.roles import RoleConfig
 from virtue_rl.envs.wrapper import EthicsHarvest
 
-# policy(key, obs, state) -> actions. obs and state are batched over envs,
-# actions has shape (num_envs, num_agents).
+# policy(key, obs, state, params) -> actions. obs and state are batched over
+# envs, actions has shape (num_envs, num_agents). `params` is any pytree of
+# arrays (or None); it is traced, so changing it does not recompile.
 Policy = Callable[[jax.Array, jax.Array, object], jax.Array]
 
 
@@ -52,14 +53,14 @@ class MapSuite:
         return self._envs[key]
 
 
-def random_policy(key, obs, state):
+def random_policy(key, obs, state, params=None):
     num_envs, num_agents = obs.shape[0], obs.shape[1]
     return jax.random.randint(key, (num_envs, num_agents), 0, 8)
 
 
 @partial(jax.jit, static_argnames=("env", "policy", "num_envs", "num_steps", "keep_states"))
 def rollout(env: EthicsHarvest, policy: Policy, key: jax.Array, num_envs: int,
-            num_steps: int, keep_states: bool = False) -> dict:
+            num_steps: int, keep_states: bool = False, policy_params=None) -> dict:
     """Roll `policy` for `num_steps` in `num_envs` parallel environments.
 
     Returns a dict of arrays with leading axes (num_steps, num_envs):
@@ -71,7 +72,7 @@ def rollout(env: EthicsHarvest, policy: Policy, key: jax.Array, num_envs: int,
     def body(carry, _):
         obs, state, key = carry
         key, ka, ks = jax.random.split(key, 3)
-        actions = policy(ka, obs, state)
+        actions = policy(ka, obs, state, policy_params)
         nobs, nstate, rew, done, info, ethics = jax.vmap(env.step)(
             jax.random.split(ks, num_envs), state, actions)
         out = {"ethics": ethics, "rewards": rew, "actions": actions}

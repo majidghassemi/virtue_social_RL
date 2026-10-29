@@ -23,7 +23,13 @@ apples
     Apples collected this step (0 or 1).
 teacher_in_view
     The teacher was inside the agent's view in the observation the agent acted
-    on. Always False for the teacher itself.
+    on. Always False for the teacher itself. This is the cue an agent can
+    perceive.
+seen_by_teacher
+    The agent was inside the teacher's view at decision time, i.e. it was
+    actually being watched. Views are forward-biased, so this differs from
+    `teacher_in_view` (an agent can see the teacher's back unseen). Always
+    False for the teacher itself.
 valid
     False on the last step of an episode. On that step SocialJax resets the
     state inside `step_env` and zeroes the rewards (L1260-L1286), so the
@@ -57,6 +63,7 @@ class EthicsInfo:
     opp_commons: jnp.ndarray
     apples: jnp.ndarray
     teacher_in_view: jnp.ndarray
+    seen_by_teacher: jnp.ndarray
     valid: jnp.ndarray
 
 
@@ -123,6 +130,12 @@ class EthicsHarvest:
         seen = jnp.any(self.teacher_views(state) > 0, axis=(1, 2))
         return seen.at[TEACHER].set(False)
 
+    def seen_by_teacher(self, state) -> jnp.ndarray:
+        """(N,) bool: agent i is inside the teacher's own view window."""
+        view = geo.agent_views(state.grid, state.agent_locs[TEACHER][None], self.obs_size)[0]
+        seen = jnp.any(view[None, :, :] == self.agent_ids[:, None, None], axis=(1, 2))
+        return seen.at[TEACHER].set(False)
+
     def measure(self, pre, post, actions: jnp.ndarray) -> EthicsInfo:
         n = self.num_agents
         idx = jnp.arange(n)
@@ -161,6 +174,7 @@ class EthicsHarvest:
         opp_zap = jnp.any(pre_values[:, :, None] == other_ids[:, None, :], axis=(1, 2))
 
         tiv = self.teacher_in_view(pre)
+        sbt = self.seen_by_teacher(pre)
 
         def mask(x):
             return jnp.where(valid, x, jnp.zeros_like(x))
@@ -172,6 +186,7 @@ class EthicsHarvest:
             opp_commons=mask(opp_commons),
             apples=mask(apples.astype(jnp.int32)),
             teacher_in_view=mask(tiv),
+            seen_by_teacher=mask(sbt),
             valid=jnp.broadcast_to(valid, (n,)),
         )
 

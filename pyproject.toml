@@ -39,12 +39,16 @@ tracking = ["wandb==0.27.2"]
 [tool.setuptools.package-dir]
 virtue_rl = "src/virtue_rl"
 "virtue_rl.envs" = "src/virtue_rl/envs"
+"virtue_rl.agents" = "src/virtue_rl/agents"
+"virtue_rl.metrics" = "src/virtue_rl/metrics"
 socialjax = "third_party/SocialJax/socialjax"
 
 [tool.setuptools]
 packages = [
     "virtue_rl",
     "virtue_rl.envs",
+    "virtue_rl.agents",
+    "virtue_rl.metrics",
     "socialjax",
     "socialjax.environments",
     "socialjax.environments.cleanup",
