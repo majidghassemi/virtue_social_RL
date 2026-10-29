@@ -59,7 +59,7 @@ SocialJax is not packaged upstream, so `pyproject.toml` exposes its `socialjax` 
 | 0. Setup | Done | Pinned SocialJax, installable package, smoke tests, CPU speed benchmark (about 20,900 env steps per second on 2 cores) |
 | 1. Ethics wrapper | Done | Per-agent ethics record on every step, teacher channel in observations, role configuration |
 | 2. Maps and splits | Done | Seeded map generator, 24-map suite in three splits, teacher-absent condition, provisional cost bands, per-map runner |
-| 3. Scripted ladder and metrics | Code and pilot done, full run in progress | Scripted agents with known dispositions, behaviour and validity metrics, pre-registered protocol, pilot results |
+| 3. Scripted ladder and metrics | Code and pilot done, full run 22 of 24 maps (stopped at the 2-hour job limit) | Scripted agents with known dispositions, behaviour and validity metrics, pre-registered protocol, pilot results |
 | 4. Learned agents | Planned | PPO, PPO with harm penalty, SVO, behaviour cloning, social learner (needs the GPU benchmark first) |
 | 5. Analysis | Planned | Figures and a script that regenerates every reported number from raw logs |
 
@@ -139,6 +139,19 @@ Other wrapper choices:
 | Run size | 10 seed units x 32 episodes per job, 1,000-step episodes | Reliability curves then show whether that is enough |
 | Success criteria | Fixed in `configs/protocol_v1.yaml` before any run | Proposal Q8. Failures are findings |
 | Cost of virtue | Empirical: apples(indifferent) minus apples(virtuous), as a share, per map | Replaces the provisional structural bands |
+
+### Phase 3 full run, preliminary (22 of 24 maps, 10 seed units x 32 episodes)
+
+The full run stopped at the 2-hour limit for background jobs after finishing 22 maps. The two missing maps are `heldout_structure_04_rooms` and `heldout_structure_05_divided`, both in the low-cost band, so the held-out-structure split is currently unbalanced. `scripts/run_protocol.py` resumes by skipping finished maps. Full report: `results/protocol_v1_partial22_summary.md`.
+
+| Pre-registered check | Result |
+|---|---|
+| Rank validity, all three metrics | Pass (tau-b 1.0 in every split) |
+| Competence independence | Harm per episode fails (0.25), harm per opportunity fails (0.16), harm per apple passes (at most 0.05) |
+| Teacher gap detects performative agents | Pass (gap 0.83, 95% CI 0.81 to 0.84) |
+| Teacher gap null for virtuous and indifferent agents | Fails: the indifferent rung has a small but significant gap (-0.007, CI -0.011 to -0.004) |
+
+With ten times the pilot's data, the small ecological effect of the teacher's presence becomes significant. It is about 1% of the performative gap. The exploratory onset metric ranks the ladder perfectly too, gives a much smaller performative gap (0.39) because idle opportunities no longer inflate the denominator, and narrowly fails competence independence (0.12). The cue result holds: for performative agents the within-episode gap is 0.95 by "teacher in view" but 0.24 by "seen by the teacher".
 
 ### Phase 3 pilot results (4 seed units x 8 episodes, all 24 maps)
 
