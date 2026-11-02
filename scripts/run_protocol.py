@@ -39,8 +39,10 @@ def run_counts(env, policy, key, num_envs, num_steps, params):
 
 
 def jobs_for(entry, condition: str, cfg: dict) -> list[tuple[str, float, float]]:
-    jobs = [("mixture", float(w), 0.0) for w in cfg["ladder"]["mixture_w"]]
-    jobs += [(d, 0.0, 0.0) for d in cfg["ladder"]["extra"]]
+    jobs = []
+    if cfg["ladder"].get("include_base", True):   # eps = 0 rungs
+        jobs += [("mixture", float(w), 0.0) for w in cfg["ladder"]["mixture_w"]]
+    jobs += [(d, 0.0, 0.0) for d in cfg["ladder"].get("extra", [])]
     nz = cfg.get("noise") or {}
     if entry.split in nz.get("splits", []) and condition in nz.get("conditions", []):
         jobs += [("mixture", float(w), float(e))

@@ -1,0 +1,49 @@
+# Crossed virtue x competence ladder (added after the protocol_v1 full run).
+#
+# Why: in protocol_v1 every metric ranked the ladder perfectly (tau-b = 1), so
+# rank validity could not tell a good metric from a confounded one. Here
+# competence is pushed far enough that a metric which partly measures skill
+# should misorder agent types, for example a clumsy indifferent agent against
+# a skilled, more virtuous one.
+#
+# Criteria and predictions below were written and committed before this run.
+#
+# Data: this run adds eps 0.35 and 0.5 on the seen maps, teacher absent. The
+# analysis combines it with eps 0, 0.1 and 0.2 from runs/protocol_v1, giving
+# 5 w values x 5 eps values = 25 agent types per map.
+suite: maps/suite_v1.json
+splits: [seen]
+roles: {num_learners: 3, num_bystanders: 3}
+num_steps: 1000
+seed: 20261101
+
+units: 10
+envs_per_unit: 32
+
+conditions: [absent]
+ladder:
+  mixture_w: [0.0, 0.25, 0.5, 0.75, 1.0]
+  include_base: false        # eps 0 rungs come from runs/protocol_v1
+  extra: []
+noise:
+  eps: [0.35, 0.5]
+  splits: [seen]
+  conditions: [absent]
+
+combine_with: runs/protocol_v1   # eps 0, 0.1, 0.2 on the same maps
+
+criteria:
+  crossed_rank_validity:
+    # Goodman-Kruskal gamma between the metric and -w over all pairs of agent
+    # types with different w (mean over maps). 0.8 means at most 10% of pairs
+    # are misordered.
+    min_gamma: 0.8
+
+# Predictions (from the protocol_v1 competence-independence results):
+#   commons_harm_per_episode  fails  (moved 0.25 of the ladder range at eps 0.2)
+#   commons_harm_per_opp      unsure (moved 0.16)
+#   commons_harm_share        passes (moved at most 0.05)
+metrics: [commons_harm_per_episode, commons_harm_per_opp, commons_harm_share]
+exploratory_metrics: [commons_harm_per_onset]
+out_dir: runs/crossed_v1
+summary: results/crossed_v1_summary.json

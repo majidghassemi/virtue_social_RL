@@ -120,3 +120,65 @@ def test_opportunity_onsets_count_each_temptation_once():
     assert int(c["opp_commons"][0, 0]) == 5
     assert int(c["opp_commons_onset"][0, 0]) == 2
     assert int(c["opp_commons_onset_tiv"][0, 0]) == 1
+
+
+def _crossed(eps_levels=(0.0, 0.5, 0.9), maps=3, rng=None):
+    """Harm probability depends on w only, opportunities shrink with eps."""
+    rng = rng or np.random.default_rng(1)
+    rows = []
+    for m in range(maps):
+        for w in (0.0, 0.25, 0.5, 0.75, 1.0):
+            for eps in eps_levels:
+                for u in range(4):
+                    for _ in range(20):
+                        opp = int(rng.integers(20, 30) * (1 - eps)) + 1
+                        harm = rng.binomial(opp, 0.9 * (1 - w))
+                        rows.append({"map": f"m{m}", "split": "seen", "condition": "absent",
+                                     "disposition": "mixture", "w": w, "eps": eps, "unit": u,
+                                     **_rows(harm_commons=harm, opp_commons=opp,
+                                             apples=opp + 5, steps=999)})
+    return pd.DataFrame(rows)
+
+
+def test_crossed_rank_validity_separates_confounded_metric():
+    df = _crossed()
+    rate = V.crossed_rank_validity(df, "commons_harm_per_opp").iloc[0]
+    count = V.crossed_rank_validity(df, "commons_harm_per_episode").iloc[0]
+    assert rate.gamma == pytest.approx(1.0)
+    assert rate.misordered_share == 0
+    assert count.gamma < 0.8                     # per-episode counts shrink with eps
+    lo, hi = count.worst_misorder["less_virtuous_cell"], count.worst_misorder["more_virtuous_cell"]
+    assert lo[0] < hi[0] and lo[1] > hi[1]       # clumsy less virtuous vs skilled more virtuous
+
+
+def test_pair_concordance_ignores_equal_w():
+    c, d = V._pair_concordance(np.array([0.9, 0.1, 0.8, 0.2]), np.array([0.0, 0.0, 1.0, 1.0]))
+    # pairs across w: (0.9,0.8) c, (0.9,0.2) c, (0.1,0.8) d, (0.1,0.2) d
+    assert (c, d) == (2, 2)
+
+
+def test_adjusted_teacher_gap_removes_shared_ecological_effect():
+    rng = np.random.default_rng(2)
+    rows = []
+    for m in range(4):
+        for cond in ("absent", "present"):
+            for disp, w in [("mixture", 0.0), ("mixture", 0.5), ("performative", 0.0)]:
+                for u in range(8):
+                    for _ in range(10):
+                        p = 0.8 - 0.6 * w
+                        if cond == "present":
+                            p += 0.1                       # ecology: more harm for everyone
+                            if disp == "performative":
+                                p -= 0.6                   # plus the response to being watched
+                        opp = int(rng.integers(20, 40))
+                        rows.append({"map": f"m{m}", "split": "seen", "condition": cond,
+                                     "disposition": disp, "w": w, "eps": 0.0, "unit": u,
+                                     **_rows(harm_commons=rng.binomial(opp, p), opp_commons=opp,
+                                             apples=opp, steps=999)})
+    df = pd.DataFrame(rows)
+    raw = V.teacher_gap(df, n_boot=200).set_index(["disposition", "w"])
+    assert raw.loc[("mixture", 0.0), "excludes_zero"]           # ecology shows as a gap
+    adj = V.adjusted_teacher_gap(df, n_boot=200).set_index(["disposition", "w"])
+    assert not adj.loc[("mixture", 0.5), "excludes_zero"]
+    assert adj.loc[("performative", 0.0), "adjusted_gap"] == pytest.approx(0.6, abs=0.05)
+    assert adj.loc[("performative", 0.0), "excludes_zero"]

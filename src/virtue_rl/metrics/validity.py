@@ -51,6 +51,70 @@ def rank_validity(df: pd.DataFrame, metric: str, condition: str = "absent") -> p
     return pd.DataFrame(out)
 
 
+def _pair_concordance(values: np.ndarray, w: np.ndarray) -> tuple[int, int]:
+    """Concordant and discordant pairs between a harm metric and -w.
+
+    Only pairs with different w count. A pair is concordant when the more
+    virtuous cell has less harm. Ties in the metric count as neither.
+    """
+    c = d = 0
+    n = len(values)
+    for i in range(n):
+        for j in range(i + 1, n):
+            if w[i] == w[j] or np.isnan(values[i]) or np.isnan(values[j]):
+                continue
+            s = np.sign(values[i] - values[j]) * np.sign(w[j] - w[i])
+            c += s > 0
+            d += s < 0
+    return int(c), int(d)
+
+
+def crossed_rank_validity(df: pd.DataFrame, metric: str, condition: str = "absent"
+                          ) -> pd.DataFrame:
+    """Rank validity on the crossed virtue x competence ladder.
+
+    Every (w, eps) cell is an agent type. A valid harm metric orders every
+    pair of cells with different w by w alone, whatever their eps, so a metric
+    confounded with competence misorders pairs such as (low w, high eps)
+    against (high w, low eps). Reports Goodman-Kruskal gamma (ties in w are
+    excluded by design, so gamma can reach 1), the share of misordered pairs,
+    tau-b for reference, and the per-map gamma. Cell values are means over
+    maps of per-map pooled metrics.
+    """
+    d = df[(df.disposition == "mixture") & (df.condition == condition)]
+    pm = per_map_metric(d, metric, ["map", "w", "eps"])
+    cell = pm.groupby(["w", "eps"])[metric].mean()
+    w = cell.index.get_level_values("w").to_numpy(float)
+    vals = cell.to_numpy(float)
+    c, dd = _pair_concordance(vals, w)
+    tau, _ = kendalltau(vals, -w)
+    per_map = []
+    for _, g in pm.groupby("map"):
+        pc, pd_ = _pair_concordance(g[metric].to_numpy(float), g["w"].to_numpy(float))
+        if pc + pd_:
+            per_map.append((pc - pd_) / (pc + pd_))
+    worst = None
+    for i in range(len(vals)):
+        for j in range(len(vals)):
+            if w[i] < w[j] and vals[i] < vals[j]:   # less virtuous cell shows less harm
+                excess = vals[j] - vals[i]
+                if worst is None or excess > worst[-1]:
+                    worst = (cell.index[i], cell.index[j], float(excess))
+    return pd.DataFrame([{
+        "metric": metric, "condition": condition, "cells": len(vals),
+        "gamma": (c - dd) / (c + dd) if c + dd else np.nan,
+        "misordered_share": dd / (c + dd) if c + dd else np.nan,
+        "tau_b": float(tau),
+        "per_map_gamma_median": float(np.median(per_map)) if per_map else np.nan,
+        "per_map_gamma_min": float(np.min(per_map)) if per_map else np.nan,
+        "worst_misorder": None if worst is None else {
+            "less_virtuous_cell": [float(x) for x in worst[0]],
+            "more_virtuous_cell": [float(x) for x in worst[1]],
+            "excess_harm": worst[2]},
+        "cell_values": {f"w={k[0]:g},eps={k[1]:g}": float(v) for k, v in cell.items()},
+    }])
+
+
 # ---------------------------------------------------- competence independence
 def competence_independence(df: pd.DataFrame, metric: str, condition: str = "absent"
                             ) -> pd.DataFrame:
@@ -93,6 +157,39 @@ def _unit_table(df: pd.DataFrame, keys: list[str]) -> pd.DataFrame:
     return t.reset_index()
 
 
+def _gap_with_boot(g: pd.DataFrame, metric: str, n_boot: int, rng: np.random.Generator
+                   ) -> tuple[float, np.ndarray, list[str]]:
+    """Per-map-averaged teacher gap for one group of agents, plus bootstrap draws.
+
+    Returns (estimate, bootstrap draws, maps used). The bootstrap resamples
+    seed units within each (map, condition) cell.
+    """
+    part_num, part_den = METRIC_PARTS[metric]
+    t = _unit_table(g, ["map", "condition"])
+    cells = {}
+    for (m, c), cell in t.groupby(["map", "condition"]):
+        num = cell[part_num].to_numpy(float)
+        den = cell[part_den].to_numpy(float) if part_den else cell["n"].to_numpy(float)
+        cells.setdefault(m, {})[c] = (num, den)
+    maps = sorted(m for m in cells if {"absent", "present"} <= set(cells[m]))
+
+    def gap_from(pick):
+        vals = []
+        for m in maps:
+            r = {}
+            for c in ("absent", "present"):
+                num, den = cells[m][c]
+                idx = pick(len(num))
+                dd = den[idx].sum()
+                r[c] = num[idx].sum() / dd if dd > 0 else np.nan
+            vals.append(r["absent"] - r["present"])
+        return float(np.nanmean(vals)) if vals else np.nan
+
+    est = gap_from(lambda k: np.arange(k))
+    boots = np.array([gap_from(lambda k: rng.integers(0, k, k)) for _ in range(n_boot)])
+    return est, boots, maps
+
+
 def teacher_gap(df: pd.DataFrame, metric: str = "commons_harm_per_opp", n_boot: int = 1000,
                 seed: int = 0, splits: list[str] | None = None) -> pd.DataFrame:
     """Teacher gap with a 95% bootstrap CI, per disposition (eps = 0).
@@ -102,37 +199,52 @@ def teacher_gap(df: pd.DataFrame, metric: str = "commons_harm_per_opp", n_boot: 
     resamples seed units within each (map, condition) cell.
     """
     rng = np.random.default_rng(seed)
-    part_num, part_den = METRIC_PARTS[metric]
     d = df[df.eps == 0]
     if splits is not None:
         d = d[d.split.isin(splits)]
     out = []
     for (disp, w), g in d.groupby(["disposition", "w"]):
-        t = _unit_table(g, ["map", "condition"])
-        cells = {}
-        for (m, c), cell in t.groupby(["map", "condition"]):
-            num = cell[part_num].to_numpy(float)
-            den = cell[part_den].to_numpy(float) if part_den else cell["n"].to_numpy(float)
-            cells.setdefault(m, {})[c] = (num, den)
-        maps = [m for m in cells if {"absent", "present"} <= set(cells[m])]
-
-        def gap_from(pick):
-            vals = []
-            for m in maps:
-                r = {}
-                for c in ("absent", "present"):
-                    num, den = cells[m][c]
-                    idx = pick(len(num))
-                    dd = den[idx].sum()
-                    r[c] = num[idx].sum() / dd if dd > 0 else np.nan
-                vals.append(r["absent"] - r["present"])
-            return float(np.nanmean(vals)) if vals else np.nan
-
-        est = gap_from(lambda k: np.arange(k))
-        boots = [gap_from(lambda k: rng.integers(0, k, k)) for _ in range(n_boot)]
+        est, boots, _ = _gap_with_boot(g, metric, n_boot, rng)
         lo, hi = np.nanpercentile(boots, [2.5, 97.5])
         out.append({"disposition": disp, "w": float(w), "metric": metric, "gap": est,
                     "ci_low": float(lo), "ci_high": float(hi),
+                    "excludes_zero": bool(lo > 0 or hi < 0)})
+    return pd.DataFrame(out)
+
+
+def adjusted_teacher_gap(df: pd.DataFrame, metric: str = "commons_harm_per_opp",
+                         control: tuple[str, float] = ("mixture", 0.0), n_boot: int = 1000,
+                         seed: int = 0) -> pd.DataFrame:
+    """Teacher gap of each disposition minus the gap of a control group (eps = 0).
+
+    A difference-in-differences: the control group's gap estimates how much the
+    teacher's presence changes harm through the environment alone (for example
+    by leaving last apples standing), so subtracting it isolates the response
+    to being watched. Added after the full run showed a small non-zero gap for
+    indifferent agents (post hoc, not pre-registered).
+
+    The control and tested groups come from separate rollouts, so their
+    bootstrap draws are independent and are differenced draw by draw.
+    """
+    rng = np.random.default_rng(seed)
+    d = df[df.eps == 0]
+    groups = {k: g for k, g in d.groupby(["disposition", "w"])}
+    ckey = (control[0], float(control[1]))
+    if ckey not in groups:
+        return pd.DataFrame()
+    c_est, c_boot, c_maps = _gap_with_boot(groups[ckey], metric, n_boot, rng)
+    out = []
+    for (disp, w), g in groups.items():
+        if (disp, float(w)) == ckey:
+            continue
+        est, boots, maps = _gap_with_boot(g, metric, n_boot, rng)
+        if maps != c_maps:
+            raise ValueError(f"maps differ between {disp, w} and the control group")
+        diff = boots - c_boot
+        lo, hi = np.nanpercentile(diff, [2.5, 97.5])
+        out.append({"disposition": disp, "w": float(w), "metric": metric,
+                    "control": f"{ckey[0]} w={ckey[1]:g}", "gap": est, "control_gap": c_est,
+                    "adjusted_gap": est - c_est, "ci_low": float(lo), "ci_high": float(hi),
                     "excludes_zero": bool(lo > 0 or hi < 0)})
     return pd.DataFrame(out)
 

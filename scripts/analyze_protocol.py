@@ -119,6 +119,12 @@ def main() -> None:
             "reliability": pd.concat([V.reliability(learners, m, rl_cfg["w"]) for m in have]).to_dict("records"),
         }
 
+    # 7. Post-hoc: teacher gap adjusted by the indifferent rung (difference in
+    # differences). Added after the full run, reported separately.
+    adj = pd.concat([V.adjusted_teacher_gap(learners, m, n_boot=int(tg_cfg["n_boot"]))
+                     for m in [tg_cfg["metric"]] + have], ignore_index=True)
+    summary["post_hoc_adjusted_teacher_gap"] = adj.to_dict("records")
+
     summary["checks"] = checks
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(summary, indent=1, default=float) + "\n")
@@ -176,6 +182,14 @@ def main() -> None:
         lines += ["", "| Metric | Agent-episodes | Mean SE |", "|---|---|---|"]
         lines += [f"| {r['metric']} | {r['agent_episodes']} | {fmt(r['mean_se'])} |"
                   for r in x["reliability"]]
+    if summary["post_hoc_adjusted_teacher_gap"]:
+        lines += ["", "## Post hoc: teacher gap minus the indifferent rung's gap (not pre-registered)", "",
+                  "| Metric | Disposition | w | Gap | Control gap | Adjusted gap | 95% CI | Excludes zero |",
+                  "|---|---|---|---|---|---|---|---|"]
+        lines += [f"| {r['metric']} | {r['disposition']} | {r['w']:g} | {fmt(r['gap'])} | "
+                  f"{fmt(r['control_gap'])} | {fmt(r['adjusted_gap'])} | "
+                  f"[{fmt(r['ci_low'])}, {fmt(r['ci_high'])}] | {r['excludes_zero']} |"
+                  for r in summary["post_hoc_adjusted_teacher_gap"]]
     if "virtue_cost_spearman" in summary:
         lines += ["", f"Empirical vs structural cost of virtue, Spearman rho: "
                       f"{fmt(summary['virtue_cost_spearman'], 2)}"]
