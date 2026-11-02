@@ -38,6 +38,10 @@ COUNT_FIELDS = (
     "opp_commons_onset", "opp_commons_onset_tiv", "opp_commons_onset_sbt",
 )
 
+# Environment-level outcomes (the same value for every agent of an episode).
+# Kept apart from COUNT_FIELDS so that runs logged before they existed still load.
+ENV_FIELDS = ("regrown", "stock")
+
 
 def episode_counts(ethics) -> dict[str, jnp.ndarray]:
     """Sum an EthicsInfo with leading axes (T, E, N) over time -> (E, N) counts.
@@ -72,6 +76,7 @@ def episode_counts(ethics) -> dict[str, jnp.ndarray]:
         "harm_zap_tiv": s(hz * tiv), "opp_zap_tiv": s(oz * tiv),
         "opp_commons_onset": s(onset), "opp_commons_onset_tiv": s(onset * tiv),
         "opp_commons_onset_sbt": s(onset * sbt),
+        "regrown": s(ethics.regrown), "stock": s(ethics.stock * v),
     }
 
 

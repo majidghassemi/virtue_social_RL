@@ -38,16 +38,34 @@ def run_counts(env, policy, key, num_envs, num_steps, params):
     return episode_counts(traj["ethics"])
 
 
-def jobs_for(entry, condition: str, cfg: dict) -> list[tuple[str, float, float]]:
-    jobs = []
+def jobs_for(entry, condition: str, cfg: dict) -> list[dict]:
+    """Jobs for one (map, condition): a list of learner-group descriptions.
+
+    Two config styles: `groups` (protocol v2, named groups with rule, cue and
+    view_only) or `ladder` plus `noise` (protocol v1 and the crossed ladder).
+    """
+    if "groups" in cfg:
+        return [{"group": g["name"], "disposition": g["disposition"],
+                 "w": float(g.get("w", 0.0)), "eps": float(g.get("eps", 0.0)),
+                 "rule": g.get("rule", "minimal"), "cue": g.get("cue", "in_view"),
+                 "view_only": bool(g.get("view_only", False))}
+                for g in cfg["groups"] if condition in g["conditions"]]
+    tuples = []
     if cfg["ladder"].get("include_base", True):   # eps = 0 rungs
-        jobs += [("mixture", float(w), 0.0) for w in cfg["ladder"]["mixture_w"]]
-    jobs += [(d, 0.0, 0.0) for d in cfg["ladder"].get("extra", [])]
+        tuples += [("mixture", float(w), 0.0) for w in cfg["ladder"]["mixture_w"]]
+    tuples += [(d, 0.0, 0.0) for d in cfg["ladder"].get("extra", [])]
     nz = cfg.get("noise") or {}
     if entry.split in nz.get("splits", []) and condition in nz.get("conditions", []):
-        jobs += [("mixture", float(w), float(e))
-                 for e in nz["eps"] for w in cfg["ladder"]["mixture_w"]]
-    return jobs
+        tuples += [("mixture", float(w), float(e))
+                   for e in nz["eps"] for w in cfg["ladder"]["mixture_w"]]
+    return [{"group": None, "disposition": d, "w": w, "eps": e, "rule": "minimal",
+             "cue": "in_view", "view_only": False} for d, w, e in tuples]
+
+
+def conditions_of(cfg: dict) -> list[str]:
+    if "groups" in cfg:
+        return [c for c in ("absent", "present") if any(c in g["conditions"] for g in cfg["groups"])]
+    return cfg["conditions"]
 
 
 def job_key(seed: int, *parts) -> jax.Array:
@@ -87,27 +105,36 @@ def main() -> None:
             print(f"[{i + 1}/{len(entries)}] {entry.name}: exists, skipping")
             continue
         frames = []
-        for condition in cfg["conditions"]:
+        for condition in conditions_of(cfg):
             env = suite.env(entry.name, condition == "present")
             policy = ScriptedPolicy(env)
-            for disp, w, eps in jobs_for(entry, condition, cfg):
+            for job in jobs_for(entry, condition, cfg):
+                disp, w, eps = job["disposition"], job["w"], job["eps"]
                 t0 = time.perf_counter()
-                params = make_params(roles, disp, w, eps)
-                key = job_key(int(cfg["seed"]), entry.name, condition, disp, w, eps)
+                params = make_params(roles, disp, w, eps, rule=job["rule"], cue=job["cue"],
+                                     view_only=job["view_only"])
+                if job["group"] is None:   # v1 keys, unchanged so old runs reproduce
+                    key = job_key(int(cfg["seed"]), entry.name, condition, disp, w, eps)
+                else:
+                    key = job_key(int(cfg["seed"]), entry.name, condition, job["group"])
                 counts = jax.device_get(run_counts(env, policy, key, num_envs, num_steps, params))
                 e_idx, a_idx = np.meshgrid(np.arange(num_envs), np.arange(roles.num_agents),
                                            indexing="ij")
-                df = pd.DataFrame({k: np.asarray(counts[k]).ravel() for k in COUNT_FIELDS})
+                df = pd.DataFrame({k: np.asarray(v).ravel() for k, v in counts.items()})
                 df.insert(0, "agent", a_idx.ravel())
                 df.insert(0, "role", role_of[a_idx.ravel()])
                 df.insert(0, "unit", e_idx.ravel() // per_unit)
                 df.insert(0, "episode", e_idx.ravel())
+                if job["group"] is not None:
+                    for col in ("view_only", "cue", "rule", "group"):
+                        df.insert(0, col, job[col])
                 for col, val in (("eps", eps), ("w", w), ("disposition", disp),
                                  ("condition", condition), ("band", entry.band),
                                  ("split", entry.split), ("map", entry.name)):
                     df.insert(0, col, val)
                 frames.append(df)
-                print(f"[{i + 1}/{len(entries)}] {entry.name} {condition:<7} {disp:<12} "
+                label = job["group"] or disp
+                print(f"[{i + 1}/{len(entries)}] {entry.name} {condition:<7} {label:<16} "
                       f"w={w:.2f} eps={eps:.2f}  {time.perf_counter() - t0:5.1f}s")
         pd.concat(frames).to_csv(path, index=False, compression="gzip")
     print(f"done in {time.perf_counter() - t_start:.0f}s, counts in {out_dir}")

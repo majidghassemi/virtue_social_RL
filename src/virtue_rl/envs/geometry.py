@@ -57,6 +57,50 @@ def last_apple_mask(grid: jnp.ndarray) -> jnp.ndarray:
     return (grid == Items.apple) & (apple_neighbour_counts(grid) == 0)
 
 
+def apple_component_sizes(grid: jnp.ndarray) -> jnp.ndarray:
+    """Size of each apple's regrowth component, 0 for non-apple cells, shape (H, W).
+
+    Two apples are in the same component when they are linked by a chain of
+    apples, each within the radius-2 regrowth neighbourhood of the next. This
+    is the connectivity the map generator uses for patches. Computed by
+    max-label propagation until nothing changes (jit and vmap compatible).
+    """
+    is_apple = grid == Items.apple
+    h, w = grid.shape
+    labels0 = jnp.where(is_apple, jnp.arange(1, h * w + 1).reshape(h, w), 0)
+
+    def neighbour_max(lab):
+        p = jnp.pad(lab, 2)
+
+        def shifted(offset):
+            return jax.lax.dynamic_slice(p, (2 + offset[0], 2 + offset[1]), (h, w))
+
+        return jnp.max(jax.vmap(shifted)(APPLE_NEIGHBOURHOOD), axis=0)
+
+    def body(carry):
+        lab, _ = carry
+        new = jnp.where(is_apple, jnp.maximum(lab, neighbour_max(lab)), 0)
+        return new, jnp.any(new != lab)
+
+    labels, _ = jax.lax.while_loop(lambda c: c[1], body, (labels0, jnp.array(True)))
+    counts = jnp.bincount(labels.ravel(), length=h * w + 1)
+    return jnp.where(is_apple, counts[labels], 0)
+
+
+def view_mask(loc: jnp.ndarray, grid_shape: tuple[int, int], obs_size: int) -> jnp.ndarray:
+    """(H, W) bool: map cells inside the agent's view window.
+
+    Same window as `agent_views` (rotation does not change which cells are
+    inside it).
+    """
+    h, w = grid_shape
+    x, y = obs_window_corner(loc.astype(jnp.int32), obs_size)
+    r0, c0 = x - (obs_size - 1), y - (obs_size - 1)   # padded -> map coordinates
+    rows = jnp.arange(h)[:, None]
+    cols = jnp.arange(w)[None, :]
+    return (rows >= r0) & (rows < r0 + obs_size) & (cols >= c0) & (cols < c0 + obs_size)
+
+
 def lookup(grid: jnp.ndarray, rc: jnp.ndarray, fill: int = 0) -> jnp.ndarray:
     """grid[r, c] with out-of-map cells returning `fill`."""
     h, w = grid.shape

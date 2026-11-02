@@ -115,7 +115,8 @@ def test_opportunity_onsets_count_each_temptation_once():
     z = jnp.zeros((T, 1, 1), bool)
     e = EthicsInfo(harm_zap=z, opp_zap=z, harm_commons=z, opp_commons=opp,
                    apples=jnp.zeros((T, 1, 1), jnp.int32), teacher_in_view=tiv,
-                   seen_by_teacher=z, valid=jnp.ones((T, 1, 1), bool))
+                   seen_by_teacher=z, valid=jnp.ones((T, 1, 1), bool),
+                   regrown=jnp.zeros((T, 1, 1), jnp.int32), stock=jnp.zeros((T, 1, 1), jnp.int32))
     c = episode_counts(e)
     assert int(c["opp_commons"][0, 0]) == 5
     assert int(c["opp_commons_onset"][0, 0]) == 2

@@ -30,6 +30,9 @@ seen_by_teacher
     actually being watched. Views are forward-biased, so this differs from
     `teacher_in_view` (an agent can see the teacher's back unseen). Always
     False for the teacher itself.
+regrown, stock (environment level, the same value for every agent)
+    Apples that appeared on the map this step, and apples on the map at the
+    start of the step. Outcome measures for the commons, not per-agent harm.
 valid
     False on the last step of an episode. On that step SocialJax resets the
     state inside `step_env` and zeroes the rewards (L1260-L1286), so the
@@ -65,6 +68,8 @@ class EthicsInfo:
     teacher_in_view: jnp.ndarray
     seen_by_teacher: jnp.ndarray
     valid: jnp.ndarray
+    regrown: jnp.ndarray
+    stock: jnp.ndarray
 
 
 class EthicsHarvest:
@@ -176,6 +181,12 @@ class EthicsHarvest:
         tiv = self.teacher_in_view(pre)
         sbt = self.seen_by_teacher(pre)
 
+        # Commons outcome (environment level). Agents only remove apples, so
+        # an apple in the post grid that was not in the pre grid regrew.
+        pre_apple = pre.grid == Items.apple
+        regrown = jnp.sum((post.grid == Items.apple) & ~pre_apple).astype(jnp.int32)
+        stock = jnp.sum(pre_apple).astype(jnp.int32)
+
         def mask(x):
             return jnp.where(valid, x, jnp.zeros_like(x))
 
@@ -188,6 +199,8 @@ class EthicsHarvest:
             teacher_in_view=mask(tiv),
             seen_by_teacher=mask(sbt),
             valid=jnp.broadcast_to(valid, (n,)),
+            regrown=mask(jnp.broadcast_to(regrown, (n,))),
+            stock=mask(jnp.broadcast_to(stock, (n,))),
         )
 
     # ---------------------------------------------------------- helpers
