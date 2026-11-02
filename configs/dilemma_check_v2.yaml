@@ -1,0 +1,45 @@
+# Social dilemma check v2: milder defection and discounted value.
+#
+# Follows configs/dilemma_check.yaml (results in a3f1811..41daa3f), which found
+# no dilemma with a fully greedy defector and undiscounted episode totals.
+# Two limits of that check are addressed here. Criteria and the decision rule
+# are fixed before this run.
+#
+# Defectors (agent 1 switches, everyone else follows the restrained rule):
+#   greedy   takes the nearest apple of any kind (as in v1 of the check)
+#   minimal  takes every apple except last apples (strips patches to one apple)
+# Restrained rule: sustainable (keeps 3 apples per patch).
+#
+# Value measures:
+#   undiscounted  apples per 1,000-step episode
+#   discounted    sum over steps of gamma^t * apples_t, gamma = 0.99. This is
+#                 the GAMMA of SocialJax's IPPO config for Harvest Open
+#                 (algorithms/IPPO/config/ippo_base.yaml), i.e. what a learner
+#                 trained with the benchmark's settings optimises.
+#
+# For each defector d, value measure v and number of agents:
+#   C1 collective benefit: v_total(all sustainable) > v_total(all d)
+#   C2 temptation:         v_1(d among sustainable) > v_1(all sustainable)
+#   C3 sucker's cost:      v_1(all d) > v_1(sustainable among d)
+# (v_1 = value of agent 1, v_total = sum over agents.) Each holds when the mean
+# over maps of the per-map difference is positive and its 95% bootstrap CI
+# (seed units, paired by common random numbers) excludes 0.
+num_agents: [3, 5, 7]
+defectors: [greedy, minimal]
+gamma: 0.99
+map_sets:
+  ours: {suite: maps/suite_v2.json, split: seen, teacher_present_version: true}
+  upstream: {default_map: true}
+num_steps: 1000
+units: 8
+envs_per_unit: 8
+seed: 20261102
+decision_rule: >
+  The discounted measure is the one that matters for learned agents. A setting
+  is usable when C1, C2 and C3 all hold under the discounted measure for at
+  least one defector. Use the smallest number of agents that is usable on our
+  maps. If none is usable on our maps but one is on the upstream map, the map
+  density is the cause and the maps should be regenerated at upstream density.
+  If none is usable anywhere, report it and do not change the environment
+  without a stated principle.
+out: results/dilemma_check_v2.json
