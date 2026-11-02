@@ -182,3 +182,39 @@ Suite v2 results (from `maps/suite_v2.json` and `results/map_cost_cache_v2.json`
 Why two bands: a split of 8 maps balances evenly into two bands, not three. The first estimate of the cost SE (0.023, from independent sampling in protocol_v1) suggested three bands could not be told apart. With common random numbers the SE is about 0.009, so precision is no longer the reason.
 
 Band counts match, distributions do not fully: held-out structure has a much wider spread of costs (SD 0.19 against 0.07 for seen) and includes a map where virtue pays (heldout_structure_04_divided, cost -0.28, mechanism not yet checked). Phase 4 analyses should therefore use each map's measured cost as a covariate, not only its band.
+
+## Protocol v2: known groups not defined by the metric's rule
+
+Design principle (from the project lead, 2 Nov 2026): the environment and the tests should neither be built to confirm our assumptions nor be built to break them.
+
+Audit of Phase 3 against that principle:
+
+| Phase 3 choice | Problem |
+|---|---|
+| The "virtuous" agent avoids exactly the last apples the harm metric counts | Rank validity was close to guaranteed. This agent is really "minimal compliance" with the metric's rule. It strips every patch down to one apple |
+| Performative agents react to "teacher in view", the cue then used to split the data | The 0.95 within-episode gap is mostly by construction |
+| Competence lowered only by random lapses, and a virtuous lapse onto a last apple is cancelled | Shields the metrics from realistic kinds of low competence |
+| Onset metric, adjusted gap, +-0.05 margin added after seeing results | Labelled post hoc, but chosen with the data in view |
+| Crossed ladder up to eps 0.5 | Range picked to stress the metrics, not taken from what real agents do |
+
+Protocol v2 (`configs/protocol_v2.yaml`, pre-registered in commit `e924e33`, analysis script committed in `b3386c3` before the run):
+
+| Addition | Definition | Where the parameter comes from |
+|---|---|---|
+| Sustainable rule | In virtuous mode, take an apple only if its regrowth component has more than 3 apples, so each patch keeps a reserve of 3 | Regrowth rule: a cell with 3 or more apple neighbours regrows fastest |
+| Minimal rule | The Phase 3 "virtuous" behaviour, renamed | Unchanged (actions bit-identical to Phase 3, checked on 16 configurations) |
+| View-only agents | See apples only inside their own 11 x 11 view, know the walls, wander at random when no suitable apple is in view | Upstream observation window |
+| Watched cues | Performative agents react to: teacher in view, being in the teacher's view, or the teacher within Manhattan distance 5 | 5 = lateral half-width of the view |
+| Commons outcome | Environment-level apples regrown per step and apple stock (`regrown`, `stock` in `EthicsInfo`) | Read directly from the grid |
+
+Component size uses the same radius-2 connectivity as the map generator. A component of size 1 is exactly a last apple (tested), so the sustainable rule never takes a last apple, and both the minimal and sustainable groups have zero commons harm by construction. Q2 measures the outcome difference that the harm metrics therefore cannot see.
+
+Mechanical note: the YAML key `null` in the first committed version parsed as None (the same pitfall as in Phase 3). It was renamed `null_groups` in `b3386c3`, with the same content, before any results.
+
+Run plan: 28 maps of suite v2, 10 seed units x 16 episodes, 16 jobs per map (13 full view, 3 view-only), in two chunks of 14 maps to stay under the 2-hour limit for background jobs. About 6 minutes per map on 2 CPU cores.
+
+Protocol v2 results (`results/protocol_v2_summary.md`): summarised in the README. Predictions against outcomes: Q3 harm per episode predicted to fail and failed. Q4 predicted all cues detected and all were. Q5 predicted each group's largest gap on its own cue, which held. Q1 sustainable vs minimal was marked uncertain, and sustainable regrew more on all 28 maps.
+
+Commons dynamics check (after the run, not pre-registered): with 3 indifferent bystanders and the teacher, the commons is close to empty for most of the episode in every group. Mean apple stock over the episode is 0.52 (indifferent learners), 0.59 (minimal) and 0.61 (sustainable), and about 0.5 to 1.2 apples regrow per 1,000-step episode. On the upstream default map (64 apples, same roles and scripted agents, 64 episodes per group) the mean stock is 1.06 to 1.18 and 2.0 to 3.5 apples regrow per episode, so the collapse is mainly an environment property with this many greedy agents. Our generated maps hold fewer apples (median 30, range 15 to 47) than the upstream map (64), which makes it faster.
+
+Open decision for Phase 4 (not changed yet, since changing it would be a design choice made after seeing results): the setting is close to a one-shot depletion game, where learners' restraint costs apples but barely changes the commons because the bystanders take what is left. Options: keep it (the harshest setting), match the upstream apple density, or change the bystander mix. Scripted agents are perfect greedy collectors, so learned agents may deplete more slowly. Measuring depletion speed under the first learned agents is the neutral way to decide.
