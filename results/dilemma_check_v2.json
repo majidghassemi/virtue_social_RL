@@ -1,0 +1,1082 @@
+{
+ "ours|3|greedy|undiscounted": {
+  "map_set": "ours",
+  "num_agents": 3,
+  "defector": "greedy",
+  "value": "undiscounted",
+  "C1": [
+   117.28385416666667,
+   116.23430989583333,
+   118.28795572916667
+  ],
+  "C2": [
+   -31.1171875,
+   -31.786523437499998,
+   -30.459570312500002
+  ],
+  "C3": [
+   0.81640625,
+   0.5481445312500001,
+   1.0846354166666667
+  ],
+  "holds": {
+   "C1": true,
+   "C2": false,
+   "C3": true
+  },
+  "dilemma": false,
+  "means": {
+   "all_sustainable": {
+    "total": 151.55989583333334,
+    "switcher": 49.645833333333336
+   },
+   "all_d": {
+    "total": 34.276041666666664,
+    "switcher": 10.674479166666666
+   },
+   "d_among_sustainable": {
+    "total": 36.657552083333336,
+    "switcher": 18.528645833333332
+   },
+   "sustainable_among_d": {
+    "total": 35.028645833333336,
+    "switcher": 9.858072916666666
+   }
+  }
+ },
+ "ours|3|greedy|discounted": {
+  "map_set": "ours",
+  "num_agents": 3,
+  "defector": "greedy",
+  "value": "discounted",
+  "C1": [
+   1.0764366393703615,
+   0.8929741205875302,
+   1.2472677700864245
+  ],
+  "C2": [
+   4.528511760617524,
+   4.3618284679181665,
+   4.7086858320888645
+  ],
+  "C3": [
+   0.6762907590406636,
+   0.4626789691566955,
+   0.8900218447359899
+  ],
+  "holds": {
+   "C1": true,
+   "C2": true,
+   "C3": true
+  },
+  "dilemma": true,
+  "means": {
+   "all_sustainable": {
+    "total": 29.236158822270074,
+    "switcher": 9.001415942623984
+   },
+   "all_d": {
+    "total": 28.159722182899714,
+    "switcher": 8.736182125207657
+   },
+   "d_among_sustainable": {
+    "total": 28.550937542070944,
+    "switcher": 13.529927703241507
+   },
+   "sustainable_among_d": {
+    "total": 28.48917655305316,
+    "switcher": 8.059891366166994
+   }
+  }
+ },
+ "ours|3|minimal|undiscounted": {
+  "map_set": "ours",
+  "num_agents": 3,
+  "defector": "minimal",
+  "value": "undiscounted",
+  "C1": [
+   108.19401041666667,
+   107.149609375,
+   109.22278645833333
+  ],
+  "C2": [
+   -21.240885416666668,
+   -21.929817708333335,
+   -20.557291666666668
+  ],
+  "C3": [
+   5.635416666666667,
+   5.359375,
+   5.90498046875
+  ],
+  "holds": {
+   "C1": true,
+   "C2": false,
+   "C3": true
+  },
+  "dilemma": false,
+  "means": {
+   "all_sustainable": {
+    "total": 151.55989583333334,
+    "switcher": 49.645833333333336
+   },
+   "all_d": {
+    "total": 43.365885416666664,
+    "switcher": 13.453125
+   },
+   "d_among_sustainable": {
+    "total": 47.354166666666664,
+    "switcher": 28.404947916666668
+   },
+   "sustainable_among_d": {
+    "total": 44.200520833333336,
+    "switcher": 7.817708333333333
+   }
+  }
+ },
+ "ours|3|minimal|discounted": {
+  "map_set": "ours",
+  "num_agents": 3,
+  "defector": "minimal",
+  "value": "discounted",
+  "C1": [
+   4.768395244745648,
+   4.616352600296207,
+   4.923464572269413
+  ],
+  "C2": [
+   1.5833027014517331,
+   1.431317885434146,
+   1.745013019482394
+  ],
+  "C3": [
+   1.1527551887385432,
+   1.015903318651344,
+   1.2946329394936866
+  ],
+  "holds": {
+   "C1": true,
+   "C2": true,
+   "C3": true
+  },
+  "dilemma": true,
+  "means": {
+   "all_sustainable": {
+    "total": 29.236158822270074,
+    "switcher": 9.001415942623984
+   },
+   "all_d": {
+    "total": 24.467763577524426,
+    "switcher": 7.281743779354258
+   },
+   "d_among_sustainable": {
+    "total": 24.934106355716228,
+    "switcher": 10.584718644075716
+   },
+   "sustainable_among_d": {
+    "total": 24.579382311715648,
+    "switcher": 6.128988590615715
+   }
+  }
+ },
+ "ours|5|greedy|undiscounted": {
+  "map_set": "ours",
+  "num_agents": 5,
+  "defector": "greedy",
+  "value": "undiscounted",
+  "C1": [
+   102.5859375,
+   101.56630859375,
+   103.61204427083334
+  ],
+  "C2": [
+   -10.079427083333334,
+   -10.648502604166667,
+   -9.499934895833334
+  ],
+  "C3": [
+   1.0690104166666667,
+   0.8658854166666666,
+   1.2904296874999996
+  ],
+  "holds": {
+   "C1": true,
+   "C2": false,
+   "C3": true
+  },
+  "dilemma": false,
+  "means": {
+   "all_sustainable": {
+    "total": 136.79296875,
+    "switcher": 26.55078125
+   },
+   "all_d": {
+    "total": 34.20703125,
+    "switcher": 6.395833333333333
+   },
+   "d_among_sustainable": {
+    "total": 36.877604166666664,
+    "switcher": 16.471354166666668
+   },
+   "sustainable_among_d": {
+    "total": 34.345052083333336,
+    "switcher": 5.326822916666667
+   }
+  }
+ },
+ "ours|5|greedy|discounted": {
+  "map_set": "ours",
+  "num_agents": 5,
+  "defector": "greedy",
+  "value": "discounted",
+  "C1": [
+   -0.009741523963375206,
+   -0.16494449926247512,
+   0.14559977612405076
+  ],
+  "C2": [
+   6.360740529577375,
+   6.212334861009673,
+   6.510412644760529
+  ],
+  "C3": [
+   0.9228936646444102,
+   0.7500189234056355,
+   1.0915668008577388
+  ],
+  "holds": {
+   "C1": false,
+   "C2": true,
+   "C3": true
+  },
+  "dilemma": false,
+  "means": {
+   "all_sustainable": {
+    "total": 29.386094032592165,
+    "switcher": 5.544158033822536
+   },
+   "all_d": {
+    "total": 29.39583555655554,
+    "switcher": 5.48391165661936
+   },
+   "d_among_sustainable": {
+    "total": 29.196257464179023,
+    "switcher": 11.904898563399911
+   },
+   "sustainable_among_d": {
+    "total": 29.422222356544808,
+    "switcher": 4.56101799197495
+   }
+  }
+ },
+ "ours|5|minimal|undiscounted": {
+  "map_set": "ours",
+  "num_agents": 5,
+  "defector": "minimal",
+  "value": "undiscounted",
+  "C1": [
+   95.59765625,
+   94.56497395833334,
+   96.616015625
+  ],
+  "C2": [
+   -1.7955729166666667,
+   -2.4518229166666665,
+   -1.160123697916667
+  ],
+  "C3": [
+   3.4205729166666665,
+   3.23173828125,
+   3.62109375
+  ],
+  "holds": {
+   "C1": true,
+   "C2": false,
+   "C3": true
+  },
+  "dilemma": false,
+  "means": {
+   "all_sustainable": {
+    "total": 136.79296875,
+    "switcher": 26.55078125
+   },
+   "all_d": {
+    "total": 41.1953125,
+    "switcher": 7.76171875
+   },
+   "d_among_sustainable": {
+    "total": 47.986979166666664,
+    "switcher": 24.755208333333332
+   },
+   "sustainable_among_d": {
+    "total": 41.755208333333336,
+    "switcher": 4.341145833333333
+   }
+  }
+ },
+ "ours|5|minimal|discounted": {
+  "map_set": "ours",
+  "num_agents": 5,
+  "defector": "minimal",
+  "value": "discounted",
+  "C1": [
+   4.32696670906229,
+   4.174156787268141,
+   4.482781264302365
+  ],
+  "C2": [
+   3.0403779047292687,
+   2.9146538688611234,
+   3.163050180792718
+  ],
+  "C3": [
+   0.9116272009373082,
+   0.8059504118431132,
+   1.000701531142708
+  ],
+  "holds": {
+   "C1": true,
+   "C2": true,
+   "C3": true
+  },
+  "dilemma": true,
+  "means": {
+   "all_sustainable": {
+    "total": 29.386094032592165,
+    "switcher": 5.544158033822536
+   },
+   "all_d": {
+    "total": 25.059127323529875,
+    "switcher": 4.510785301182234
+   },
+   "d_among_sustainable": {
+    "total": 25.545753456376886,
+    "switcher": 8.584535938551804
+   },
+   "sustainable_among_d": {
+    "total": 25.051386977995076,
+    "switcher": 3.5991581002449258
+   }
+  }
+ },
+ "ours|7|greedy|undiscounted": {
+  "map_set": "ours",
+  "num_agents": 7,
+  "defector": "greedy",
+  "value": "undiscounted",
+  "C1": [
+   89.39453125,
+   88.26031901041667,
+   90.5078125
+  ],
+  "C2": [
+   -2.2057291666666665,
+   -2.673209635416667,
+   -1.726529947916667
+  ],
+  "C3": [
+   1.21484375,
+   1.0806966145833334,
+   1.3438151041666664
+  ],
+  "holds": {
+   "C1": true,
+   "C2": false,
+   "C3": true
+  },
+  "dilemma": false,
+  "means": {
+   "all_sustainable": {
+    "total": 123.36848958333333,
+    "switcher": 17.506510416666668
+   },
+   "all_d": {
+    "total": 33.973958333333336,
+    "switcher": 4.665364583333333
+   },
+   "d_among_sustainable": {
+    "total": 36.920572916666664,
+    "switcher": 15.30078125
+   },
+   "sustainable_among_d": {
+    "total": 34.029947916666664,
+    "switcher": 3.4505208333333335
+   }
+  }
+ },
+ "ours|7|greedy|discounted": {
+  "map_set": "ours",
+  "num_agents": 7,
+  "defector": "greedy",
+  "value": "discounted",
+  "C1": [
+   -1.0312217591526622,
+   -1.1890168878222211,
+   -0.8746325046298571
+  ],
+  "C2": [
+   7.013462599787336,
+   6.873404121231013,
+   7.160472249248586
+  ],
+  "C3": [
+   1.0561244438868016,
+   0.940794803815273,
+   1.1669602254133982
+  ],
+  "holds": {
+   "C1": false,
+   "C2": true,
+   "C3": true
+  },
+  "dilemma": false,
+  "means": {
+   "all_sustainable": {
+    "total": 28.781835642142468,
+    "switcher": 3.8519876379351103
+   },
+   "all_d": {
+    "total": 29.81305740129513,
+    "switcher": 4.083463256868224
+   },
+   "d_among_sustainable": {
+    "total": 29.292949130279663,
+    "switcher": 10.865450237722447
+   },
+   "sustainable_among_d": {
+    "total": 29.793916286745418,
+    "switcher": 3.0273388129814216
+   }
+  }
+ },
+ "ours|7|minimal|undiscounted": {
+  "map_set": "ours",
+  "num_agents": 7,
+  "defector": "minimal",
+  "value": "undiscounted",
+  "C1": [
+   83.30729166666667,
+   82.16663411458333,
+   84.50003255208334
+  ],
+  "C2": [
+   4.83984375,
+   4.285123697916666,
+   5.35810546875
+  ],
+  "C3": [
+   2.4752604166666665,
+   2.2916666666666665,
+   2.6536458333333335
+  ],
+  "holds": {
+   "C1": true,
+   "C2": true,
+   "C3": true
+  },
+  "dilemma": true,
+  "means": {
+   "all_sustainable": {
+    "total": 123.36848958333333,
+    "switcher": 17.506510416666668
+   },
+   "all_d": {
+    "total": 40.061197916666664,
+    "switcher": 5.37109375
+   },
+   "d_among_sustainable": {
+    "total": 48.7265625,
+    "switcher": 22.346354166666668
+   },
+   "sustainable_among_d": {
+    "total": 40.166666666666664,
+    "switcher": 2.8958333333333335
+   }
+  }
+ },
+ "ours|7|minimal|discounted": {
+  "map_set": "ours",
+  "num_agents": 7,
+  "defector": "minimal",
+  "value": "discounted",
+  "C1": [
+   3.5808786779430855,
+   3.4276000742359773,
+   3.733852011505223
+  ],
+  "C2": [
+   3.4920006417591103,
+   3.364936657980374,
+   3.6133633012871385
+  ],
+  "C3": [
+   0.7472115226412749,
+   0.6674961856453323,
+   0.8285191702164957
+  ],
+  "holds": {
+   "C1": true,
+   "C2": true,
+   "C3": true
+  },
+  "dilemma": true,
+  "means": {
+   "all_sustainable": {
+    "total": 28.781835642142468,
+    "switcher": 3.8519876379351103
+   },
+   "all_d": {
+    "total": 25.20095696419938,
+    "switcher": 3.2266259890111635
+   },
+   "d_among_sustainable": {
+    "total": 25.738923016999113,
+    "switcher": 7.34398827969422
+   },
+   "sustainable_among_d": {
+    "total": 25.1506214501679,
+    "switcher": 2.4794144663698887
+   }
+  }
+ },
+ "upstream|3|greedy|undiscounted": {
+  "map_set": "upstream",
+  "num_agents": 3,
+  "defector": "greedy",
+  "value": "undiscounted",
+  "C1": [
+   284.640625,
+   279.390234375,
+   290.0625
+  ],
+  "C2": [
+   -80.671875,
+   -84.234765625,
+   -77.109375
+  ],
+  "C3": [
+   2.125,
+   0.6875,
+   3.59375
+  ],
+  "holds": {
+   "C1": true,
+   "C2": false,
+   "C3": true
+  },
+  "dilemma": false,
+  "means": {
+   "all_sustainable": {
+    "total": 351.359375,
+    "switcher": 116.359375
+   },
+   "all_d": {
+    "total": 66.71875,
+    "switcher": 24.96875
+   },
+   "d_among_sustainable": {
+    "total": 75.28125,
+    "switcher": 35.6875
+   },
+   "sustainable_among_d": {
+    "total": 69.515625,
+    "switcher": 22.84375
+   }
+  }
+ },
+ "upstream|3|greedy|discounted": {
+  "map_set": "upstream",
+  "num_agents": 3,
+  "defector": "greedy",
+  "value": "discounted",
+  "C1": [
+   9.883001938462257,
+   9.18394912853837,
+   10.672558980062604
+  ],
+  "C2": [
+   2.278420180082321,
+   0.9965248472988606,
+   3.4611443080008018
+  ],
+  "C3": [
+   1.6444654911756516,
+   0.5982376459985972,
+   2.65055086761713
+  ],
+  "holds": {
+   "C1": true,
+   "C2": true,
+   "C3": true
+  },
+  "dilemma": true,
+  "means": {
+   "all_sustainable": {
+    "total": 63.64778450131416,
+    "switcher": 23.14860248565674
+   },
+   "all_d": {
+    "total": 53.764782562851906,
+    "switcher": 20.158018469810486
+   },
+   "d_among_sustainable": {
+    "total": 56.094005808234215,
+    "switcher": 25.42702266573906
+   },
+   "sustainable_among_d": {
+    "total": 54.99260051548481,
+    "switcher": 18.513552978634834
+   }
+  }
+ },
+ "upstream|3|minimal|undiscounted": {
+  "map_set": "upstream",
+  "num_agents": 3,
+  "defector": "minimal",
+  "value": "undiscounted",
+  "C1": [
+   252.328125,
+   245.953125,
+   258.015625
+  ],
+  "C2": [
+   -48.84375,
+   -53.15625,
+   -45.312109375000006
+  ],
+  "C3": [
+   10.734375,
+   9.171484375,
+   12.171875
+  ],
+  "holds": {
+   "C1": true,
+   "C2": false,
+   "C3": true
+  },
+  "dilemma": false,
+  "means": {
+   "all_sustainable": {
+    "total": 351.359375,
+    "switcher": 116.359375
+   },
+   "all_d": {
+    "total": 99.03125,
+    "switcher": 35.140625
+   },
+   "d_among_sustainable": {
+    "total": 114.15625,
+    "switcher": 67.515625
+   },
+   "sustainable_among_d": {
+    "total": 102.34375,
+    "switcher": 24.40625
+   }
+  }
+ },
+ "upstream|3|minimal|discounted": {
+  "map_set": "upstream",
+  "num_agents": 3,
+  "defector": "minimal",
+  "value": "discounted",
+  "C1": [
+   10.53284141048789,
+   9.420192347466946,
+   11.808007437735796
+  ],
+  "C2": [
+   0.8373766243457794,
+   -0.21087293475866317,
+   1.9563795030117035
+  ],
+  "C3": [
+   1.6595937460660934,
+   0.7729320663958787,
+   2.5869488332420585
+  ],
+  "holds": {
+   "C1": true,
+   "C2": false,
+   "C3": true
+  },
+  "dilemma": false,
+  "means": {
+   "all_sustainable": {
+    "total": 63.64778450131416,
+    "switcher": 23.14860248565674
+   },
+   "all_d": {
+    "total": 53.11494309082627,
+    "switcher": 19.79965367913246
+   },
+   "d_among_sustainable": {
+    "total": 55.125924333930016,
+    "switcher": 23.985979110002518
+   },
+   "sustainable_among_d": {
+    "total": 53.98636057972908,
+    "switcher": 18.140059933066368
+   }
+  }
+ },
+ "upstream|5|greedy|undiscounted": {
+  "map_set": "upstream",
+  "num_agents": 5,
+  "defector": "greedy",
+  "value": "undiscounted",
+  "C1": [
+   255.46875,
+   250.796875,
+   259.84375
+  ],
+  "C2": [
+   -37.984375,
+   -41.953125,
+   -34.5
+  ],
+  "C3": [
+   1.328125,
+   0.624609375,
+   1.9375
+  ],
+  "holds": {
+   "C1": true,
+   "C2": false,
+   "C3": true
+  },
+  "dilemma": false,
+  "means": {
+   "all_sustainable": {
+    "total": 322.046875,
+    "switcher": 68.375
+   },
+   "all_d": {
+    "total": 66.578125,
+    "switcher": 18.015625
+   },
+   "d_among_sustainable": {
+    "total": 75.140625,
+    "switcher": 30.390625
+   },
+   "sustainable_among_d": {
+    "total": 67.296875,
+    "switcher": 16.6875
+   }
+  }
+ },
+ "upstream|5|greedy|discounted": {
+  "map_set": "upstream",
+  "num_agents": 5,
+  "defector": "greedy",
+  "value": "discounted",
+  "C1": [
+   8.732430662959814,
+   8.006311896257102,
+   9.421448471210894
+  ],
+  "C2": [
+   5.299107760190964,
+   4.6416275557130575,
+   5.950684540718793
+  ],
+  "C3": [
+   1.0741856172680855,
+   0.581776187941432,
+   1.5154629945755005
+  ],
+  "holds": {
+   "C1": true,
+   "C2": true,
+   "C3": true
+  },
+  "dilemma": true,
+  "means": {
+   "all_sustainable": {
+    "total": 64.98368841782212,
+    "switcher": 16.7115940451622
+   },
+   "all_d": {
+    "total": 56.25125775486231,
+    "switcher": 15.407774932682514
+   },
+   "d_among_sustainable": {
+    "total": 58.52347034122795,
+    "switcher": 22.010701805353165
+   },
+   "sustainable_among_d": {
+    "total": 56.57106359116733,
+    "switcher": 14.333589315414429
+   }
+  }
+ },
+ "upstream|5|minimal|undiscounted": {
+  "map_set": "upstream",
+  "num_agents": 5,
+  "defector": "minimal",
+  "value": "undiscounted",
+  "C1": [
+   227.703125,
+   223.140234375,
+   231.6875
+  ],
+  "C2": [
+   -8.59375,
+   -12.578515625,
+   -5.186718750000004
+  ],
+  "C3": [
+   6.65625,
+   4.84375,
+   8.046875
+  ],
+  "holds": {
+   "C1": true,
+   "C2": false,
+   "C3": true
+  },
+  "dilemma": false,
+  "means": {
+   "all_sustainable": {
+    "total": 322.046875,
+    "switcher": 68.375
+   },
+   "all_d": {
+    "total": 94.34375,
+    "switcher": 23.03125
+   },
+   "d_among_sustainable": {
+    "total": 114.625,
+    "switcher": 59.78125
+   },
+   "sustainable_among_d": {
+    "total": 95.515625,
+    "switcher": 16.375
+   }
+  }
+ },
+ "upstream|5|minimal|discounted": {
+  "map_set": "upstream",
+  "num_agents": 5,
+  "defector": "minimal",
+  "value": "discounted",
+  "C1": [
+   10.358073671348393,
+   9.74480215567164,
+   10.93654500748962
+  ],
+  "C2": [
+   3.7785710394382477,
+   3.1061714235693216,
+   4.445449098944664
+  ],
+  "C3": [
+   1.1066977605223656,
+   0.3460517844185233,
+   1.8063053693622348
+  ],
+  "holds": {
+   "C1": true,
+   "C2": true,
+   "C3": true
+  },
+  "dilemma": true,
+  "means": {
+   "all_sustainable": {
+    "total": 64.98368841782212,
+    "switcher": 16.7115940451622
+   },
+   "all_d": {
+    "total": 54.62561474647373,
+    "switcher": 14.395994544029236
+   },
+   "d_among_sustainable": {
+    "total": 57.052161561790854,
+    "switcher": 20.49016508460045
+   },
+   "sustainable_among_d": {
+    "total": 54.80771670676768,
+    "switcher": 13.28929678350687
+   }
+  }
+ },
+ "upstream|7|greedy|undiscounted": {
+  "map_set": "upstream",
+  "num_agents": 7,
+  "defector": "greedy",
+  "value": "undiscounted",
+  "C1": [
+   234.625,
+   229.546484375,
+   239.25117187499998
+  ],
+  "C2": [
+   -21.21875,
+   -24.0,
+   -18.1875
+  ],
+  "C3": [
+   0.75,
+   0.265625,
+   1.328125
+  ],
+  "holds": {
+   "C1": true,
+   "C2": false,
+   "C3": true
+  },
+  "dilemma": false,
+  "means": {
+   "all_sustainable": {
+    "total": 300.859375,
+    "switcher": 49.296875
+   },
+   "all_d": {
+    "total": 66.234375,
+    "switcher": 14.46875
+   },
+   "d_among_sustainable": {
+    "total": 74.875,
+    "switcher": 28.078125
+   },
+   "sustainable_among_d": {
+    "total": 66.765625,
+    "switcher": 13.71875
+   }
+  }
+ },
+ "upstream|7|greedy|discounted": {
+  "map_set": "upstream",
+  "num_agents": 7,
+  "defector": "greedy",
+  "value": "discounted",
+  "C1": [
+   7.5237606023438275,
+   6.844394144800026,
+   8.158769693388603
+  ],
+  "C2": [
+   6.589549854397774,
+   5.705874303728342,
+   7.371193523705004
+  ],
+  "C3": [
+   0.6271872818470001,
+   0.23569826148450376,
+   1.100973648205398
+  ],
+  "holds": {
+   "C1": true,
+   "C2": true,
+   "C3": true
+  },
+  "dilemma": true,
+  "means": {
+   "all_sustainable": {
+    "total": 64.81937641603872,
+    "switcher": 13.728165686130524
+   },
+   "all_d": {
+    "total": 57.295615813694894,
+    "switcher": 12.78144196420908
+   },
+   "d_among_sustainable": {
+    "total": 58.88149074802641,
+    "switcher": 20.317715540528297
+   },
+   "sustainable_among_d": {
+    "total": 57.597835519351065,
+    "switcher": 12.15425468236208
+   }
+  }
+ },
+ "upstream|7|minimal|undiscounted": {
+  "map_set": "upstream",
+  "num_agents": 7,
+  "defector": "minimal",
+  "value": "undiscounted",
+  "C1": [
+   209.515625,
+   204.25,
+   214.3125
+  ],
+  "C2": [
+   4.71875,
+   1.59296875,
+   7.937890624999998
+  ],
+  "C3": [
+   4.015625,
+   3.359375,
+   4.546875
+  ],
+  "holds": {
+   "C1": true,
+   "C2": true,
+   "C3": true
+  },
+  "dilemma": true,
+  "means": {
+   "all_sustainable": {
+    "total": 300.859375,
+    "switcher": 49.296875
+   },
+   "all_d": {
+    "total": 91.34375,
+    "switcher": 17.203125
+   },
+   "d_among_sustainable": {
+    "total": 111.1875,
+    "switcher": 54.015625
+   },
+   "sustainable_among_d": {
+    "total": 93.328125,
+    "switcher": 13.1875
+   }
+  }
+ },
+ "upstream|7|minimal|discounted": {
+  "map_set": "upstream",
+  "num_agents": 7,
+  "defector": "minimal",
+  "value": "discounted",
+  "C1": [
+   9.359760947911127,
+   8.890120584583201,
+   9.83276733725488
+  ],
+  "C2": [
+   5.180147424340248,
+   4.576254146918655,
+   5.689170369505883
+  ],
+  "C3": [
+   0.8425590991973877,
+   0.3244445832446218,
+   1.3231789944693442
+  ],
+  "holds": {
+   "C1": true,
+   "C2": true,
+   "C3": true
+  },
+  "dilemma": true,
+  "means": {
+   "all_sustainable": {
+    "total": 64.81937641603872,
+    "switcher": 13.728165686130524
+   },
+   "all_d": {
+    "total": 55.459615468127595,
+    "switcher": 12.080056734383106
+   },
+   "d_among_sustainable": {
+    "total": 57.55861295235991,
+    "switcher": 18.908313110470772
+   },
+   "sustainable_among_d": {
+    "total": 55.66035593237484,
+    "switcher": 11.237497635185719
+   }
+  }
+ }
+}

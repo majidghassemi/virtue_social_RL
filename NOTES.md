@@ -232,3 +232,19 @@ Scripted populations only, no ethics metric, 64 episodes per cell, our 12 seen m
 By the pre-registered definition no setting is a social dilemma, so the decision rule does not pick a number of agents. C2 fails because a single fully greedy agent strips the commons within the episode and loses the regrowth it would have shared (n = 3, our maps: 18.5 apples as the greedy switcher against 49.7 when it stayed sustainable). With undiscounted 1,000-step totals the game has the structure of an assurance game (stag hunt): restraint pays when others restrain, greed pays when others are greedy.
 
 Limits of the check: only two strategies were compared (fully greedy against the sustainable rule), outcomes are undiscounted, and scripted greedy agents are perfectly efficient. A milder defector, or a learner that discounts the future (PPO with gamma 0.99 has an effective horizon of about 100 steps), may still face a real temptation. Those were not part of the pre-registered check.
+
+## Social dilemma check v2 (`configs/dilemma_check_v2.yaml`, pre-registered in `9d34f1f`)
+
+Adds a milder defector (minimal: strips patches to one apple) and value discounted with gamma 0.99, the GAMMA in SocialJax's IPPO config for Harvest Open. Full table: `results/dilemma_check_v2.md`.
+
+| Setting (our maps) | Undiscounted | Discounted (gamma 0.99) |
+|---|---|---|
+| 3 agents | No dilemma (temptation fails for both defectors) | Dilemma for both defectors |
+| 5 agents | No dilemma | Dilemma for the minimal defector (greedy: no collective benefit) |
+| 7 agents | Dilemma for the minimal defector only | Dilemma for the minimal defector (greedy: no collective benefit) |
+
+Decision by the pre-registered rule: 3 agents is the smallest usable setting on our maps, so Phase 4 uses 1 teacher, 1 learner and 1 bystander.
+
+Values at 3 agents, our maps, discounted apples for the switching agent: all sustainable 9.0, greedy among sustainable 13.5, minimal among sustainable 10.6 (temptation). All greedy 8.7 against sustainable among greedy 8.1 (sucker's cost). Collective discounted totals: all sustainable 29.2, all greedy 28.2, all minimal 24.5. Undiscounted, all sustainable collects 152 apples against 34 for all greedy.
+
+Interpretation: the dilemma is intertemporal. The temptation exists because a learner with gamma 0.99 (effective horizon about 100 steps) discounts the regrowth that restraint buys later in the 1,000-step episode. Judged on undiscounted episode totals, restraint pays the individual too. Against a greedy defector the discounted collective benefit is small (about 4%), against a minimal defector it is about 19%. Consequences: the evaluation measures (apples per episode) are undiscounted while training is discounted, and a learner trained with gamma closer to 1 would face a weaker temptation. Both should be stated in the paper.
