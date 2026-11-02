@@ -1,0 +1,380 @@
+{
+ "ours|3": {
+  "map_set": "ours",
+  "num_agents": 3,
+  "maps": 12,
+  "C1_collective_benefit": [
+   117.28385416666667,
+   116.23430989583333,
+   118.28795572916667
+  ],
+  "C2_temptation": [
+   -31.1171875,
+   -31.786523437499998,
+   -30.459570312500002
+  ],
+  "C3_sucker_cost": [
+   0.81640625,
+   0.5481445312500001,
+   1.0846354166666667
+  ],
+  "holds": {
+   "C1": true,
+   "C2": false,
+   "C3": true
+  },
+  "dilemma": false,
+  "share_of_maps": {
+   "C1": 1.0,
+   "C2": 0.08333333333333333,
+   "C3": 0.8333333333333334
+  },
+  "means": {
+   "all_greedy": {
+    "total": 34.276041666666664,
+    "switcher": 10.674479166666666,
+    "stock": 0.7093421546546547,
+    "regrown": 0.91015625
+   },
+   "all_minimal": {
+    "total": 43.365885416666664,
+    "switcher": 13.453125,
+    "stock": 7.465773064731398,
+    "regrown": 16.46875
+   },
+   "all_sustainable": {
+    "total": 151.55989583333334,
+    "switcher": 49.645833333333336,
+    "stock": 13.883688375875877,
+    "regrown": 130.3671875
+   },
+   "greedy_among_sustainable": {
+    "total": 36.657552083333336,
+    "switcher": 18.528645833333332,
+    "stock": 1.0240240240240241,
+    "regrown": 3.34765625
+   },
+   "sustainable_among_greedy": {
+    "total": 35.028645833333336,
+    "switcher": 9.858072916666666,
+    "stock": 0.7510322822822822,
+    "regrown": 1.6393229166666667
+   }
+  }
+ },
+ "ours|5": {
+  "map_set": "ours",
+  "num_agents": 5,
+  "maps": 12,
+  "C1_collective_benefit": [
+   102.5859375,
+   101.50651041666667,
+   103.569140625
+  ],
+  "C2_temptation": [
+   -10.079427083333334,
+   -10.626334635416667,
+   -9.509082031250001
+  ],
+  "C3_sucker_cost": [
+   1.0690104166666667,
+   0.8580729166666666,
+   1.2747395833333333
+  ],
+  "holds": {
+   "C1": true,
+   "C2": false,
+   "C3": true
+  },
+  "dilemma": false,
+  "share_of_maps": {
+   "C1": 1.0,
+   "C2": 0.08333333333333333,
+   "C3": 1.0
+  },
+  "means": {
+   "all_greedy": {
+    "total": 34.20703125,
+    "switcher": 6.395833333333333,
+    "stock": 0.5474250291958626,
+    "regrown": 0.8411458333333334
+   },
+   "all_minimal": {
+    "total": 41.1953125,
+    "switcher": 7.76171875,
+    "stock": 7.140458166499833,
+    "regrown": 14.07421875
+   },
+   "all_sustainable": {
+    "total": 136.79296875,
+    "switcher": 26.55078125,
+    "stock": 13.119275525525524,
+    "regrown": 114.82682291666667
+   },
+   "greedy_among_sustainable": {
+    "total": 36.877604166666664,
+    "switcher": 16.471354166666668,
+    "stock": 1.073997174257591,
+    "regrown": 3.65234375
+   },
+   "sustainable_among_greedy": {
+    "total": 34.345052083333336,
+    "switcher": 5.326822916666667,
+    "stock": 0.5595334918251585,
+    "regrown": 0.96875
+   }
+  }
+ },
+ "ours|7": {
+  "map_set": "ours",
+  "num_agents": 7,
+  "maps": 12,
+  "C1_collective_benefit": [
+   89.39453125,
+   88.27731119791666,
+   90.52884114583333
+  ],
+  "C2_temptation": [
+   -2.2057291666666665,
+   -2.6627604166666665,
+   -1.7551432291666669
+  ],
+  "C3_sucker_cost": [
+   1.21484375,
+   1.0833333333333333,
+   1.3424804687499998
+  ],
+  "holds": {
+   "C1": true,
+   "C2": false,
+   "C3": true
+  },
+  "dilemma": false,
+  "share_of_maps": {
+   "C1": 0.9166666666666666,
+   "C2": 0.25,
+   "C3": 1.0
+  },
+  "means": {
+   "all_greedy": {
+    "total": 33.973958333333336,
+    "switcher": 4.665364583333333,
+    "stock": 0.4728634884884884,
+    "regrown": 0.6015625
+   },
+   "all_minimal": {
+    "total": 40.061197916666664,
+    "switcher": 5.37109375,
+    "stock": 6.90724578745412,
+    "regrown": 12.640625
+   },
+   "all_sustainable": {
+    "total": 123.36848958333333,
+    "switcher": 17.506510416666668,
+    "stock": 12.659255609776444,
+    "regrown": 101.12890625
+   },
+   "greedy_among_sustainable": {
+    "total": 36.920572916666664,
+    "switcher": 15.30078125,
+    "stock": 1.1896544982482482,
+    "regrown": 3.77734375
+   },
+   "sustainable_among_greedy": {
+    "total": 34.029947916666664,
+    "switcher": 3.4505208333333335,
+    "stock": 0.4814371663329997,
+    "regrown": 0.6575520833333334
+   }
+  }
+ },
+ "upstream|3": {
+  "map_set": "upstream",
+  "num_agents": 3,
+  "maps": 1,
+  "C1_collective_benefit": [
+   284.640625,
+   279.53125,
+   289.93828125
+  ],
+  "C2_temptation": [
+   -80.671875,
+   -84.4375,
+   -77.01484375000001
+  ],
+  "C3_sucker_cost": [
+   2.125,
+   0.703125,
+   3.5
+  ],
+  "holds": {
+   "C1": true,
+   "C2": false,
+   "C3": true
+  },
+  "dilemma": false,
+  "share_of_maps": {
+   "C1": 1.0,
+   "C2": 0.0,
+   "C3": 1.0
+  },
+  "means": {
+   "all_greedy": {
+    "total": 66.71875,
+    "switcher": 24.96875,
+    "stock": 1.523367117117117,
+    "regrown": 2.640625
+   },
+   "all_minimal": {
+    "total": 99.03125,
+    "switcher": 35.140625,
+    "stock": 7.56275025025025,
+    "regrown": 40.109375
+   },
+   "all_sustainable": {
+    "total": 351.359375,
+    "switcher": 116.359375,
+    "stock": 21.664680305305307,
+    "regrown": 304.390625
+   },
+   "greedy_among_sustainable": {
+    "total": 75.28125,
+    "switcher": 35.6875,
+    "stock": 2.0760135135135136,
+    "regrown": 11.1875
+   },
+   "sustainable_among_greedy": {
+    "total": 69.515625,
+    "switcher": 22.84375,
+    "stock": 1.6315065065065064,
+    "regrown": 5.4375
+   }
+  }
+ },
+ "upstream|5": {
+  "map_set": "upstream",
+  "num_agents": 5,
+  "maps": 1,
+  "C1_collective_benefit": [
+   255.46875,
+   250.625,
+   259.782421875
+  ],
+  "C2_temptation": [
+   -37.984375,
+   -41.875,
+   -34.686718750000004
+  ],
+  "C3_sucker_cost": [
+   1.328125,
+   0.625,
+   1.9375
+  ],
+  "holds": {
+   "C1": true,
+   "C2": false,
+   "C3": true
+  },
+  "dilemma": false,
+  "share_of_maps": {
+   "C1": 1.0,
+   "C2": 0.0,
+   "C3": 1.0
+  },
+  "means": {
+   "all_greedy": {
+    "total": 66.578125,
+    "switcher": 18.015625,
+    "stock": 1.1826514014014013,
+    "regrown": 2.5
+   },
+   "all_minimal": {
+    "total": 94.34375,
+    "switcher": 23.03125,
+    "stock": 6.9628691191191185,
+    "regrown": 34.953125
+   },
+   "all_sustainable": {
+    "total": 322.046875,
+    "switcher": 68.375,
+    "stock": 19.453469094094096,
+    "regrown": 272.015625
+   },
+   "greedy_among_sustainable": {
+    "total": 75.140625,
+    "switcher": 30.390625,
+    "stock": 1.7792636386386387,
+    "regrown": 10.890625
+   },
+   "sustainable_among_greedy": {
+    "total": 67.296875,
+    "switcher": 16.6875,
+    "stock": 1.2129786036036037,
+    "regrown": 3.15625
+   }
+  }
+ },
+ "upstream|7": {
+  "map_set": "upstream",
+  "num_agents": 7,
+  "maps": 1,
+  "C1_collective_benefit": [
+   234.625,
+   229.608984375,
+   239.125
+  ],
+  "C2_temptation": [
+   -21.21875,
+   -24.015625,
+   -17.999609375000002
+  ],
+  "C3_sucker_cost": [
+   0.75,
+   0.25,
+   1.3441406249999979
+  ],
+  "holds": {
+   "C1": true,
+   "C2": false,
+   "C3": true
+  },
+  "dilemma": false,
+  "share_of_maps": {
+   "C1": 1.0,
+   "C2": 0.0,
+   "C3": 1.0
+  },
+  "means": {
+   "all_greedy": {
+    "total": 66.234375,
+    "switcher": 14.46875,
+    "stock": 1.0159221721721723,
+    "regrown": 2.15625
+   },
+   "all_minimal": {
+    "total": 91.34375,
+    "switcher": 17.203125,
+    "stock": 6.487393643643644,
+    "regrown": 31.734375
+   },
+   "all_sustainable": {
+    "total": 300.859375,
+    "switcher": 49.296875,
+    "stock": 18.58298923923924,
+    "regrown": 250.21875
+   },
+   "greedy_among_sustainable": {
+    "total": 74.875,
+    "switcher": 28.078125,
+    "stock": 1.8459240490490492,
+    "regrown": 10.84375
+   },
+   "sustainable_among_greedy": {
+    "total": 66.765625,
+    "switcher": 13.71875,
+    "stock": 1.0305618118118118,
+    "regrown": 2.65625
+   }
+  }
+ }
+}

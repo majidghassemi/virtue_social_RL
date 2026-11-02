@@ -218,3 +218,17 @@ Protocol v2 results (`results/protocol_v2_summary.md`): summarised in the README
 Commons dynamics check (after the run, not pre-registered): with 3 indifferent bystanders and the teacher, the commons is close to empty for most of the episode in every group. Mean apple stock over the episode is 0.52 (indifferent learners), 0.59 (minimal) and 0.61 (sustainable), and about 0.5 to 1.2 apples regrow per 1,000-step episode. On the upstream default map (64 apples, same roles and scripted agents, 64 episodes per group) the mean stock is 1.06 to 1.18 and 2.0 to 3.5 apples regrow per episode, so the collapse is mainly an environment property with this many greedy agents. Our generated maps hold fewer apples (median 30, range 15 to 47) than the upstream map (64), which makes it faster.
 
 Open decision for Phase 4 (not changed yet, since changing it would be a design choice made after seeing results): the setting is close to a one-shot depletion game, where learners' restraint costs apples but barely changes the commons because the bystanders take what is left. Options: keep it (the harshest setting), match the upstream apple density, or change the bystander mix. Scripted agents are perfect greedy collectors, so learned agents may deplete more slowly. Measuring depletion speed under the first learned agents is the neutral way to decide.
+
+## Social dilemma check (`configs/dilemma_check.yaml`, pre-registered in `a3f1811`)
+
+Scripted populations only, no ethics metric, 64 episodes per cell, our 12 seen maps (teacher-present version) and the upstream default map. Full table: `results/dilemma_check.md`.
+
+| Criterion | Our maps, 3 / 5 / 7 agents | Upstream map, 3 / 5 / 7 agents |
+|---|---|---|
+| C1 collective benefit (all sustainable minus all greedy, total apples) | +117 / +103 / +89, holds | +285 / +255 / +235, holds |
+| C2 temptation (one agent switches to greedy among sustainable agents) | -31 / -10 / -2.2, fails | -81 / -38 / -21, fails |
+| C3 sucker's cost (one agent switches to sustainable among greedy agents) | +0.8 / +1.1 / +1.2, holds | +2.1 / +1.3 / +0.8, holds |
+
+By the pre-registered definition no setting is a social dilemma, so the decision rule does not pick a number of agents. C2 fails because a single fully greedy agent strips the commons within the episode and loses the regrowth it would have shared (n = 3, our maps: 18.5 apples as the greedy switcher against 49.7 when it stayed sustainable). With undiscounted 1,000-step totals the game has the structure of an assurance game (stag hunt): restraint pays when others restrain, greed pays when others are greedy.
+
+Limits of the check: only two strategies were compared (fully greedy against the sustainable rule), outcomes are undiscounted, and scripted greedy agents are perfectly efficient. A milder defector, or a learner that discounts the future (PPO with gamma 0.99 has an effective horizon of about 100 steps), may still face a real temptation. Those were not part of the pre-registered check.
