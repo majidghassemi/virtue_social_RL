@@ -1,0 +1,188 @@
+{
+ "open:0": {
+  "apples_indifferent": 6.654166666666667,
+  "apples_virtuous": 5.816666666666666,
+  "empirical_virtue_cost": 0.12586098935504075,
+  "cost_se": 0.008582861987921771
+ },
+ "open:1": {
+  "apples_indifferent": 4.489583333333333,
+  "apples_virtuous": 3.8583333333333334,
+  "empirical_virtue_cost": 0.14060324825986073,
+  "cost_se": 0.007907512113747003
+ },
+ "open:2": {
+  "apples_indifferent": 5.535416666666666,
+  "apples_virtuous": 4.483333333333334,
+  "empirical_virtue_cost": 0.1900639819345124,
+  "cost_se": 0.007049039936214009
+ },
+ "open:3": {
+  "apples_indifferent": 3.338541666666667,
+  "apples_virtuous": 2.1531249999999997,
+  "empirical_virtue_cost": 0.35507020280811247,
+  "cost_se": 0.0064881577071224765
+ },
+ "open:4": {
+  "apples_indifferent": 7.96875,
+  "apples_virtuous": 7.10625,
+  "empirical_virtue_cost": 0.10823529411764704,
+  "cost_se": 0.00891857432806701
+ },
+ "open:5": {
+  "apples_indifferent": 6.684375,
+  "apples_virtuous": 5.767708333333333,
+  "empirical_virtue_cost": 0.1371357332086645,
+  "cost_se": 0.007232255320156147
+ },
+ "open:6": {
+  "apples_indifferent": 6.401041666666667,
+  "apples_virtuous": 5.803125,
+  "empirical_virtue_cost": 0.09340927583401148,
+  "cost_se": 0.007880446615019764
+ },
+ "open:7": {
+  "apples_indifferent": 4.027083333333333,
+  "apples_virtuous": 3.6333333333333337,
+  "empirical_virtue_cost": 0.09777547853078092,
+  "cost_se": 0.008990138749549197
+ },
+ "open:8": {
+  "apples_indifferent": 4.502083333333333,
+  "apples_virtuous": 3.6552083333333334,
+  "empirical_virtue_cost": 0.18810735770476628,
+  "cost_se": 0.0066864101830534425
+ },
+ "open:9": {
+  "apples_indifferent": 7.11875,
+  "apples_virtuous": 6.415625,
+  "empirical_virtue_cost": 0.09877085162423178,
+  "cost_se": 0.008716839096848953
+ },
+ "open:10": {
+  "apples_indifferent": 7.611458333333334,
+  "apples_virtuous": 5.990625,
+  "empirical_virtue_cost": 0.2129464896674423,
+  "cost_se": 0.008247750720358105
+ },
+ "open:11": {
+  "apples_indifferent": 3.6677083333333336,
+  "apples_virtuous": 3.151041666666667,
+  "empirical_virtue_cost": 0.14086907128656628,
+  "cost_se": 0.011502250611598978
+ },
+ "open:1001": {
+  "apples_indifferent": 5.417708333333334,
+  "apples_virtuous": 4.352083333333334,
+  "empirical_virtue_cost": 0.19669294366467982,
+  "cost_se": 0.01103403740788516
+ },
+ "open:1002": {
+  "apples_indifferent": 4.546875000000001,
+  "apples_virtuous": 3.796875,
+  "empirical_virtue_cost": 0.16494845360824759,
+  "cost_se": 0.011865941277429248
+ },
+ "open:1003": {
+  "apples_indifferent": 3.675,
+  "apples_virtuous": 3.1677083333333336,
+  "empirical_virtue_cost": 0.13803854875283436,
+  "cost_se": 0.006317435473050201
+ },
+ "open:1006": {
+  "apples_indifferent": 2.4322916666666665,
+  "apples_virtuous": 2.15625,
+  "empirical_virtue_cost": 0.11349036402569587,
+  "cost_se": 0.014260628543155117
+ },
+ "open:1008": {
+  "apples_indifferent": 4.409375,
+  "apples_virtuous": 4.323958333333334,
+  "empirical_virtue_cost": 0.019371604063311978,
+  "cost_se": 0.018398761682069487
+ },
+ "open:1010": {
+  "apples_indifferent": 6.642708333333333,
+  "apples_virtuous": 6.151041666666666,
+  "empirical_virtue_cost": 0.07401599498196651,
+  "cost_se": 0.014506774683704959
+ },
+ "open:1011": {
+  "apples_indifferent": 3.6135416666666673,
+  "apples_virtuous": 3.1416666666666666,
+  "empirical_virtue_cost": 0.13058518304987046,
+  "cost_se": 0.0110791810978283
+ },
+ "open:1012": {
+  "apples_indifferent": 6.616666666666667,
+  "apples_virtuous": 5.98125,
+  "empirical_virtue_cost": 0.09603274559193958,
+  "cost_se": 0.007466424827623928
+ },
+ "open:1014": {
+  "apples_indifferent": 5.863541666666667,
+  "apples_virtuous": 5.01875,
+  "empirical_virtue_cost": 0.14407532421389246,
+  "cost_se": 0.010114320952927159
+ },
+ "open:1015": {
+  "apples_indifferent": 4.45625,
+  "apples_virtuous": 3.7864583333333335,
+  "empirical_virtue_cost": 0.1503038803179055,
+  "cost_se": 0.010053767853960656
+ },
+ "divided:2000": {
+  "apples_indifferent": 3.6114583333333337,
+  "apples_virtuous": 3.0802083333333337,
+  "empirical_virtue_cost": 0.1471012402653591,
+  "cost_se": 0.006825549198797599
+ },
+ "rooms:2001": {
+  "apples_indifferent": 7.182291666666667,
+  "apples_virtuous": 6.915625,
+  "empirical_virtue_cost": 0.037128353879622905,
+  "cost_se": 0.005502378070203854
+ },
+ "divided:2002": {
+  "apples_indifferent": 2.6468749999999996,
+  "apples_virtuous": 2.046875,
+  "empirical_virtue_cost": 0.2266824085005902,
+  "cost_se": 0.016004902780501384
+ },
+ "rooms:2003": {
+  "apples_indifferent": 2.5177083333333337,
+  "apples_virtuous": 1.5708333333333333,
+  "empirical_virtue_cost": 0.37608605709557313,
+  "cost_se": 0.011805007054612104
+ },
+ "divided:2004": {
+  "apples_indifferent": 6.265625,
+  "apples_virtuous": 8.033333333333333,
+  "empirical_virtue_cost": -0.2821280133000831,
+  "cost_se": 0.023455040247891096
+ },
+ "rooms:2005": {
+  "apples_indifferent": 7.54375,
+  "apples_virtuous": 6.9520833333333325,
+  "empirical_virtue_cost": 0.07843137254901975,
+  "cost_se": 0.010190529957767026
+ },
+ "divided:2006": {
+  "apples_indifferent": 5.091666666666667,
+  "apples_virtuous": 5.209375,
+  "empirical_virtue_cost": -0.023117839607201214,
+  "cost_se": 0.011766172452250938
+ },
+ "rooms:2007": {
+  "apples_indifferent": 4.8604166666666675,
+  "apples_virtuous": 4.432291666666666,
+  "empirical_virtue_cost": 0.08808401200171481,
+  "cost_se": 0.008037064133291976
+ },
+ "rooms:2009": {
+  "apples_indifferent": 6.030208333333334,
+  "apples_virtuous": 5.021875,
+  "empirical_virtue_cost": 0.1672136811193645,
+  "cost_se": 0.005963921508757997
+ }
+}

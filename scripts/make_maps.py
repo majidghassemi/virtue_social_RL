@@ -101,7 +101,8 @@ def build(cfg: dict) -> tuple[list[M.MapEntry], dict]:
     return entries, meta
 
 
-def preview(entries: list[M.MapEntry], path: Path) -> None:
+def preview(entries: list[M.MapEntry], path: Path, cost_key: str = "structural_virtue_cost",
+            cost_label: str = "cost") -> None:
     import matplotlib
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
@@ -115,7 +116,7 @@ def preview(entries: list[M.MapEntry], path: Path) -> None:
     for ax, e in zip(axes.flat, entries):
         g = np.vectorize(code.get)(M.to_array(e.ascii_present))
         ax.imshow(g, cmap=cmap, vmin=0, vmax=4, interpolation="nearest")
-        ax.set_title(f"{e.name}\ncost {e.stats['structural_virtue_cost']:.2f} ({e.band})",
+        ax.set_title(f"{e.name}\n{cost_label} {e.stats[cost_key]:.2f} ({e.band})",
                      fontsize=7)
         ax.set_xticks([])
         ax.set_yticks([])

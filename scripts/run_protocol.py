@@ -108,7 +108,7 @@ def main() -> None:
                     df.insert(0, col, val)
                 frames.append(df)
                 print(f"[{i + 1}/{len(entries)}] {entry.name} {condition:<7} {disp:<12} "
-                      f"w={w:.2f} eps={eps:.1f}  {time.perf_counter() - t0:5.1f}s")
+                      f"w={w:.2f} eps={eps:.2f}  {time.perf_counter() - t0:5.1f}s")
         pd.concat(frames).to_csv(path, index=False, compression="gzip")
     print(f"done in {time.perf_counter() - t_start:.0f}s, counts in {out_dir}")
 

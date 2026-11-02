@@ -35,7 +35,19 @@ For a CUDA 12 GPU, install the GPU extra instead: `pip install -e ".[dev,gpu]"`.
 ```bash
 .venv/bin/python scripts/make_maps.py --preview results/maps_suite_v1.png  # regenerate the suite
 .venv/bin/python scripts/check_maps.py                                    # invariants on every map
+.venv/bin/python scripts/make_suite_v2.py --preview results/maps_suite_v2.png  # suite v2 (measures the cost of virtue, about 30 min on 2 CPU cores)
 ```
+
+## Phase 3 protocol
+
+```bash
+.venv/bin/python scripts/run_protocol.py                                         # pre-registered ladder (configs/protocol_v1.yaml)
+.venv/bin/python scripts/analyze_protocol.py                                     # results/protocol_v1_summary.{json,md}
+.venv/bin/python scripts/run_protocol.py --config configs/protocol_crossed_v1.yaml  # crossed virtue x competence ladder
+.venv/bin/python scripts/analyze_crossed.py                                      # results/crossed_v1_summary.{json,md}
+```
+
+Both run scripts skip maps that are already finished, so an interrupted run resumes where it stopped.
 
 ## Layout
 
@@ -46,7 +58,7 @@ For a CUDA 12 GPU, install the GPU extra instead: `pip install -e ".[dev,gpu]"`.
 | `scripts/` | runnable entry points |
 | `tests/` | unit tests |
 | `configs/` | YAML configs (roles, environment, map suite) |
-| `maps/` | generated map suites (JSON) |
+| `maps/` | generated map suites (JSON): `suite_v1` for Phase 3, `suite_v2` for Phase 4 |
 | `results/` | small result files (benchmarks, map checks, previews) |
 | `NOTES.md` | environment facts this project relies on, with source line numbers |
 
@@ -59,11 +71,11 @@ SocialJax is not packaged upstream, so `pyproject.toml` exposes its `socialjax` 
 | 0. Setup | Done | Pinned SocialJax, installable package, smoke tests, CPU speed benchmark (about 20,900 env steps per second on 2 cores) |
 | 1. Ethics wrapper | Done | Per-agent ethics record on every step, teacher channel in observations, role configuration |
 | 2. Maps and splits | Done | Seeded map generator, 24-map suite in three splits, teacher-absent condition, provisional cost bands, per-map runner |
-| 3. Scripted ladder and metrics | Code and pilot done, full run 22 of 24 maps (stopped at the 2-hour job limit) | Scripted agents with known dispositions, behaviour and validity metrics, pre-registered protocol, pilot results |
+| 3. Scripted ladder and metrics | Done | Scripted agents with known dispositions, behaviour and validity metrics, pre-registered protocol, full run on 24 maps, crossed virtue x competence ladder, map suite v2 balanced on the measured cost of virtue |
 | 4. Learned agents | Planned | PPO, PPO with harm penalty, SVO, behaviour cloning, social learner (needs the GPU benchmark first) |
 | 5. Analysis | Planned | Figures and a script that regenerates every reported number from raw logs |
 
-Test status: 77 tests pass (`pytest -q`).
+Test status: 80 tests pass (`pytest -q`).
 
 ## Design decisions
 
@@ -140,18 +152,53 @@ Other wrapper choices:
 | Success criteria | Fixed in `configs/protocol_v1.yaml` before any run | Proposal Q8. Failures are findings |
 | Cost of virtue | Empirical: apples(indifferent) minus apples(virtuous), as a share, per map | Replaces the provisional structural bands |
 
-### Phase 3 full run, preliminary (22 of 24 maps, 10 seed units x 32 episodes)
+### Phase 3 full run (all 24 maps, 10 seed units x 32 episodes)
 
-The full run stopped at the 2-hour limit for background jobs after finishing 22 maps. The two missing maps are `heldout_structure_04_rooms` and `heldout_structure_05_divided`, both in the low-cost band, so the held-out-structure split is currently unbalanced. `scripts/run_protocol.py` resumes by skipping finished maps. Full report: `results/protocol_v1_partial22_summary.md`.
+Full report: `results/protocol_v1_summary.md`. About 1.02 million agent-episodes, 438,000 of them learners. Adding the last two maps did not change any verdict from the 22-map preliminary analysis.
 
 | Pre-registered check | Result |
 |---|---|
 | Rank validity, all three metrics | Pass (tau-b 1.0 in every split) |
 | Competence independence | Harm per episode fails (0.25), harm per opportunity fails (0.16), harm per apple passes (at most 0.05) |
-| Teacher gap detects performative agents | Pass (gap 0.83, 95% CI 0.81 to 0.84) |
-| Teacher gap null for virtuous and indifferent agents | Fails: the indifferent rung has a small but significant gap (-0.007, CI -0.011 to -0.004) |
+| Teacher gap detects performative agents | Pass (gap 0.84, 95% CI 0.81 to 0.84) |
+| Teacher gap null for virtuous and indifferent agents | Fails: the indifferent rung has a small but significant gap (-0.007, CI -0.010 to -0.004) |
 
-With ten times the pilot's data, the small ecological effect of the teacher's presence becomes significant. It is about 1% of the performative gap. The exploratory onset metric ranks the ladder perfectly too, gives a much smaller performative gap (0.39) because idle opportunities no longer inflate the denominator, and narrowly fails competence independence (0.12). The cue result holds: for performative agents the within-episode gap is 0.95 by "teacher in view" but 0.24 by "seen by the teacher".
+Other results: about 64 agent-episodes per map and rung give a standard error of 0.05, zap metrics separate aggressive agents perfectly, and the structural cost of virtue correlates only weakly with the measured cost (Spearman 0.30). The exploratory onset metric gives a performative gap of 0.40 instead of 0.84, because idle opportunities no longer inflate the denominator. For performative agents the within-episode gap is 0.95 by "teacher in view" but 0.24 by "seen by the teacher".
+
+### Phase 3 completion (decided after the full run)
+
+| Addition | Status | Result |
+|---|---|---|
+| Crossed virtue x competence ladder: 5 w values x 5 eps values (0 to 0.5), seen maps, teacher absent | Pre-registered (criteria and predictions committed in `636a29c` before the run) | All three metrics reach the gamma threshold of 0.8, but harm per episode only exactly at it (see below) |
+| Teacher gap minus the indifferent rung's gap | Post hoc | Does not remove the ecological effect, because that effect differs between rungs |
+| Equivalence view of the teacher gap (95% CI inside +-0.05) | Post hoc, proposed for the Phase 4 pre-registration | Every non-performative gap is inside the margin, the performative gap is far outside it, for both opportunity metrics |
+| Map suite v2 with two empirical cost bands | Design change, used from Phase 4 on | See below |
+
+Crossed ladder (`results/crossed_v1_summary.md`, 288,000 learner agent-episodes). Gamma is computed over the 250 pairs of agent types with different w.
+
+| Metric | Prediction | Gamma | Misordered pairs | Worst misorder |
+|---|---|---|---|---|
+| Harm per episode | Fails | 0.800 (threshold) | 10.0% | A clumsy indifferent agent (w 0, eps 0.5) scores 0.62 below a skilled w 0.25 agent |
+| Harm per opportunity | Unsure | 0.952 | 2.4% | Same pair, by 0.15 |
+| Harm per apple | Passes | 1.000 | 0% | None |
+| Harm per onset (exploratory) | Not predicted | 0.928 | 3.6% | Same pair, by 0.15 |
+
+Harm per episode passes only exactly at the threshold (25 of 250 pairs misordered), and its worst map has gamma 0.72. By the pre-registered rule it is a pass, so the predicted failure did not happen. The confound still shows in the size of the worst misorder, close to half the ladder's range. Harm per opportunity also falls with noise, because a random lapse next to a last apple turns an opportunity into a non-harm. Harm per apple orders every pair correctly: it is the only metric that is independent of competence on both tests. Caveat: competence here is lowered by random lapses only. Learned agents may be less competent in other ways (slow routing, poor exploration), so Phase 4 should check this again.
+
+Teacher-gap nulls: the indifferent-rung adjustment works for the per-opportunity metric (the w 0.25 to 0.75 rungs then include zero, and the virtuous rung, which never harms, is only shifted by the control gap), but under the onset metric the mixture rungs at w 0.5 and 0.75 have larger ecological gaps (-0.023) than the indifferent rung (-0.007), so the additive adjustment leaves a significant -0.016. A fixed equivalence margin is simpler and robust: the largest non-performative gap is 0.023 in absolute value (its CI reaches 0.031), while the performative gaps are 0.40 and 0.84.
+
+Map suite v2 (`maps/suite_v2.json`, preview `results/maps_suite_v2.png`). Phase 4 uses it. Phase 3 results stay on suite v1.
+
+| Item | Value |
+|---|---|
+| Seen maps | The 12 v1 seen maps, unchanged |
+| Held-out maps | 8 per split, selected in seed order until each band quota was filled (held-out position 4 + 4, held-out structure 2 per family and band) |
+| Bands | Two, split at the median measured cost of the seen maps (0.139) |
+| Cost measurement | Scripted learners w 0 against w 1, eps 0, teacher absent, 320 episodes, both rungs on the same random keys. Median SE 0.009 |
+| Reproducibility | r = 0.94 against the protocol_v1 measurement on the seen maps |
+| Map checks | 56 of 56 pass |
+
+Why two bands: 8 maps per split balance evenly into two bands, not three. Balanced band counts do not mean matched distributions: the held-out-structure costs spread much more widely (SD 0.19 against 0.07 for seen maps), and one divided map has a cost of -0.28 (virtue pays there). Phase 4 should therefore use each map's measured cost as a covariate, not only its band.
 
 ### Phase 3 pilot results (4 seed units x 8 episodes, all 24 maps)
 

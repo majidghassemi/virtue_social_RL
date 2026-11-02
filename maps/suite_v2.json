@@ -1,0 +1,3274 @@
+{
+ "meta": {
+  "config": {
+   "num_agents": 7,
+   "patch": {
+    "num_patches": [
+     5,
+     8
+    ],
+    "radii": [
+     0,
+     1,
+     2
+    ]
+   },
+   "cost_measurement": {
+    "units": 10,
+    "envs_per_unit": 32,
+    "num_steps": 1000,
+    "seed": 20261101
+   },
+   "bands": [
+    "low",
+    "high"
+   ],
+   "splits": {
+    "seen": {
+     "from_suite": "maps/suite_v1.json"
+    },
+    "heldout_position": {
+     "families": [
+      "open"
+     ],
+     "count": 8,
+     "first_seed": 1000,
+     "max_apple_overlap": 0.5
+    },
+    "heldout_structure": {
+     "families": [
+      "divided",
+      "rooms"
+     ],
+     "count": 8,
+     "first_seed": 2000
+    }
+   },
+   "max_candidates_per_split": 80,
+   "cache": "results/map_cost_cache_v2.json",
+   "out": "maps/suite_v2.json"
+  },
+  "band_cut_empirical_cost": 0.13886949073426264,
+  "band_note": "empirical cost of virtue, two bands split at the median of the seen maps",
+  "selection": {
+   "heldout_position": {
+    "candidates_measured": 10,
+    "rejected_for_overlap": 6
+   },
+   "heldout_structure": {
+    "candidates_measured": 9,
+    "rejected_for_overlap": 0
+   }
+  },
+  "grid_size": [
+   18,
+   34
+  ]
+ },
+ "maps": [
+  {
+   "name": "seen_00_open",
+   "split": "seen",
+   "family": "open",
+   "seed": 0,
+   "ascii_present": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W A       A    A       WWWWWWWWWWW",
+    "W        AAA      A    WWWWWWWWWWW",
+    "W       AAAAA          WWWWWWWWWWW",
+    "W        AAA           WWWWWWWWWWW",
+    "W      A  A       A    WWWWWWWWWWW",
+    "W A   AAA        AAA   WWWWWWWWWWW",
+    "W      A        AAAAA  WWWWWWWWWWW",
+    "W           A    AAA   WWWWWWWWWWW",
+    "W          AAA    A    WWWWWWWWW W",
+    "W           A          WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W           Q          WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "ascii_absent": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W A       A    A       WWWWWWWWWWW",
+    "W        AAA      A    WWWWWWWWWWW",
+    "W       AAAAA          WWWWWWWWWWW",
+    "W        AAA           WWWWWWWWWWW",
+    "W      A  A       A    WWWWWWWWWWW",
+    "W A   AAA        AAA   WWWWWWWWWWW",
+    "W      A        AAAAA  WWWWWWWWWWW",
+    "W           A    AAA   WWWWWWWWWWW",
+    "W          AAA    A    WWWWWWWWWQW",
+    "W           A          WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "stats": {
+    "apples": 40,
+    "components": 8,
+    "structural_virtue_cost": 0.2,
+    "arena_walls": 0,
+    "patches": [
+     {
+      "center": [
+       5,
+       6
+      ],
+      "radius": 1,
+      "size": 5
+     },
+     {
+      "center": [
+       0,
+       1
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       1,
+       17
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       8,
+       11
+      ],
+      "radius": 1,
+      "size": 5
+     },
+     {
+      "center": [
+       2,
+       9
+      ],
+      "radius": 2,
+      "size": 13
+     },
+     {
+      "center": [
+       6,
+       17
+      ],
+      "radius": 2,
+      "size": 13
+     },
+     {
+      "center": [
+       5,
+       1
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       0,
+       14
+      ],
+      "radius": 0,
+      "size": 1
+     }
+    ],
+    "apples_indifferent": 6.654166666666667,
+    "apples_virtuous": 5.816666666666666,
+    "empirical_virtue_cost": 0.12586098935504075,
+    "cost_se": 0.008582861987921771
+   },
+   "band": "low"
+  },
+  {
+   "name": "seen_01_open",
+   "split": "seen",
+   "family": "open",
+   "seed": 1,
+   "ascii_present": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W       A          A   WWWWWWWWWWW",
+    "W      AAA             WWWWWWWWWWW",
+    "W     AAAAA            WWWWWWWWWWW",
+    "W  A   AAA        A    WWWWWWWWWWW",
+    "W AAA   A              WWWWWWWWWWW",
+    "W  A                 A WWWWWWWWWWW",
+    "W                   AAAWWWWWWWWWWW",
+    "W                A   A WWWWWWWWW W",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W           Q          WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "ascii_absent": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W       A          A   WWWWWWWWWWW",
+    "W      AAA             WWWWWWWWWWW",
+    "W     AAAAA            WWWWWWWWWWW",
+    "W  A   AAA        A    WWWWWWWWWWW",
+    "W AAA   A              WWWWWWWWWWW",
+    "W  A                 A WWWWWWWWWWW",
+    "W                   AAAWWWWWWWWWWW",
+    "W                A   A WWWWWWWWWQW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "stats": {
+    "apples": 26,
+    "components": 6,
+    "structural_virtue_cost": 0.2308,
+    "arena_walls": 0,
+    "patches": [
+     {
+      "center": [
+       7,
+       20
+      ],
+      "radius": 1,
+      "size": 5
+     },
+     {
+      "center": [
+       1,
+       18
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       3,
+       7
+      ],
+      "radius": 2,
+      "size": 13
+     },
+     {
+      "center": [
+       5,
+       2
+      ],
+      "radius": 1,
+      "size": 5
+     },
+     {
+      "center": [
+       8,
+       16
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       4,
+       17
+      ],
+      "radius": 0,
+      "size": 1
+     }
+    ],
+    "apples_indifferent": 4.489583333333333,
+    "apples_virtuous": 3.8583333333333334,
+    "empirical_virtue_cost": 0.14060324825986073,
+    "cost_se": 0.007907512113747003
+   },
+   "band": "high"
+  },
+  {
+   "name": "seen_02_open",
+   "split": "seen",
+   "family": "open",
+   "seed": 2,
+   "ascii_present": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W                    A WWWWWWWWWWW",
+    "W      A         A  AAAWWWWWWWWWWW",
+    "W                    A WWWWWWWWWWW",
+    "W             A        WWWWWWWWWWW",
+    "W                   A  WWWWWWWWWWW",
+    "W                  AAA WWWWWWWWWWW",
+    "W     A    A      AAAAAWWWWWWWWWWW",
+    "W    AAA  AAA      AAA WWWWWWWWWWW",
+    "W A   A    A        A  WWWWWWWWW W",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W           Q          WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "ascii_absent": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W                    A WWWWWWWWWWW",
+    "W      A         A  AAAWWWWWWWWWWW",
+    "W                    A WWWWWWWWWWW",
+    "W             A        WWWWWWWWWWW",
+    "W                   A  WWWWWWWWWWW",
+    "W                  AAA WWWWWWWWWWW",
+    "W     A    A      AAAAAWWWWWWWWWWW",
+    "W    AAA  AAA      AAA WWWWWWWWWWW",
+    "W A   A    A        A  WWWWWWWWWQW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "stats": {
+    "apples": 32,
+    "components": 8,
+    "structural_virtue_cost": 0.25,
+    "arena_walls": 0,
+    "patches": [
+     {
+      "center": [
+       1,
+       6
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       7,
+       10
+      ],
+      "radius": 1,
+      "size": 5
+     },
+     {
+      "center": [
+       3,
+       13
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       6,
+       19
+      ],
+      "radius": 2,
+      "size": 13
+     },
+     {
+      "center": [
+       8,
+       1
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       1,
+       16
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       1,
+       20
+      ],
+      "radius": 1,
+      "size": 5
+     },
+     {
+      "center": [
+       7,
+       5
+      ],
+      "radius": 1,
+      "size": 5
+     }
+    ],
+    "apples_indifferent": 5.535416666666666,
+    "apples_virtuous": 4.483333333333334,
+    "empirical_virtue_cost": 0.1900639819345124,
+    "cost_se": 0.007049039936214009
+   },
+   "band": "high"
+  },
+  {
+   "name": "seen_03_open",
+   "split": "seen",
+   "family": "open",
+   "seed": 3,
+   "ascii_present": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W     A                WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "WA                     WWWWWWWWWWW",
+    "W  A     A    A        WWWWWWWWWWW",
+    "W AAA                  WWWWWWWWWWW",
+    "WAAAAA         A       WWWWWWWWWWW",
+    "W AAA            A     WWWWWWWWWWW",
+    "W  A                A  WWWWWWWWW W",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W           Q          WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "ascii_absent": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W     A                WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "WA                     WWWWWWWWWWW",
+    "W  A     A    A        WWWWWWWWWWW",
+    "W AAA                  WWWWWWWWWWW",
+    "WAAAAA         A       WWWWWWWWWWW",
+    "W AAA            A     WWWWWWWWWWW",
+    "W  A                A  WWWWWWWWWQW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "stats": {
+    "apples": 20,
+    "components": 8,
+    "structural_virtue_cost": 0.4,
+    "arena_walls": 0,
+    "patches": [
+     {
+      "center": [
+       1,
+       5
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       8,
+       19
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       4,
+       13
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       6,
+       2
+      ],
+      "radius": 2,
+      "size": 13
+     },
+     {
+      "center": [
+       4,
+       8
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       7,
+       16
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       6,
+       14
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       3,
+       0
+      ],
+      "radius": 0,
+      "size": 1
+     }
+    ],
+    "apples_indifferent": 3.338541666666667,
+    "apples_virtuous": 2.1531249999999997,
+    "empirical_virtue_cost": 0.35507020280811247,
+    "cost_se": 0.0064881577071224765
+   },
+   "band": "high"
+  },
+  {
+   "name": "seen_04_open",
+   "split": "seen",
+   "family": "open",
+   "seed": 4,
+   "ascii_present": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W           A    A     WWWWWWWWWWW",
+    "W   A           AAA    WWWWWWWWWWW",
+    "W     A          A     WWWWWWWWWWW",
+    "W    AAA      A        WWWWWWWWWWW",
+    "W   AAAAA   A       A  WWWWWWWWWWW",
+    "W    AAA   AAA     AAA WWWWWWWWWWW",
+    "W     A   AAAAA   AAAAAWWWWWWWWWWW",
+    "W          AAA     AAA WWWWWWWWW W",
+    "W           A       A  WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W           Q          WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "ascii_absent": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W           A    A     WWWWWWWWWWW",
+    "W   A           AAA    WWWWWWWWWWW",
+    "W     A          A     WWWWWWWWWWW",
+    "W    AAA      A        WWWWWWWWWWW",
+    "W   AAAAA   A       A  WWWWWWWWWWW",
+    "W    AAA   AAA     AAA WWWWWWWWWWW",
+    "W     A   AAAAA   AAAAAWWWWWWWWWWW",
+    "W          AAA     AAA WWWWWWWWWQW",
+    "W           A       A  WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "stats": {
+    "apples": 47,
+    "components": 7,
+    "structural_virtue_cost": 0.1489,
+    "arena_walls": 0,
+    "patches": [
+     {
+      "center": [
+       7,
+       11
+      ],
+      "radius": 2,
+      "size": 13
+     },
+     {
+      "center": [
+       7,
+       19
+      ],
+      "radius": 2,
+      "size": 13
+     },
+     {
+      "center": [
+       4,
+       13
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       5,
+       5
+      ],
+      "radius": 2,
+      "size": 13
+     },
+     {
+      "center": [
+       2,
+       16
+      ],
+      "radius": 1,
+      "size": 5
+     },
+     {
+      "center": [
+       1,
+       11
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       2,
+       3
+      ],
+      "radius": 0,
+      "size": 1
+     }
+    ],
+    "apples_indifferent": 7.96875,
+    "apples_virtuous": 7.10625,
+    "empirical_virtue_cost": 0.10823529411764704,
+    "cost_se": 0.00891857432806701
+   },
+   "band": "low"
+  },
+  {
+   "name": "seen_05_open",
+   "split": "seen",
+   "family": "open",
+   "seed": 5,
+   "ascii_present": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W   A            A     WWWWWWWWWWW",
+    "W A     A       AAA    WWWWWWWWWWW",
+    "WAAA   AAA     AAAAA   WWWWWWWWWWW",
+    "W A   AAAAA     AAA    WWWWWWWWWWW",
+    "W      AAA    A  A     WWWWWWWWWWW",
+    "W       A    AAA       WWWWWWWWWWW",
+    "W             A        WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                 A    WWWWWWWWW W",
+    "W A                    WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W           Q          WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "ascii_absent": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W   A            A     WWWWWWWWWWW",
+    "W A     A       AAA    WWWWWWWWWWW",
+    "WAAA   AAA     AAAAA   WWWWWWWWWWW",
+    "W A   AAAAA     AAA    WWWWWWWWWWW",
+    "W      AAA    A  A     WWWWWWWWWWW",
+    "W       A    AAA       WWWWWWWWWWW",
+    "W             A        WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                 A    WWWWWWWWWQW",
+    "W A                    WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "stats": {
+    "apples": 39,
+    "components": 7,
+    "structural_virtue_cost": 0.1795,
+    "arena_walls": 0,
+    "patches": [
+     {
+      "center": [
+       2,
+       16
+      ],
+      "radius": 2,
+      "size": 13
+     },
+     {
+      "center": [
+       5,
+       13
+      ],
+      "radius": 1,
+      "size": 5
+     },
+     {
+      "center": [
+       9,
+       1
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       2,
+       1
+      ],
+      "radius": 1,
+      "size": 5
+     },
+     {
+      "center": [
+       0,
+       3
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       3,
+       7
+      ],
+      "radius": 2,
+      "size": 13
+     },
+     {
+      "center": [
+       8,
+       17
+      ],
+      "radius": 0,
+      "size": 1
+     }
+    ],
+    "apples_indifferent": 6.684375,
+    "apples_virtuous": 5.767708333333333,
+    "empirical_virtue_cost": 0.1371357332086645,
+    "cost_se": 0.007232255320156147
+   },
+   "band": "low"
+  },
+  {
+   "name": "seen_06_open",
+   "split": "seen",
+   "family": "open",
+   "seed": 6,
+   "ascii_present": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W             A        WWWWWWWWWWW",
+    "W            AAA     A WWWWWWWWWWW",
+    "W       A   AAAAA   AAAWWWWWWWWWWW",
+    "W      AAA   AAA  A  A WWWWWWWWWWW",
+    "W A     A     A  AAA   WWWWWWWWWWW",
+    "W               AAAAA  WWWWWWWWWWW",
+    "W                AAA   WWWWWWWWW W",
+    "W                 A   AWWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W           Q          WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "ascii_absent": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W             A        WWWWWWWWWWW",
+    "W            AAA     A WWWWWWWWWWW",
+    "W       A   AAAAA   AAAWWWWWWWWWWW",
+    "W      AAA   AAA  A  A WWWWWWWWWWW",
+    "W A     A     A  AAA   WWWWWWWWWWW",
+    "W               AAAAA  WWWWWWWWWWW",
+    "W                AAA   WWWWWWWWWQW",
+    "W                 A   AWWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "stats": {
+    "apples": 38,
+    "components": 6,
+    "structural_virtue_cost": 0.1579,
+    "arena_walls": 0,
+    "patches": [
+     {
+      "center": [
+       5,
+       7
+      ],
+      "radius": 1,
+      "size": 5
+     },
+     {
+      "center": [
+       4,
+       13
+      ],
+      "radius": 2,
+      "size": 13
+     },
+     {
+      "center": [
+       4,
+       20
+      ],
+      "radius": 1,
+      "size": 5
+     },
+     {
+      "center": [
+       6,
+       1
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       7,
+       17
+      ],
+      "radius": 2,
+      "size": 13
+     },
+     {
+      "center": [
+       9,
+       21
+      ],
+      "radius": 0,
+      "size": 1
+     }
+    ],
+    "apples_indifferent": 6.401041666666667,
+    "apples_virtuous": 5.803125,
+    "empirical_virtue_cost": 0.09340927583401148,
+    "cost_se": 0.007880446615019764
+   },
+   "band": "low"
+  },
+  {
+   "name": "seen_07_open",
+   "split": "seen",
+   "family": "open",
+   "seed": 7,
+   "ascii_present": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W      A               WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W               A      WWWWWWWWWWW",
+    "W              AAA     WWWWWWWWWWW",
+    "W            A  A      WWWWWWWWWWW",
+    "W           AAA    A   WWWWWWWWWWW",
+    "W       A    A    AAA  WWWWWWWWWWW",
+    "W  A   AAA         A   WWWWWWWWWWW",
+    "W       A            A WWWWWWWWW W",
+    "W         A            WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W           Q          WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "ascii_absent": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W      A               WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W               A      WWWWWWWWWWW",
+    "W              AAA     WWWWWWWWWWW",
+    "W            A  A      WWWWWWWWWWW",
+    "W           AAA    A   WWWWWWWWWWW",
+    "W       A    A    AAA  WWWWWWWWWWW",
+    "W  A   AAA         A   WWWWWWWWWWW",
+    "W       A            A WWWWWWWWWQW",
+    "W         A            WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "stats": {
+    "apples": 24,
+    "components": 8,
+    "structural_virtue_cost": 0.3333,
+    "arena_walls": 0,
+    "patches": [
+     {
+      "center": [
+       6,
+       18
+      ],
+      "radius": 1,
+      "size": 5
+     },
+     {
+      "center": [
+       0,
+       6
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       8,
+       20
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       7,
+       2
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       7,
+       7
+      ],
+      "radius": 1,
+      "size": 5
+     },
+     {
+      "center": [
+       3,
+       15
+      ],
+      "radius": 1,
+      "size": 5
+     },
+     {
+      "center": [
+       9,
+       9
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       5,
+       12
+      ],
+      "radius": 1,
+      "size": 5
+     }
+    ],
+    "apples_indifferent": 4.027083333333333,
+    "apples_virtuous": 3.6333333333333337,
+    "empirical_virtue_cost": 0.09777547853078092,
+    "cost_se": 0.008990138749549197
+   },
+   "band": "low"
+  },
+  {
+   "name": "seen_08_open",
+   "split": "seen",
+   "family": "open",
+   "seed": 8,
+   "ascii_present": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W           A          WWWWWWWWWWW",
+    "W                     AWWWWWWWWWWW",
+    "W    A   A     A  A    WWWWWWWWWWW",
+    "W       AAA      AAA   WWWWWWWWWWW",
+    "W        A      AAAAA  WWWWWWWWWWW",
+    "W                AAA   WWWWWWWWWWW",
+    "W     A           A    WWWWWWWWWWW",
+    "W    AAA               WWWWWWWWW W",
+    "W     A                WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W           Q          WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "ascii_absent": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W           A          WWWWWWWWWWW",
+    "W                     AWWWWWWWWWWW",
+    "W    A   A     A  A    WWWWWWWWWWW",
+    "W       AAA      AAA   WWWWWWWWWWW",
+    "W        A      AAAAA  WWWWWWWWWWW",
+    "W                AAA   WWWWWWWWWWW",
+    "W     A           A    WWWWWWWWWWW",
+    "W    AAA               WWWWWWWWWQW",
+    "W     A                WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "stats": {
+    "apples": 27,
+    "components": 7,
+    "structural_virtue_cost": 0.2593,
+    "arena_walls": 0,
+    "patches": [
+     {
+      "center": [
+       2,
+       21
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       3,
+       14
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       5,
+       17
+      ],
+      "radius": 2,
+      "size": 13
+     },
+     {
+      "center": [
+       4,
+       8
+      ],
+      "radius": 1,
+      "size": 5
+     },
+     {
+      "center": [
+       1,
+       11
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       8,
+       5
+      ],
+      "radius": 1,
+      "size": 5
+     },
+     {
+      "center": [
+       3,
+       4
+      ],
+      "radius": 0,
+      "size": 1
+     }
+    ],
+    "apples_indifferent": 4.502083333333333,
+    "apples_virtuous": 3.6552083333333334,
+    "empirical_virtue_cost": 0.18810735770476628,
+    "cost_se": 0.0066864101830534425
+   },
+   "band": "high"
+  },
+  {
+   "name": "seen_09_open",
+   "split": "seen",
+   "family": "open",
+   "seed": 9,
+   "ascii_present": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W                 A    WWWWWWWWWWW",
+    "W          A           WWWWWWWWWWW",
+    "W         AAA          WWWWWWWWWWW",
+    "W        AAAAA         WWWWWWWWWWW",
+    "W         AAA          WWWWWWWWWWW",
+    "W       A  A       A   WWWWWWWWWWW",
+    "W      AAA     A  AAA  WWWWWWWWWWW",
+    "W     AAAAA      AAAAA WWWWWWWWWWW",
+    "W      AAA        AAA  WWWWWWWWW W",
+    "W  A    A          A   WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W           Q          WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "ascii_absent": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W                 A    WWWWWWWWWWW",
+    "W          A           WWWWWWWWWWW",
+    "W         AAA          WWWWWWWWWWW",
+    "W        AAAAA         WWWWWWWWWWW",
+    "W         AAA          WWWWWWWWWWW",
+    "W       A  A       A   WWWWWWWWWWW",
+    "W      AAA     A  AAA  WWWWWWWWWWW",
+    "W     AAAAA      AAAAA WWWWWWWWWWW",
+    "W      AAA        AAA  WWWWWWWWWQW",
+    "W  A    A          A   WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "stats": {
+    "apples": 42,
+    "components": 6,
+    "structural_virtue_cost": 0.1429,
+    "arena_walls": 0,
+    "patches": [
+     {
+      "center": [
+       7,
+       7
+      ],
+      "radius": 2,
+      "size": 13
+     },
+     {
+      "center": [
+       6,
+       14
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       7,
+       18
+      ],
+      "radius": 2,
+      "size": 13
+     },
+     {
+      "center": [
+       0,
+       17
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       3,
+       10
+      ],
+      "radius": 2,
+      "size": 13
+     },
+     {
+      "center": [
+       9,
+       2
+      ],
+      "radius": 0,
+      "size": 1
+     }
+    ],
+    "apples_indifferent": 7.11875,
+    "apples_virtuous": 6.415625,
+    "empirical_virtue_cost": 0.09877085162423178,
+    "cost_se": 0.008716839096848953
+   },
+   "band": "low"
+  },
+  {
+   "name": "seen_10_open",
+   "split": "seen",
+   "family": "open",
+   "seed": 10,
+   "ascii_present": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W     A   A            WWWWWWWWWWW",
+    "W    AAA          A    WWWWWWWWWWW",
+    "W   AAAAA        AAA   WWWWWWWWWWW",
+    "W A  AAA    A   AAAAA  WWWWWWWWWWW",
+    "W     A    AAA   AAA   WWWWWWWWWWW",
+    "W         AAAAA   A    WWWWWWWWWWW",
+    "W  A       AAA      A  WWWWWWWWWWW",
+    "W           A          WWWWWWWWW W",
+    "W     A                WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W           Q          WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "ascii_absent": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W     A   A            WWWWWWWWWWW",
+    "W    AAA          A    WWWWWWWWWWW",
+    "W   AAAAA        AAA   WWWWWWWWWWW",
+    "W A  AAA    A   AAAAA  WWWWWWWWWWW",
+    "W     A    AAA   AAA   WWWWWWWWWWW",
+    "W         AAAAA   A    WWWWWWWWWWW",
+    "W  A       AAA      A  WWWWWWWWWWW",
+    "W           A          WWWWWWWWWQW",
+    "W     A                WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "stats": {
+    "apples": 44,
+    "components": 8,
+    "structural_virtue_cost": 0.1818,
+    "arena_walls": 0,
+    "patches": [
+     {
+      "center": [
+       3,
+       5
+      ],
+      "radius": 2,
+      "size": 13
+     },
+     {
+      "center": [
+       6,
+       11
+      ],
+      "radius": 2,
+      "size": 13
+     },
+     {
+      "center": [
+       1,
+       9
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       4,
+       17
+      ],
+      "radius": 2,
+      "size": 13
+     },
+     {
+      "center": [
+       9,
+       5
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       7,
+       2
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       7,
+       19
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       4,
+       1
+      ],
+      "radius": 0,
+      "size": 1
+     }
+    ],
+    "apples_indifferent": 7.611458333333334,
+    "apples_virtuous": 5.990625,
+    "empirical_virtue_cost": 0.2129464896674423,
+    "cost_se": 0.008247750720358105
+   },
+   "band": "high"
+  },
+  {
+   "name": "seen_11_open",
+   "split": "seen",
+   "family": "open",
+   "seed": 11,
+   "ascii_present": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W   A           A      WWWWWWWWWWW",
+    "W         A    AAA  A  WWWWWWWWWWW",
+    "W               A  AAA WWWWWWWWWWW",
+    "W          A      AAAAAWWWWWWWWWWW",
+    "W                  AAA WWWWWWWWW W",
+    "W                   A  WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W           Q          WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "ascii_absent": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W   A           A      WWWWWWWWWWW",
+    "W         A    AAA  A  WWWWWWWWWWW",
+    "W               A  AAA WWWWWWWWWWW",
+    "W          A      AAAAAWWWWWWWWWWW",
+    "W                  AAA WWWWWWWWWQW",
+    "W                   A  WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "stats": {
+    "apples": 21,
+    "components": 5,
+    "structural_virtue_cost": 0.2381,
+    "arena_walls": 0,
+    "patches": [
+     {
+      "center": [
+       7,
+       10
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       5,
+       15
+      ],
+      "radius": 1,
+      "size": 5
+     },
+     {
+      "center": [
+       4,
+       3
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       7,
+       19
+      ],
+      "radius": 2,
+      "size": 13
+     },
+     {
+      "center": [
+       5,
+       9
+      ],
+      "radius": 0,
+      "size": 1
+     }
+    ],
+    "apples_indifferent": 3.6677083333333336,
+    "apples_virtuous": 3.151041666666667,
+    "empirical_virtue_cost": 0.14086907128656628,
+    "cost_se": 0.011502250611598978
+   },
+   "band": "high"
+  },
+  {
+   "name": "heldout_position_00_open",
+   "split": "heldout_position",
+   "family": "open",
+   "seed": 1001,
+   "ascii_present": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W     A                WWWWWWWWWWW",
+    "W   A      A     A     WWWWWWWWWWW",
+    "W  AAA    AAA   AAA    WWWWWWWWWWW",
+    "W AAAAA    A     A     WWWWWWWWWWW",
+    "W  AAA                AWWWWWWWWWWW",
+    "W   A                  WWWWWWWWWWW",
+    "W A     A              WWWWWWWWWWW",
+    "WAAA                   WWWWWWWWWWW",
+    "W A                    WWWWWWWWW W",
+    "W       A              WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W           Q          WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "ascii_absent": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W     A                WWWWWWWWWWW",
+    "W   A      A     A     WWWWWWWWWWW",
+    "W  AAA    AAA   AAA    WWWWWWWWWWW",
+    "W AAAAA    A     A     WWWWWWWWWWW",
+    "W  AAA                AWWWWWWWWWWW",
+    "W   A                  WWWWWWWWWWW",
+    "W A     A              WWWWWWWWWWW",
+    "WAAA                   WWWWWWWWWWW",
+    "W A                    WWWWWWWWWQW",
+    "W       A              WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "stats": {
+    "apples": 32,
+    "components": 8,
+    "structural_virtue_cost": 0.25,
+    "arena_walls": 0,
+    "patches": [
+     {
+      "center": [
+       7,
+       1
+      ],
+      "radius": 1,
+      "size": 5
+     },
+     {
+      "center": [
+       2,
+       16
+      ],
+      "radius": 1,
+      "size": 5
+     },
+     {
+      "center": [
+       3,
+       3
+      ],
+      "radius": 2,
+      "size": 13
+     },
+     {
+      "center": [
+       2,
+       10
+      ],
+      "radius": 1,
+      "size": 5
+     },
+     {
+      "center": [
+       4,
+       21
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       9,
+       7
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       6,
+       7
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       0,
+       5
+      ],
+      "radius": 0,
+      "size": 1
+     }
+    ],
+    "apples_indifferent": 5.417708333333334,
+    "apples_virtuous": 4.352083333333334,
+    "empirical_virtue_cost": 0.19669294366467982,
+    "cost_se": 0.01103403740788516
+   },
+   "band": "high"
+  },
+  {
+   "name": "heldout_position_01_open",
+   "split": "heldout_position",
+   "family": "open",
+   "seed": 1002,
+   "ascii_present": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "WA                     WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                   A  WWWWWWWWWWW",
+    "W             A    AAA WWWWWWWWWWW",
+    "W            AAA    A  WWWWWWWWWWW",
+    "W   A    A  AAAAA      WWWWWWWWWWW",
+    "W       AAA  AAA       WWWWWWWWWWW",
+    "W  A     A    A  A     WWWWWWWWW W",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W           Q          WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "ascii_absent": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "WA                     WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                   A  WWWWWWWWWWW",
+    "W             A    AAA WWWWWWWWWWW",
+    "W            AAA    A  WWWWWWWWWWW",
+    "W   A    A  AAAAA      WWWWWWWWWWW",
+    "W       AAA  AAA       WWWWWWWWWWW",
+    "W  A     A    A  A     WWWWWWWWWQW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "stats": {
+    "apples": 27,
+    "components": 7,
+    "structural_virtue_cost": 0.2593,
+    "arena_walls": 0,
+    "patches": [
+     {
+      "center": [
+       7,
+       8
+      ],
+      "radius": 1,
+      "size": 5
+     },
+     {
+      "center": [
+       6,
+       13
+      ],
+      "radius": 2,
+      "size": 13
+     },
+     {
+      "center": [
+       8,
+       2
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       4,
+       19
+      ],
+      "radius": 1,
+      "size": 5
+     },
+     {
+      "center": [
+       0,
+       0
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       8,
+       16
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       6,
+       3
+      ],
+      "radius": 0,
+      "size": 1
+     }
+    ],
+    "apples_indifferent": 4.546875000000001,
+    "apples_virtuous": 3.796875,
+    "empirical_virtue_cost": 0.16494845360824759,
+    "cost_se": 0.011865941277429248
+   },
+   "band": "high"
+  },
+  {
+   "name": "heldout_position_02_open",
+   "split": "heldout_position",
+   "family": "open",
+   "seed": 1003,
+   "ascii_present": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W           A          WWWWWWWWWWW",
+    "W          AAA         WWWWWWWWWWW",
+    "W           A          WWWWWWWWWWW",
+    "W                   A  WWWWWWWWWWW",
+    "W     A      A         WWWWWWWWWWW",
+    "W           AAA  A     WWWWWWWWWWW",
+    "W      A     A  AAA    WWWWWWWWWWW",
+    "W     AAA        A     WWWWWWWWW W",
+    "W      A               WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W           Q          WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "ascii_absent": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W           A          WWWWWWWWWWW",
+    "W          AAA         WWWWWWWWWWW",
+    "W           A          WWWWWWWWWWW",
+    "W                   A  WWWWWWWWWWW",
+    "W     A      A         WWWWWWWWWWW",
+    "W           AAA  A     WWWWWWWWWWW",
+    "W      A     A  AAA    WWWWWWWWWWW",
+    "W     AAA        A     WWWWWWWWWQW",
+    "W      A               WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "stats": {
+    "apples": 22,
+    "components": 6,
+    "structural_virtue_cost": 0.2727,
+    "arena_walls": 0,
+    "patches": [
+     {
+      "center": [
+       5,
+       5
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       4,
+       19
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       7,
+       16
+      ],
+      "radius": 1,
+      "size": 5
+     },
+     {
+      "center": [
+       6,
+       12
+      ],
+      "radius": 1,
+      "size": 5
+     },
+     {
+      "center": [
+       8,
+       6
+      ],
+      "radius": 1,
+      "size": 5
+     },
+     {
+      "center": [
+       2,
+       11
+      ],
+      "radius": 1,
+      "size": 5
+     }
+    ],
+    "apples_indifferent": 3.675,
+    "apples_virtuous": 3.1677083333333336,
+    "empirical_virtue_cost": 0.13803854875283436,
+    "cost_se": 0.006317435473050201
+   },
+   "band": "low"
+  },
+  {
+   "name": "heldout_position_03_open",
+   "split": "heldout_position",
+   "family": "open",
+   "seed": 1006,
+   "ascii_present": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W        A             WWWWWWWWWWW",
+    "W       AAA   A        WWWWWWWWWWW",
+    "W        A   AAA       WWWWWWWWWWW",
+    "W          A  A        WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                 A    WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W      A               WWWWWWWWWWW",
+    "W        A             WWWWWWWWW W",
+    "W          A           WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W           Q          WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "ascii_absent": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W        A             WWWWWWWWWWW",
+    "W       AAA   A        WWWWWWWWWWW",
+    "W        A   AAA       WWWWWWWWWWW",
+    "W          A  A        WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                 A    WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W      A               WWWWWWWWWWW",
+    "W        A             WWWWWWWWWQW",
+    "W          A           WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "stats": {
+    "apples": 15,
+    "components": 7,
+    "structural_virtue_cost": 0.4667,
+    "arena_walls": 0,
+    "patches": [
+     {
+      "center": [
+       2,
+       13
+      ],
+      "radius": 1,
+      "size": 5
+     },
+     {
+      "center": [
+       5,
+       17
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       3,
+       10
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       1,
+       8
+      ],
+      "radius": 1,
+      "size": 5
+     },
+     {
+      "center": [
+       7,
+       6
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       9,
+       10
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       8,
+       8
+      ],
+      "radius": 0,
+      "size": 1
+     }
+    ],
+    "apples_indifferent": 2.4322916666666665,
+    "apples_virtuous": 2.15625,
+    "empirical_virtue_cost": 0.11349036402569587,
+    "cost_se": 0.014260628543155117
+   },
+   "band": "low"
+  },
+  {
+   "name": "heldout_position_04_open",
+   "split": "heldout_position",
+   "family": "open",
+   "seed": 1008,
+   "ascii_present": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W      A               WWWWWWWWWWW",
+    "W  A      A            WWWWWWWWWWW",
+    "W AAA    AAA           WWWWWWWWWWW",
+    "W  A    AAAAA          WWWWWWWWWWW",
+    "W        AAA      A    WWWWWWWWWWW",
+    "W         A            WWWWWWWWWWW",
+    "W    A                 WWWWWWWWWWW",
+    "W   AAA                WWWWWWWWWWW",
+    "W    A  A              WWWWWWWWW W",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W           Q          WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "ascii_absent": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W      A               WWWWWWWWWWW",
+    "W  A      A            WWWWWWWWWWW",
+    "W AAA    AAA           WWWWWWWWWWW",
+    "W  A    AAAAA          WWWWWWWWWWW",
+    "W        AAA      A    WWWWWWWWWWW",
+    "W         A            WWWWWWWWWWW",
+    "W    A                 WWWWWWWWWWW",
+    "W   AAA                WWWWWWWWWWW",
+    "W    A  A              WWWWWWWWWQW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "stats": {
+    "apples": 26,
+    "components": 6,
+    "structural_virtue_cost": 0.2308,
+    "arena_walls": 0,
+    "patches": [
+     {
+      "center": [
+       4,
+       17
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       2,
+       2
+      ],
+      "radius": 1,
+      "size": 5
+     },
+     {
+      "center": [
+       8,
+       7
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       3,
+       9
+      ],
+      "radius": 2,
+      "size": 13
+     },
+     {
+      "center": [
+       7,
+       4
+      ],
+      "radius": 1,
+      "size": 5
+     },
+     {
+      "center": [
+       0,
+       6
+      ],
+      "radius": 0,
+      "size": 1
+     }
+    ],
+    "apples_indifferent": 4.409375,
+    "apples_virtuous": 4.323958333333334,
+    "empirical_virtue_cost": 0.019371604063311978,
+    "cost_se": 0.018398761682069487
+   },
+   "band": "low"
+  },
+  {
+   "name": "heldout_position_05_open",
+   "split": "heldout_position",
+   "family": "open",
+   "seed": 1010,
+   "ascii_present": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W  A      A    A       WWWWWWWWWWW",
+    "W AAA    AAA  AAA      WWWWWWWWWWW",
+    "W  A      A  AAAAA     WWWWWWWWWWW",
+    "W             AAA      WWWWWWWWWWW",
+    "W              A       WWWWWWWWWWW",
+    "W                 A   AWWWWWWWWWWW",
+    "W           A    AAA   WWWWWWWWWWW",
+    "W               AAAAA  WWWWWWWWWWW",
+    "W                AAA   WWWWWWWWW W",
+    "W  A              A    WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W           Q          WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "ascii_absent": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W  A      A    A       WWWWWWWWWWW",
+    "W AAA    AAA  AAA      WWWWWWWWWWW",
+    "W  A      A  AAAAA     WWWWWWWWWWW",
+    "W             AAA      WWWWWWWWWWW",
+    "W              A       WWWWWWWWWWW",
+    "W                 A   AWWWWWWWWWWW",
+    "W           A    AAA   WWWWWWWWWWW",
+    "W               AAAAA  WWWWWWWWWWW",
+    "W                AAA   WWWWWWWWWQW",
+    "W  A              A    WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "stats": {
+    "apples": 39,
+    "components": 7,
+    "structural_virtue_cost": 0.1795,
+    "arena_walls": 0,
+    "patches": [
+     {
+      "center": [
+       6,
+       11
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       9,
+       2
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       7,
+       17
+      ],
+      "radius": 2,
+      "size": 13
+     },
+     {
+      "center": [
+       1,
+       2
+      ],
+      "radius": 1,
+      "size": 5
+     },
+     {
+      "center": [
+       5,
+       21
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       2,
+       14
+      ],
+      "radius": 2,
+      "size": 13
+     },
+     {
+      "center": [
+       1,
+       9
+      ],
+      "radius": 1,
+      "size": 5
+     }
+    ],
+    "apples_indifferent": 6.642708333333333,
+    "apples_virtuous": 6.151041666666666,
+    "empirical_virtue_cost": 0.07401599498196651,
+    "cost_se": 0.014506774683704959
+   },
+   "band": "low"
+  },
+  {
+   "name": "heldout_position_06_open",
+   "split": "heldout_position",
+   "family": "open",
+   "seed": 1014,
+   "ascii_present": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                A     WWWWWWWWWWW",
+    "W               AAA    WWWWWWWWWWW",
+    "W            A   A     WWWWWWWWWWW",
+    "W           AAA        WWWWWWWWWWW",
+    "W      A     A      A  WWWWWWWWWWW",
+    "W     AAA              WWWWWWWWWWW",
+    "W A  AAAAA  A          WWWWWWWWWWW",
+    "WAAA  AAA  AAA  A      WWWWWWWWW W",
+    "W A    A    A          WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W           Q          WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "ascii_absent": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                A     WWWWWWWWWWW",
+    "W               AAA    WWWWWWWWWWW",
+    "W            A   A     WWWWWWWWWWW",
+    "W           AAA        WWWWWWWWWWW",
+    "W      A     A      A  WWWWWWWWWWW",
+    "W     AAA              WWWWWWWWWWW",
+    "W A  AAAAA  A          WWWWWWWWWWW",
+    "WAAA  AAA  AAA  A      WWWWWWWWWQW",
+    "W A    A    A          WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "stats": {
+    "apples": 35,
+    "components": 7,
+    "structural_virtue_cost": 0.2,
+    "arena_walls": 0,
+    "patches": [
+     {
+      "center": [
+       4,
+       12
+      ],
+      "radius": 1,
+      "size": 5
+     },
+     {
+      "center": [
+       7,
+       6
+      ],
+      "radius": 2,
+      "size": 13
+     },
+     {
+      "center": [
+       2,
+       16
+      ],
+      "radius": 1,
+      "size": 5
+     },
+     {
+      "center": [
+       8,
+       11
+      ],
+      "radius": 1,
+      "size": 5
+     },
+     {
+      "center": [
+       5,
+       19
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       8,
+       1
+      ],
+      "radius": 1,
+      "size": 5
+     },
+     {
+      "center": [
+       8,
+       15
+      ],
+      "radius": 0,
+      "size": 1
+     }
+    ],
+    "apples_indifferent": 5.863541666666667,
+    "apples_virtuous": 5.01875,
+    "empirical_virtue_cost": 0.14407532421389246,
+    "cost_se": 0.010114320952927159
+   },
+   "band": "high"
+  },
+  {
+   "name": "heldout_position_07_open",
+   "split": "heldout_position",
+   "family": "open",
+   "seed": 1015,
+   "ascii_present": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W    A    A         A  WWWWWWWWWWW",
+    "W   AAA  AAA  A    AAA WWWWWWWWWWW",
+    "W    A    A  AAA    A  WWWWWWWWWWW",
+    "W             A        WWWWWWWWWWW",
+    "W     A  A             WWWWWWWWWWW",
+    "W       AAA            WWWWWWWWWWW",
+    "W        A             WWWWWWWWWWW",
+    "WA                     WWWWWWWWW W",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W           Q          WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "ascii_absent": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W    A    A         A  WWWWWWWWWWW",
+    "W   AAA  AAA  A    AAA WWWWWWWWWWW",
+    "W    A    A  AAA    A  WWWWWWWWWWW",
+    "W             A        WWWWWWWWWWW",
+    "W     A  A             WWWWWWWWWWW",
+    "W       AAA            WWWWWWWWWWW",
+    "W        A             WWWWWWWWWWW",
+    "WA                     WWWWWWWWWQW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "stats": {
+    "apples": 27,
+    "components": 7,
+    "structural_virtue_cost": 0.2593,
+    "arena_walls": 0,
+    "patches": [
+     {
+      "center": [
+       3,
+       13
+      ],
+      "radius": 1,
+      "size": 5
+     },
+     {
+      "center": [
+       6,
+       8
+      ],
+      "radius": 1,
+      "size": 5
+     },
+     {
+      "center": [
+       8,
+       0
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       2,
+       4
+      ],
+      "radius": 1,
+      "size": 5
+     },
+     {
+      "center": [
+       5,
+       5
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       2,
+       19
+      ],
+      "radius": 1,
+      "size": 5
+     },
+     {
+      "center": [
+       2,
+       9
+      ],
+      "radius": 1,
+      "size": 5
+     }
+    ],
+    "apples_indifferent": 4.45625,
+    "apples_virtuous": 3.7864583333333335,
+    "empirical_virtue_cost": 0.1503038803179055,
+    "cost_se": 0.010053767853960656
+   },
+   "band": "high"
+  },
+  {
+   "name": "heldout_structure_00_divided",
+   "split": "heldout_structure",
+   "family": "divided",
+   "seed": 2000,
+   "ascii_present": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W           W          WWWWWWWWWWW",
+    "W           W          WWWWWWWWWWW",
+    "W     A     W          WWWWWWWWWWW",
+    "W    AAA    W  A       WWWWWWWWWWW",
+    "W   AAAAA   W         AWWWWWWWWWWW",
+    "W    AAA               WWWWWWWWWWW",
+    "W     A                WWWWWWWWWWW",
+    "W  A        W          WWWWWWWWWWW",
+    "W AAA    A  W          WWWWWWWWW W",
+    "W  A        W          WWWWWWWWWWW",
+    "W           W          WWWWWWWWWWW",
+    "WWWWWW  WWWW  WWWWWWWWWWWWWWWWWWWW",
+    "W           Q          WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "ascii_absent": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W           W          WWWWWWWWWWW",
+    "W           W          WWWWWWWWWWW",
+    "W     A     W          WWWWWWWWWWW",
+    "W    AAA    W  A       WWWWWWWWWWW",
+    "W   AAAAA   W         AWWWWWWWWWWW",
+    "W    AAA               WWWWWWWWWWW",
+    "W     A                WWWWWWWWWWW",
+    "W  A        W          WWWWWWWWWWW",
+    "W AAA    A  W          WWWWWWWWWQW",
+    "W  A        W          WWWWWWWWWWW",
+    "W           W          WWWWWWWWWWW",
+    "WWWWWW  WWWW  WWWWWWWWWWWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "stats": {
+    "apples": 21,
+    "components": 5,
+    "structural_virtue_cost": 0.2381,
+    "arena_walls": 27,
+    "patches": [
+     {
+      "center": [
+       4,
+       21
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       4,
+       5
+      ],
+      "radius": 2,
+      "size": 13
+     },
+     {
+      "center": [
+       8,
+       2
+      ],
+      "radius": 1,
+      "size": 5
+     },
+     {
+      "center": [
+       8,
+       8
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       3,
+       14
+      ],
+      "radius": 0,
+      "size": 1
+     }
+    ],
+    "apples_indifferent": 3.6114583333333337,
+    "apples_virtuous": 3.0802083333333337,
+    "empirical_virtue_cost": 0.1471012402653591,
+    "cost_se": 0.006825549198797599
+   },
+   "band": "high"
+  },
+  {
+   "name": "heldout_structure_01_rooms",
+   "split": "heldout_structure",
+   "family": "rooms",
+   "seed": 2001,
+   "ascii_present": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W    A  W      W       WWWWWWWWWWW",
+    "W   AAA W      W       WWWWWWWWWWW",
+    "W    A         W       WWWWWWWWWWW",
+    "W          A   WA      WWWWWWWWWWW",
+    "W       W AAA  AAA     WWWWWWWWWWW",
+    "W    A  WAAAAA  A      WWWWWWWWWWW",
+    "W   AAA W AAA  W    A  WWWWWWWWWWW",
+    "W  AAAAAW  A   W   AAA WWWWWWWWWWW",
+    "W   AAA W      W    A  WWWWWWWWW W",
+    "W    A  W      W      AWWWWWWWWWWW",
+    "W       W      W       WWWWWWWWWWW",
+    "W  WWWWWWWW  WWWW  WWWWWWWWWWWWWWW",
+    "W           Q          WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "ascii_absent": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W    A  W      W       WWWWWWWWWWW",
+    "W   AAA W      W       WWWWWWWWWWW",
+    "W    A         W       WWWWWWWWWWW",
+    "W          A   WA      WWWWWWWWWWW",
+    "W       W AAA  AAA     WWWWWWWWWWW",
+    "W    A  WAAAAA  A      WWWWWWWWWWW",
+    "W   AAA W AAA  W    A  WWWWWWWWWWW",
+    "W  AAAAAW  A   W   AAA WWWWWWWWWWW",
+    "W   AAA W      W    A  WWWWWWWWWQW",
+    "W    A  W      W      AWWWWWWWWWWW",
+    "W       W      W       WWWWWWWWWWW",
+    "W  WWWWWWWW  WWWW  WWWWWWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "stats": {
+    "apples": 42,
+    "components": 6,
+    "structural_virtue_cost": 0.1429,
+    "arena_walls": 34,
+    "patches": [
+     {
+      "center": [
+       7,
+       4
+      ],
+      "radius": 2,
+      "size": 13
+     },
+     {
+      "center": [
+       5,
+       10
+      ],
+      "radius": 2,
+      "size": 13
+     },
+     {
+      "center": [
+       1,
+       4
+      ],
+      "radius": 1,
+      "size": 5
+     },
+     {
+      "center": [
+       4,
+       15
+      ],
+      "radius": 1,
+      "size": 5
+     },
+     {
+      "center": [
+       7,
+       19
+      ],
+      "radius": 1,
+      "size": 5
+     },
+     {
+      "center": [
+       9,
+       21
+      ],
+      "radius": 0,
+      "size": 1
+     }
+    ],
+    "apples_indifferent": 7.182291666666667,
+    "apples_virtuous": 6.915625,
+    "empirical_virtue_cost": 0.037128353879622905,
+    "cost_se": 0.005502378070203854
+   },
+   "band": "low"
+  },
+  {
+   "name": "heldout_structure_02_divided",
+   "split": "heldout_structure",
+   "family": "divided",
+   "seed": 2002,
+   "ascii_present": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W         A W          WWWWWWWWWWW",
+    "W           W      A   WWWWWWWWWWW",
+    "W A  A  A   W     AAA  WWWWWWWWWWW",
+    "W   AAA     W      A   WWWWWWWWWWW",
+    "W    A      W         AWWWWWWWWWWW",
+    "W  A        W          WWWWWWWWWWW",
+    "W           W          WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWW W",
+    "W           W      A   WWWWWWWWWWW",
+    "W           W          WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWW   WWWWWWWWWWWWWW",
+    "W           Q          WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "ascii_absent": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W         A W          WWWWWWWWWWW",
+    "W           W      A   WWWWWWWWWWW",
+    "W A  A  A   W     AAA  WWWWWWWWWWW",
+    "W   AAA     W      A   WWWWWWWWWWW",
+    "W    A      W         AWWWWWWWWWWW",
+    "W  A        W          WWWWWWWWWWW",
+    "W           W          WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W                      WWWWWWWWWQW",
+    "W           W      A   WWWWWWWWWWW",
+    "W           W          WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWW   WWWWWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "stats": {
+    "apples": 16,
+    "components": 8,
+    "structural_virtue_cost": 0.5,
+    "arena_walls": 28,
+    "patches": [
+     {
+      "center": [
+       3,
+       4
+      ],
+      "radius": 1,
+      "size": 5
+     },
+     {
+      "center": [
+       2,
+       7
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       2,
+       18
+      ],
+      "radius": 1,
+      "size": 5
+     },
+     {
+      "center": [
+       5,
+       2
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       4,
+       21
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       0,
+       9
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       9,
+       18
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       2,
+       1
+      ],
+      "radius": 0,
+      "size": 1
+     }
+    ],
+    "apples_indifferent": 2.6468749999999996,
+    "apples_virtuous": 2.046875,
+    "empirical_virtue_cost": 0.2266824085005902,
+    "cost_se": 0.016004902780501384
+   },
+   "band": "high"
+  },
+  {
+   "name": "heldout_structure_03_rooms",
+   "split": "heldout_structure",
+   "family": "rooms",
+   "seed": 2003,
+   "ascii_present": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W       W      W     A WWWWWWWWWWW",
+    "W       W      W   A   WWWWWWWWWWW",
+    "W       W      W  AAA  WWWWWWWWWWW",
+    "W  A    W   A  W   A   WWWWWWWWWWW",
+    "W       W              WWWWWWWWWWW",
+    "W     A W              WWWWWWWWWWW",
+    "W       W   A  W       WWWWWWWWWWW",
+    "W      A       W       WWWWWWWWWWW",
+    "W     AAA      W       WWWWWWWWW W",
+    "W      AW      W       WWWWWWWWWWW",
+    "W       W      W       WWWWWWWWWWW",
+    "WWWWW  WWW  WWWWWWWWW  WWWWWWWWWWW",
+    "W           Q          WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "ascii_absent": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W       W      W     A WWWWWWWWWWW",
+    "W       W      W   A   WWWWWWWWWWW",
+    "W       W      W  AAA  WWWWWWWWWWW",
+    "W  A    W   A  W   A   WWWWWWWWWWW",
+    "W       W              WWWWWWWWWWW",
+    "W     A W              WWWWWWWWWWW",
+    "W       W   A  W       WWWWWWWWWWW",
+    "W      A       W       WWWWWWWWWWW",
+    "W     AAA      W       WWWWWWWWWQW",
+    "W      AW      W       WWWWWWWWWWW",
+    "W       W      W       WWWWWWWWWWW",
+    "WWWWW  WWW  WWWWWWWWW  WWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "stats": {
+    "apples": 15,
+    "components": 7,
+    "structural_virtue_cost": 0.4667,
+    "arena_walls": 34,
+    "patches": [
+     {
+      "center": [
+       8,
+       6
+      ],
+      "radius": 1,
+      "size": 5
+     },
+     {
+      "center": [
+       2,
+       18
+      ],
+      "radius": 1,
+      "size": 5
+     },
+     {
+      "center": [
+       5,
+       5
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       3,
+       2
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       6,
+       11
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       3,
+       11
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       0,
+       20
+      ],
+      "radius": 0,
+      "size": 1
+     }
+    ],
+    "apples_indifferent": 2.5177083333333337,
+    "apples_virtuous": 1.5708333333333333,
+    "empirical_virtue_cost": 0.37608605709557313,
+    "cost_se": 0.011805007054612104
+   },
+   "band": "high"
+  },
+  {
+   "name": "heldout_structure_04_divided",
+   "split": "heldout_structure",
+   "family": "divided",
+   "seed": 2004,
+   "ascii_present": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W          AW          WWWWWWWWWWW",
+    "W           WA         WWWWWWWWWWW",
+    "W        A  W     A    WWWWWWWWWWW",
+    "W  A    AAA      AAA   WWWWWWWWWWW",
+    "W AAA  AAAAA      A    WWWWWWWWWWW",
+    "WAAAAA  AAA W          WWWWWWWWWWW",
+    "W AAA    A  W   A      WWWWWWWWWWW",
+    "W  A   A    W          WWWWWWWWWWW",
+    "W           W          WWWWWWWWW W",
+    "W          AW          WWWWWWWWWWW",
+    "W           W          WWWWWWWWWWW",
+    "WWWWWWWWWWWWWW  WWWW  WWWWWWWWWWWW",
+    "W           Q          WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "ascii_absent": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W          AW          WWWWWWWWWWW",
+    "W           WA         WWWWWWWWWWW",
+    "W        A  W     A    WWWWWWWWWWW",
+    "W  A    AAA      AAA   WWWWWWWWWWW",
+    "W AAA  AAAAA      A    WWWWWWWWWWW",
+    "WAAAAA  AAA W          WWWWWWWWWWW",
+    "W AAA    A  W   A      WWWWWWWWWWW",
+    "W  A   A    W          WWWWWWWWWWW",
+    "W           W          WWWWWWWWWQW",
+    "W          AW          WWWWWWWWWWW",
+    "W           W          WWWWWWWWWWW",
+    "WWWWWWWWWWWWWW  WWWW  WWWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "stats": {
+    "apples": 36,
+    "components": 8,
+    "structural_virtue_cost": 0.2222,
+    "arena_walls": 27,
+    "patches": [
+     {
+      "center": [
+       5,
+       2
+      ],
+      "radius": 2,
+      "size": 13
+     },
+     {
+      "center": [
+       1,
+       12
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       0,
+       10
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       6,
+       15
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       4,
+       8
+      ],
+      "radius": 2,
+      "size": 13
+     },
+     {
+      "center": [
+       3,
+       17
+      ],
+      "radius": 1,
+      "size": 5
+     },
+     {
+      "center": [
+       9,
+       10
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       7,
+       6
+      ],
+      "radius": 0,
+      "size": 1
+     }
+    ],
+    "apples_indifferent": 6.265625,
+    "apples_virtuous": 8.033333333333333,
+    "empirical_virtue_cost": -0.2821280133000831,
+    "cost_se": 0.023455040247891096
+   },
+   "band": "low"
+  },
+  {
+   "name": "heldout_structure_05_rooms",
+   "split": "heldout_structure",
+   "family": "rooms",
+   "seed": 2005,
+   "ascii_present": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W       W  A  AW       WWWWWWWWWWW",
+    "W  A    W AAA  W       WWWWWWWWWWW",
+    "W AAA   WAAAAA W  A    WWWWWWWWWWW",
+    "WAAAAA  W AAA  W AAA   WWWWWWWWWWW",
+    "W AAA      A   WAAAAA  WWWWWWWWWWW",
+    "W  A  A      A W AAA   WWWWWWWWWWW",
+    "W       W      W  A    WWWWWWWWWWW",
+    "W       W            A WWWWWWWWWWW",
+    "W       WA             WWWWWWWWW W",
+    "W       W      W       WWWWWWWWWWW",
+    "W       W      W       WWWWWWWWWWW",
+    "WW  WWWWWWWW  WWWWW  WWWWWWWWWWWWW",
+    "W           Q          WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "ascii_absent": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W       W  A  AW       WWWWWWWWWWW",
+    "W  A    W AAA  W       WWWWWWWWWWW",
+    "W AAA   WAAAAA W  A    WWWWWWWWWWW",
+    "WAAAAA  W AAA  W AAA   WWWWWWWWWWW",
+    "W AAA      A   WAAAAA  WWWWWWWWWWW",
+    "W  A  A      A W AAA   WWWWWWWWWWW",
+    "W       W      W  A    WWWWWWWWWWW",
+    "W       W            A WWWWWWWWWWW",
+    "W       WA             WWWWWWWWWQW",
+    "W       W      W       WWWWWWWWWWW",
+    "W       W      W       WWWWWWWWWWW",
+    "WW  WWWWWWWW  WWWWW  WWWWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "stats": {
+    "apples": 44,
+    "components": 8,
+    "structural_virtue_cost": 0.1818,
+    "arena_walls": 34,
+    "patches": [
+     {
+      "center": [
+       0,
+       13
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       5,
+       5
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       3,
+       2
+      ],
+      "radius": 2,
+      "size": 13
+     },
+     {
+      "center": [
+       4,
+       17
+      ],
+      "radius": 2,
+      "size": 13
+     },
+     {
+      "center": [
+       2,
+       10
+      ],
+      "radius": 2,
+      "size": 13
+     },
+     {
+      "center": [
+       7,
+       20
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       8,
+       8
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       5,
+       12
+      ],
+      "radius": 0,
+      "size": 1
+     }
+    ],
+    "apples_indifferent": 7.54375,
+    "apples_virtuous": 6.9520833333333325,
+    "empirical_virtue_cost": 0.07843137254901975,
+    "cost_se": 0.010190529957767026
+   },
+   "band": "low"
+  },
+  {
+   "name": "heldout_structure_06_divided",
+   "split": "heldout_structure",
+   "family": "divided",
+   "seed": 2006,
+   "ascii_present": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W   A       W          WWWWWWWWWWW",
+    "W  AAA      W  A       WWWWWWWWWWW",
+    "W AAAAA     W AAA      WWWWWWWWWWW",
+    "W  AAA  A   WAAAAA     WWWWWWWWWWW",
+    "W   A       W AAA      WWWWWWWWWWW",
+    "W              A       WWWWWWWWWWW",
+    "WA                     WWWWWWWWWWW",
+    "W           W          WWWWWWWWWWW",
+    "W           W          WWWWWWWWW W",
+    "W      A    W          WWWWWWWWWWW",
+    "W           W          WWWWWWWWWWW",
+    "WWWW  WWWWWWWWWWWW  WWWWWWWWWWWWWW",
+    "W           Q          WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "ascii_absent": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W   A       W          WWWWWWWWWWW",
+    "W  AAA      W  A       WWWWWWWWWWW",
+    "W AAAAA     W AAA      WWWWWWWWWWW",
+    "W  AAA  A   WAAAAA     WWWWWWWWWWW",
+    "W   A       W AAA      WWWWWWWWWWW",
+    "W              A       WWWWWWWWWWW",
+    "WA                     WWWWWWWWWWW",
+    "W           W          WWWWWWWWWWW",
+    "W           W          WWWWWWWWWQW",
+    "W      A    W          WWWWWWWWWWW",
+    "W           W          WWWWWWWWWWW",
+    "WWWW  WWWWWWWWWWWW  WWWWWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "stats": {
+    "apples": 29,
+    "components": 5,
+    "structural_virtue_cost": 0.1724,
+    "arena_walls": 27,
+    "patches": [
+     {
+      "center": [
+       3,
+       7
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       3,
+       14
+      ],
+      "radius": 2,
+      "size": 13
+     },
+     {
+      "center": [
+       2,
+       3
+      ],
+      "radius": 2,
+      "size": 13
+     },
+     {
+      "center": [
+       9,
+       6
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       6,
+       0
+      ],
+      "radius": 0,
+      "size": 1
+     }
+    ],
+    "apples_indifferent": 5.091666666666667,
+    "apples_virtuous": 5.209375,
+    "empirical_virtue_cost": -0.023117839607201214,
+    "cost_se": 0.011766172452250938
+   },
+   "band": "low"
+  },
+  {
+   "name": "heldout_structure_07_rooms",
+   "split": "heldout_structure",
+   "family": "rooms",
+   "seed": 2009,
+   "ascii_present": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W       W      W       WWWWWWWWWWW",
+    "W    A  W      W       WWWWWWWWWWW",
+    "W   AAA W      WA      WWWWWWWWWWW",
+    "W    A  W      W  A    WWWWWWWWWWW",
+    "WA      W   A  W AAA   WWWWWWWWWWW",
+    "W  A       AAA WAAAAA  WWWWWWWWWWW",
+    "W         AAAAA  AAA   WWWWWWWWWWW",
+    "W       W  AAA    A  A WWWWWWWWWWW",
+    "W       W   A  W       WWWWWWWWW W",
+    "W     A W      W       WWWWWWWWWWW",
+    "W       W      W       WWWWWWWWWWW",
+    "WWWWWW  WW  WWWWWW  WWWWWWWWWWWWWW",
+    "W           Q          WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "ascii_absent": [
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    "W       W      W       WWWWWWWWWWW",
+    "W    A  W      W       WWWWWWWWWWW",
+    "W   AAA W      WA      WWWWWWWWWWW",
+    "W    A  W      W  A    WWWWWWWWWWW",
+    "WA      W   A  W AAA   WWWWWWWWWWW",
+    "W  A       AAA WAAAAA  WWWWWWWWWWW",
+    "W         AAAAA  AAA   WWWWWWWWWWW",
+    "W       W  AAA    A  A WWWWWWWWWWW",
+    "W       W   A  W       WWWWWWWWWQW",
+    "W     A W      W       WWWWWWWWWWW",
+    "W       W      W       WWWWWWWWWWW",
+    "WWWWWW  WW  WWWWWW  WWWWWWWWWWWWWW",
+    "W                      WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "W P P P P P P P P P P  WWWWWWWWWWW",
+    "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+   ],
+   "stats": {
+    "apples": 36,
+    "components": 8,
+    "structural_virtue_cost": 0.2222,
+    "arena_walls": 34,
+    "patches": [
+     {
+      "center": [
+       4,
+       0
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       2,
+       4
+      ],
+      "radius": 1,
+      "size": 5
+     },
+     {
+      "center": [
+       6,
+       11
+      ],
+      "radius": 2,
+      "size": 13
+     },
+     {
+      "center": [
+       2,
+       15
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       5,
+       17
+      ],
+      "radius": 2,
+      "size": 13
+     },
+     {
+      "center": [
+       7,
+       20
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       9,
+       5
+      ],
+      "radius": 0,
+      "size": 1
+     },
+     {
+      "center": [
+       5,
+       2
+      ],
+      "radius": 0,
+      "size": 1
+     }
+    ],
+    "apples_indifferent": 6.030208333333334,
+    "apples_virtuous": 5.021875,
+    "empirical_virtue_cost": 0.1672136811193645,
+    "cost_se": 0.005963921508757997
+   },
+   "band": "high"
+  }
+ ]
+}

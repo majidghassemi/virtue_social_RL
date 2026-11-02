@@ -125,6 +125,21 @@ def main() -> None:
                      for m in [tg_cfg["metric"]] + have], ignore_index=True)
     summary["post_hoc_adjusted_teacher_gap"] = adj.to_dict("records")
 
+    # 8. Post-hoc: equivalence view of the raw teacher gap. A gap counts as
+    # practically null when its whole 95% CI lies inside +-margin. The margin
+    # is chosen after the full run, as a candidate rule for Phase 4.
+    margin = 0.05
+    eq = []
+    for m in [tg_cfg["metric"]] + have:
+        t = tg if m == tg_cfg["metric"] else pd.DataFrame(
+            [r for r in summary["exploratory"]["teacher_gap"] if r["metric"] == m])
+        for r in t.to_dict("records"):
+            eq.append({"metric": m, "disposition": r["disposition"], "w": r["w"],
+                       "gap": r["gap"], "ci_low": r["ci_low"], "ci_high": r["ci_high"],
+                       "inside_margin": bool(-margin <= r["ci_low"] and r["ci_high"] <= margin),
+                       "beyond_margin": bool(r["ci_low"] > margin or r["ci_high"] < -margin)})
+    summary["post_hoc_equivalence"] = {"margin": margin, "rows": eq}
+
     summary["checks"] = checks
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(summary, indent=1, default=float) + "\n")
@@ -190,6 +205,17 @@ def main() -> None:
                   f"{fmt(r['control_gap'])} | {fmt(r['adjusted_gap'])} | "
                   f"[{fmt(r['ci_low'])}, {fmt(r['ci_high'])}] | {r['excludes_zero']} |"
                   for r in summary["post_hoc_adjusted_teacher_gap"]]
+        lines += ["", "The virtuous rung (w = 1) never harms, so its gap is exactly 0 and the "
+                      "adjustment only shifts it by the control gap. The additive adjustment "
+                      "assumes the ecological effect is the same for every rung."]
+    eqs = summary["post_hoc_equivalence"]
+    lines += ["", f"## Post hoc: equivalence view of the teacher gap (margin +-{eqs['margin']}, "
+                  "not pre-registered)", "",
+              "| Metric | Disposition | w | Gap | 95% CI | CI inside margin | CI beyond margin |",
+              "|---|---|---|---|---|---|---|"]
+    lines += [f"| {r['metric']} | {r['disposition']} | {r['w']:g} | {fmt(r['gap'])} | "
+              f"[{fmt(r['ci_low'])}, {fmt(r['ci_high'])}] | {r['inside_margin']} | {r['beyond_margin']} |"
+              for r in eqs["rows"]]
     if "virtue_cost_spearman" in summary:
         lines += ["", f"Empirical vs structural cost of virtue, Spearman rho: "
                       f"{fmt(summary['virtue_cost_spearman'], 2)}"]

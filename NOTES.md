@@ -150,3 +150,35 @@ New wrapper field: `seen_by_teacher`, the agent inside the teacher's own view wi
 Observed while building: the maps empty early in each episode because the indifferent bystanders take last apples, so commons opportunities are rare (about 1.5 per agent-episode). The reliability analysis quantifies how many agent-episodes this requires.
 
 Pilot (4 seed units x 8 episodes, all 24 maps, `results/protocol_v1_pilot_summary.md`): rank validity passed for all three metrics (tau-b 1.0 everywhere), competence independence passed only for harm per apple, the teacher gap detected performative agents and stayed null for the virtuous and indifferent rungs, and zap metrics separated aggressive agents perfectly. Two problems surfaced: per-step opportunity counting lets one idle episode next to a last apple contribute up to about 1,000 opportunities (heavy tails, a point estimate outside its percentile bootstrap interval), and the structural cost of virtue correlates only weakly with the empirical cost (Spearman 0.25). An exploratory onset metric (`commons_harm_per_onset`, each temptation counted once) was added after the pilot and before the full run. It is reported separately from the pre-registered checks.
+
+## Completing Phase 3 (after the full run)
+
+Full run, all 24 maps (`results/protocol_v1_summary.md`): the two maps cut off by the job time limit were run separately with `run_protocol.py --maps ...` (it skips finished maps). The pre-registered verdicts did not change from the 22-map preliminary analysis.
+
+Three additions, each labelled with when it was decided:
+
+| Addition | Status | Why |
+|---|---|---|
+| Crossed virtue x competence ladder (`configs/protocol_crossed_v1.yaml`, `scripts/analyze_crossed.py`) | Criteria and predictions committed before the run (commit `636a29c`) | Every metric had tau-b = 1 on the plain ladder, so rank validity could not fail. Crossing w with large eps (up to 0.5) creates pairs such as a clumsy indifferent agent against a skilled, more virtuous one, which a competence-confounded metric misorders |
+| Teacher gap minus the indifferent rung's gap (`validity.adjusted_teacher_gap`) | Post hoc | Tests whether a difference in differences removes the ecological effect of the teacher's presence |
+| Equivalence view of the teacher gap (CI inside +-0.05) | Post hoc, candidate rule for the Phase 4 pre-registration | A CI that excludes zero is too strict a null once samples are large, since the teacher changes the environment slightly for everyone |
+
+Crossed-ladder statistic: Goodman-Kruskal gamma between the metric and -w over every pair of (w, eps) cells with different w. Pairs with equal w are excluded by design, so gamma can reach 1 (tau-b cannot, because w has ties). Combines eps 0, 0.1, 0.2 from `runs/protocol_v1` with eps 0.35 and 0.5 from `runs/crossed_v1`, seen maps, teacher absent.
+
+Map suite v2 (`configs/maps_v2.yaml`, `scripts/make_suite_v2.py`, `maps/suite_v2.json`): v2 keeps the 12 seen maps unchanged, measures every map's cost with the scripted learners (w = 0 against w = 1, eps 0, teacher absent, 10 units x 32 episodes, common random numbers), splits at the median of the seen maps into two bands, and selects held-out maps in seed order until each (family, band) quota is filled. Held-out position: 8 maps (4 per band). Held-out structure: 8 maps (2 per family and band). Measurements are cached in `results/map_cost_cache_v2.json`. Phase 4 uses suite v2. Phase 3 results stay on suite v1.
+
+Suite v2 results (from `maps/suite_v2.json` and `results/map_cost_cache_v2.json`):
+
+| Item | Value |
+|---|---|
+| Band cut (median of seen maps) | 0.139 |
+| Maps per band | seen 6 + 6, held-out position 4 + 4, held-out structure 4 + 4 (2 per family and band) |
+| Candidates measured | held-out position 10 (6 more rejected for apple overlap before measuring), held-out structure 9 |
+| Cost SE per map | median 0.009, max 0.023 (unit bootstrap, common random numbers) |
+| Agreement with the protocol_v1 measurement on the 12 seen maps | Pearson r 0.94 |
+| Structural vs empirical cost, Spearman over 28 maps | 0.59 (0.30 in protocol_v1, which had noisier, independent sampling) |
+| Map invariants (`scripts/check_maps.py --suite maps/suite_v2.json`) | 56 of 56 pass (`results/map_check_v2.json`) |
+
+Why two bands: a split of 8 maps balances evenly into two bands, not three. The first estimate of the cost SE (0.023, from independent sampling in protocol_v1) suggested three bands could not be told apart. With common random numbers the SE is about 0.009, so precision is no longer the reason.
+
+Band counts match, distributions do not fully: held-out structure has a much wider spread of costs (SD 0.19 against 0.07 for seen) and includes a map where virtue pays (heldout_structure_04_divided, cost -0.28, mechanism not yet checked). Phase 4 analyses should therefore use each map's measured cost as a covariate, not only its band.

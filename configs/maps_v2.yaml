@@ -1,0 +1,40 @@
+# Map suite v2: held-out splits balanced on the EMPIRICAL cost of virtue.
+#
+# Why v2: protocol_v1 measured the cost of virtue with scripted agents and
+# found (1) structural cost is a poor proxy (Spearman 0.30 over 24 maps) and (2) the
+# v1 held-out maps are mostly low cost under the empirical measure. v2 uses
+# two bands (below or above the median of the seen maps) so that 8 held-out
+# maps per split balance evenly (4 + 4, or 2 per family and band).
+# Precision: without common random numbers the cost SE was about 0.02 at 320
+# episodes (v1), close to the width of a middle tertile band. With common
+# random numbers it is about 0.009 (median over maps), so precision alone
+# would not force two bands.
+#
+# The 12 seen maps are the v1 seen maps, unchanged. Phase 4 trains on them.
+num_agents: 7
+patch:
+  num_patches: [5, 8]
+  radii: [0, 1, 2]
+cost_measurement:
+  # Learners w = 0 against w = 1, eps 0, teacher absent, same settings as
+  # protocol_v1. Both rungs use the same random key (common random numbers).
+  units: 10
+  envs_per_unit: 32
+  num_steps: 1000
+  seed: 20261101
+bands: [low, high]               # split at the median cost of the seen maps
+splits:
+  seen:
+    from_suite: maps/suite_v1.json
+  heldout_position:
+    families: [open]
+    count: 8                     # 4 per band
+    first_seed: 1000
+    max_apple_overlap: 0.5
+  heldout_structure:
+    families: [divided, rooms]
+    count: 8                     # 2 per family and band
+    first_seed: 2000
+max_candidates_per_split: 80
+cache: results/map_cost_cache_v2.json
+out: maps/suite_v2.json
