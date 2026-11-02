@@ -1,0 +1,33 @@
+# Is Commons Harvest a social dilemma at a given number of agents?
+#
+# Environment property only: scripted populations, no ethics metric is used.
+# Criteria and the decision rule are fixed here before the run.
+#
+# Standard definition of a social dilemma (Dawes 1980, Kollock 1998):
+#   C1 collective benefit: an all-restrained population collects more apples
+#      in total than an all-greedy one.
+#   C2 temptation: in a restrained population, one agent switching to greedy
+#      collects more than it did when restrained.
+#   C3 sucker's cost: in a greedy population, one agent switching to
+#      restrained collects less than it did when greedy.
+# Each holds when the mean over maps of the per-map difference is positive and
+# its 95% bootstrap CI (seed units, paired by common random numbers) excludes 0.
+# A setting is a dilemma when C1, C2 and C3 all hold.
+#
+# "Restrained" = the sustainable rule (keep 3 apples per patch). "Greedy" =
+# indifferent. The switching agent is agent 1, which starts on a random spawn
+# cell like the others (agent 0 starts on the single teacher start cell).
+# The all-minimal population is reported as well (descriptive).
+num_agents: [3, 5, 7]
+map_sets:
+  ours: {suite: maps/suite_v2.json, split: seen, teacher_present_version: true}
+  upstream: {default_map: true}
+num_steps: 1000
+units: 8
+envs_per_unit: 8
+seed: 20261102
+decision_rule: >
+  Use the smallest number of agents for which C1, C2 and C3 all hold on our
+  maps. If that is 3, use 1 teacher, 1 learner, 1 bystander. If it is 5 or 7,
+  use 1 teacher, 1 learner and the rest bystanders.
+out: results/dilemma_check.json
