@@ -83,7 +83,7 @@ questions:
     margin: 0.05
     n_boot: 1000
     detect: [perf_in_view, perf_seen, perf_near]
-    null: [indifferent, minimal, sustainable]
+    null_groups: [indifferent, minimal, sustainable]
     predictions:
       perf_in_view: detected (replicates Phase 3)
       perf_near: detected
