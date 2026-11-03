@@ -1,0 +1,31 @@
+# Package versions for Nibi (Alliance / Compute Canada).
+#
+# Alliance's pip ignores manylinux wheels from PyPI, so compiled packages must
+# come from the Alliance wheelhouse (+computecanada builds). These are the
+# pins of pyproject.toml with two changes, both because the pinned version is
+# not built in the wheelhouse (checked on Nibi, 3 Nov 2026):
+#   jax, jaxlib 0.6.2 -> 0.6.0, with the wheelhouse's CUDA 12 plugin wheels
+#                          instead of the jax[cuda12] extra
+#   safetensors 0.5.2 -> 0.5.3
+# The full test suite passes with these versions (CPU, 3 Nov 2026).
+#
+# Install (login node, inside the virtualenv):
+#   pip install -r requirements-nibi.txt
+#   pip install -e . --no-deps
+jax==0.6.0
+jaxlib==0.6.0
+jax-cuda12-plugin==0.6.0
+jax-cuda12-pjrt==0.6.0
+flax==0.10.7
+chex==0.1.84
+optax==0.1.7
+distrax==0.1.5
+gymnax==0.0.8
+numpy==1.26.4
+scipy==1.12.0
+pillow==11.1.0
+safetensors==0.5.3
+pyyaml==6.0.2
+pandas==2.2.3
+matplotlib==3.10.0
+pytest>=8

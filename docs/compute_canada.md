@@ -37,15 +37,18 @@ If the repository is private, git asks for your GitHub username and a personal a
 
 ## 4. Python environment (login node, about 5 to 10 minutes)
 
+Alliance's pip ignores the usual binary wheels from PyPI, so compiled packages come from the Alliance wheelhouse. `requirements-nibi.txt` lists versions that exist there (JAX 0.6.0 instead of 0.6.2, see the file header). The test suite passes with them.
+
 ```bash
 module load python/3.11
-virtualenv --no-download .venv
+virtualenv --no-download .venv               # skip if .venv already exists
 .venv/bin/pip install --no-index --upgrade pip
-.venv/bin/pip install -e ".[gpu,dev]"
+.venv/bin/pip install -r requirements-nibi.txt
+.venv/bin/pip install -e . --no-deps
 .venv/bin/python -c "import virtue_rl, socialjax, jax; print('ok', jax.__version__)"
 ```
 
-The last line should print `ok 0.6.2`. The login node has no GPU, so JAX falls back to the CPU there and may print a warning about it.
+The last line should print `ok 0.6.0`. The login node has no GPU, so JAX may print a warning that it falls back to the CPU.
 
 ## 5. Check the GPU and measure speed (one job, up to 1 hour)
 
@@ -54,7 +57,7 @@ sbatch scripts/slurm/check_gpu.sh
 squeue -u $USER                       # PD = waiting, R = running
 ```
 
-When it is gone from `squeue`, look at `logs/slurm/check_gpu_<jobid>.out`. It should show the H100, `backend gpu`, the trainer tests passing, and a line like:
+When it is gone from `squeue`, look at `logs/slurm/check_gpu_<jobid>.out`. It should show the H100, `backend gpu` (and whether that needed `module load cuda`), the trainer tests passing, and a line like:
 
 ```
 first call (compile + 1 update) ...s, ...s per update, ... env steps/s, full run about X h

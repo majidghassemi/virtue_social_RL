@@ -26,7 +26,9 @@ cd "${SLURM_SUBMIT_DIR:-.}"
 mkdir -p logs/slurm
 export XLA_PYTHON_CLIENT_PREALLOCATE=false
 # Alliance clusters: the venv was built with this Python module, load it again.
+set +u   # Lmod's module function can trip over set -u
 if command -v module >/dev/null 2>&1; then module load python/3.11; fi
+set -u
 nvidia-smi --query-gpu=name,memory.total --format=csv || true
 .venv/bin/python scripts/train.py --config configs/train_prosocial_v1.yaml \
     --array-index "${SLURM_ARRAY_TASK_ID:-0}"
