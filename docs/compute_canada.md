@@ -65,7 +65,23 @@ first call (compile + 1 update) ...s, ...s per update, ... env steps/s, full run
 
 Send that file back before going on. The benchmark sets the time limits for steps 6 and 7.
 
-## 6. Train the 9 teachers
+## 6. Pilot: the first 20% of two teacher runs
+
+Before spending the allocation on all 9 runs, run the first 70 of 347 updates of two of them (lam 0 seed 0, lam 1 seed 0). What the pilot checks, and what may change if it fails, is fixed in `docs/pilot.md`.
+
+```bash
+sbatch scripts/slurm/pilot_prosocial.sh
+```
+
+When both have finished (`stopped at update 70` at the end of their logs):
+
+```bash
+.venv/bin/python scripts/plot_training.py runs/train/prosocial_v1
+```
+
+Send the printed checks and `runs/train/prosocial_v1/curves.png`. The two runs keep their checkpoints, so step 7 continues them instead of starting again.
+
+## 7. Train the 9 teachers
 
 After the time limit in `scripts/slurm/train_prosocial.sh` is set:
 
@@ -77,7 +93,7 @@ tail -f logs/slurm/prosocial_v1_*_0.out       # progress of the first run (Ctrl-
 
 Each run writes to `runs/train/prosocial_v1/<condition>_seed<seed>/` and is finished when `params_final.msgpack` exists. A run that hits the time limit resumes from its checkpoint when you resubmit its index, for example `sbatch --array=4 scripts/slurm/train_prosocial.sh`.
 
-## 7. Train the 12 learners (after all 9 teachers have finished)
+## 8. Train the 12 learners (after all 9 teachers have finished)
 
 ```bash
 salloc --gpus-per-node=h100:1 --cpus-per-task=4 --mem=32G --time=0:30:00
@@ -91,7 +107,7 @@ Send the benchmark line, set the time in `scripts/slurm/train_social.sh`, then:
 sbatch scripts/slurm/train_social.sh          # array 0-11, order in the script header
 ```
 
-## 8. Bring results back
+## 9. Bring results back
 
 ```bash
 tar czf prosocial_v1.tgz runs/train/prosocial_v1/*/{config.json,metrics.jsonl,params_final.msgpack,params_final.json}

@@ -6,6 +6,8 @@ Usage:
         # index = i_condition * n_seeds + i_seed, conditions in config order
     python scripts/train.py --config configs/train_prosocial_v1.yaml --bench 3
         # compiles, times 3 updates of the first condition, saves nothing
+    python scripts/train.py --config configs/train_prosocial_v1.yaml --array-index 0 --stop-after 70
+        # pilot: stops cleanly at update 70, the same command without --stop-after continues
 
 A config has shared settings and a list of named `conditions`, each of which
 overrides some of them (for example `lam`, `teacher_present`, `social: {aux_coef}`,
@@ -116,6 +118,8 @@ def main() -> None:
     p.add_argument("--seed", type=int)
     p.add_argument("--array-index", type=int)
     p.add_argument("--bench", type=int, default=0, help="time this many updates and exit")
+    p.add_argument("--stop-after", type=int, default=None,
+                   help="stop cleanly at this update (a pilot). Rerun without it to continue the same run")
     args = p.parse_args()
     cfg = yaml.safe_load(args.config.read_text())
     cond, seed, run = resolve(cfg, args)
@@ -161,9 +165,10 @@ def main() -> None:
 
     chunk, snap = int(run["chunk_updates"]), int(run["snapshot_every"])
     t_start = time.perf_counter()
-    while int(runner.update) < trainer.num_updates:
+    target = trainer.num_updates if args.stop_after is None else min(args.stop_after, trainer.num_updates)
+    while int(runner.update) < target:
         start = int(runner.update)
-        n = min(chunk, trainer.num_updates - start)
+        n = min(chunk, target - start)
         runner, m = trainer.run(runner, n)
         rows = metrics_to_rows(m, start, steps_per_update)
         ckpt.save_runner(runner_path, runner)          # state first, then metrics (see resume)
@@ -178,6 +183,12 @@ def main() -> None:
               f"harm_commons {sum(last['harm_commons']):.2f} regrown {last['regrown']:.2f} "
               f"entropy {last['entropy']:.3f} ({time.perf_counter() - t_start:.0f}s)", flush=True)
 
+    if int(runner.update) < trainer.num_updates:
+        ckpt.save_params(out / f"params_u{int(runner.update)}.msgpack", runner.train_state.params,
+                         {**meta, "update": int(runner.update)})
+        print(f"stopped at update {int(runner.update)} of {trainer.num_updates} (--stop-after). "
+              f"Run again without --stop-after to continue.", flush=True)
+        return
     ckpt.save_params(out / "params_final.msgpack", runner.train_state.params,
                      {**meta, "update": int(runner.update)})
     print(f"done, {out}", flush=True)
