@@ -41,6 +41,7 @@ virtue_rl = "src/virtue_rl"
 "virtue_rl.envs" = "src/virtue_rl/envs"
 "virtue_rl.agents" = "src/virtue_rl/agents"
 "virtue_rl.metrics" = "src/virtue_rl/metrics"
+"virtue_rl.train" = "src/virtue_rl/train"
 socialjax = "third_party/SocialJax/socialjax"
 
 [tool.setuptools]
@@ -49,6 +50,7 @@ packages = [
     "virtue_rl.envs",
     "virtue_rl.agents",
     "virtue_rl.metrics",
+    "virtue_rl.train",
     "socialjax",
     "socialjax.environments",
     "socialjax.environments.cleanup",
