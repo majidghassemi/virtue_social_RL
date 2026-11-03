@@ -15,12 +15,13 @@
 # runs/train/social_v1/<condition>_seed<seed>/runner.msgpack.
 #SBATCH --job-name=social_v1
 #SBATCH --array=0-11
-#SBATCH --gpus-per-node=1
+# Nibi: H100 80 GB. A plain "1" could land on an AMD MI300A node.
+#SBATCH --gpus-per-node=h100:1
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=32G
 #SBATCH --time=12:00:00
 #SBATCH --output=logs/slurm/%x_%A_%a.out
-##SBATCH --account=def-YOURPI      # Alliance clusters need an account
+# Account: set once with  export SBATCH_ACCOUNT=def-YOURPI  (see docs/compute_canada.md)
 
 set -euo pipefail
 cd "${SLURM_SUBMIT_DIR:-.}"

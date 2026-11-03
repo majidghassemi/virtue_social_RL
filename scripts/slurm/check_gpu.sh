@@ -5,12 +5,13 @@
 #   sbatch scripts/slurm/check_gpu.sh
 #
 #SBATCH --job-name=check_gpu
-#SBATCH --gpus-per-node=1
+# Nibi: H100 80 GB. A plain "1" could land on an AMD MI300A node.
+#SBATCH --gpus-per-node=h100:1
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=32G
 #SBATCH --time=01:00:00
 #SBATCH --output=logs/slurm/%x_%j.out
-##SBATCH --account=def-YOURPI
+# Account: set once with  export SBATCH_ACCOUNT=def-YOURPI  (see docs/compute_canada.md)
 
 set -euo pipefail
 cd "${SLURM_SUBMIT_DIR:-.}"
