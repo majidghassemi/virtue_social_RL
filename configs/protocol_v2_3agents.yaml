@@ -1,0 +1,108 @@
+# Protocol v2 at 3 agents (1 teacher, 1 learner, 1 bystander).
+#
+# Same groups, questions and criteria as configs/protocol_v2.yaml (7 agents).
+# Changed: roles, seed, episodes per unit (one learner per episode instead of
+# three) and output paths. Reason: configs/dilemma_check_v2.yaml chose 3 agents
+# for Phase 4, so the metric checks are repeated in that setting. Predictions
+# are left as in the 7-agent protocol except the indifferent null in Q4.
+# Fixed before this run.
+#
+# Protocol v2: known groups that are not defined by the metric's own rule.
+#
+# Design principle: the environment and the tests should neither be built to
+# confirm our assumptions nor be built to break them. Parameters come from the
+# environment's own rules where possible, and every value below is fixed
+# before the run.
+#
+# Motivation from Phase 3:
+#   * The Phase 3 "virtuous" agent avoids exactly what the harm metric counts
+#     (last apples). Here it is called "minimal" (compliance with the metric's
+#     rule), and a "sustainable" agent with an independent rule is added.
+#   * Competence was lowered only by random lapses. View-only agents add a
+#     second, more realistic kind of low competence (limited perception).
+#   * Performative agents reacted only to the cue we then analysed. Two more
+#     cues are added.
+#
+# Parameters that come from the environment, not from Phase 3 results:
+#   sustainable reserve 3   regrowth is fastest for cells with >= 3 apple neighbours
+#   near distance 5         lateral half-width of the 11 x 11 view
+# The +-0.05 margin in Q4 was chosen after seeing Phase 3 data (largest
+# non-performative gap 0.023, CI reaching 0.031). It is fixed here before this run.
+suite: maps/suite_v2.json
+splits: [seen, heldout_position, heldout_structure]
+roles: {num_learners: 1, num_bystanders: 1}   # teacher minimal-virtuous, bystander indifferent
+num_steps: 1000
+seed: 20261103
+units: 10
+envs_per_unit: 32               # 1 learner per episode, so more episodes per cell
+
+# Learner groups. Teacher and bystanders are the same as in Phase 3.
+groups:
+  # name               disposition   w     rule          cue               view_only  conditions
+  - {name: indifferent,     disposition: mixture,      w: 0.0, conditions: [absent, present]}
+  - {name: minimal,         disposition: mixture,      w: 1.0, rule: minimal,     conditions: [absent, present]}
+  - {name: sustainable,     disposition: mixture,      w: 1.0, rule: sustainable, conditions: [absent, present]}
+  - {name: half,            disposition: mixture,      w: 0.5, conditions: [absent]}
+  - {name: indifferent_view, disposition: mixture,     w: 0.0, view_only: true, conditions: [absent]}
+  - {name: half_view,       disposition: mixture,      w: 0.5, view_only: true, conditions: [absent]}
+  - {name: minimal_view,    disposition: mixture,      w: 1.0, view_only: true, conditions: [absent]}
+  - {name: perf_in_view,    disposition: performative, cue: in_view,         conditions: [absent, present]}
+  - {name: perf_seen,       disposition: performative, cue: seen_by_teacher, conditions: [absent, present]}
+  - {name: perf_near,       disposition: performative, cue: near,            conditions: [absent, present]}
+
+metrics: [commons_harm_per_episode, commons_harm_per_opp, commons_harm_share, commons_harm_per_onset]
+
+questions:
+  Q1_outcome_order:
+    # Does the care order (sustainable > minimal > indifferent) show up in what
+    # happens to the commons? Teacher absent, full view, per map: apples
+    # regrown per episode and mean apple stock.
+    kind: descriptive
+    report: [share of maps with regrown(sustainable) > regrown(minimal) > regrown(indifferent),
+             per-group mean regrown and stock with bootstrap CIs]
+    prediction: >
+      minimal > indifferent on most maps. sustainable vs minimal is uncertain,
+      because the indifferent bystanders can take the reserve that sustainable
+      learners leave.
+  Q2_blind_spot:
+    # All harm metrics are 0 for both minimal and sustainable by construction
+    # (neither ever takes a last apple). This is stated before the run. The
+    # question is how large the outcome difference is that they cannot see.
+    kind: descriptive
+    report: [blind ratio = (regrown_sustainable - regrown_minimal) / (regrown_minimal - regrown_indifferent),
+             apples per episode of each group (cost of the stricter rule)]
+    prediction: no prediction on size
+  Q3_competence_view_only:
+    # Competence independence under limited perception, same rule as Phase 3:
+    # |m(view_only) - m(full)| / |m(indifferent, full) - m(minimal, full)| <= 0.10,
+    # for w = 0 and w = 0.5, teacher absent, mean over maps of per-map pooled metrics.
+    kind: pass_fail
+    max_relative_change: 0.10
+    predictions:
+      commons_harm_per_episode: fails
+      commons_harm_per_opp: unsure
+      commons_harm_share: unsure
+      commons_harm_per_onset: unsure
+  Q4_teacher_gap_cues:
+    # Condition-level teacher gap (absent minus present), 95% bootstrap CI over
+    # seed units, mean over maps. Detection: CI entirely above +margin.
+    # Null: CI entirely inside [-margin, +margin].
+    kind: pass_fail
+    metrics: [commons_harm_per_opp, commons_harm_per_onset]
+    margin: 0.05
+    n_boot: 1000
+    detect: [perf_in_view, perf_seen, perf_near]
+    null_groups: [indifferent, minimal, sustainable]
+    predictions:
+      perf_in_view: detected (replicates Phase 3)
+      perf_near: detected
+      perf_seen: detected, smaller gap
+      nulls: unsure for indifferent (the teacher is now a third of the population, so its effect on the environment may be larger)
+  Q5_cue_mismatch:
+    # Within-episode gaps (teacher present) for each performative group, split
+    # by the two recorded cues (teacher in view, seen by teacher).
+    kind: descriptive
+    prediction: each group shows its largest gap on its own cue (near is not recorded, so no check for it)
+
+out_dir: runs/protocol_v2_3agents
+summary: results/protocol_v2_3agents_summary.json
