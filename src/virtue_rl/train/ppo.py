@@ -56,6 +56,10 @@ class PPOConfig:
     max_grad_norm: float = 0.5
     anneal_lr: bool = True
     activation: str = "relu"
+    # Unroll the epoch and minibatch loops. None = unroll on CPU only: XLA:CPU
+    # runs convolution gradients inside a rolled loop about 40 times slower
+    # (measured here), while on GPU a rolled loop is fast and compiles quicker.
+    unroll_update: bool | None = None
 
 
 @dataclass(frozen=True)
@@ -117,6 +121,9 @@ class Trainer:
         self.obs_shape = tuple(obs.shape[1:])
         self.slots = np.asarray(self.train_slots)        # array index (a tuple would index axes)
         self.network = ActorCritic(envs[0].action_space().n, activation=cfg.activation)
+        unroll = cfg.unroll_update if cfg.unroll_update is not None else jax.default_backend() == "cpu"
+        self.unroll_mb = cfg.num_minibatches if unroll else 1
+        self.unroll_ep = cfg.update_epochs if unroll else 1
 
     # ------------------------------------------------------------ setup
     def _lr(self, count):
@@ -235,10 +242,11 @@ class Trainer:
                 (loss, aux), grads = jax.value_and_grad(self._loss, has_aux=True)(ts.params, b, g, tg)
                 return ts.apply_gradients(grads=grads), (loss, *aux)
 
-            ts, losses = jax.lax.scan(mb_step, ts, mbs)
+            ts, losses = jax.lax.scan(mb_step, ts, mbs, unroll=self.unroll_mb)
             return (ts, rng), losses
 
-        (ts, rng), losses = jax.lax.scan(epoch, (ts, rng), None, c.update_epochs)
+        (ts, rng), losses = jax.lax.scan(epoch, (ts, rng), None, c.update_epochs,
+                                          unroll=self.unroll_ep)
 
         # One rollout is one episode per environment, so sums over time are per episode.
         ep = lambda x: x.astype(jnp.float32).sum(0).mean(0)            # (T, B, N) -> (N,)
@@ -257,9 +265,27 @@ class Trainer:
         return RunnerState(ts, states, obs, rng, upd + 1), metrics
 
     @partial(jax.jit, static_argnums=(0, 2))
-    def run(self, runner: RunnerState, num_updates: int):
-        """Run `num_updates` PPO updates. Returns the new state and stacked metrics."""
+    def _run_scan(self, runner: RunnerState, num_updates: int):
         return jax.lax.scan(self._update, runner, None, num_updates)
+
+    @partial(jax.jit, static_argnums=(0,))
+    def _update_once(self, runner: RunnerState):
+        return self._update(runner, None)
+
+    def run(self, runner: RunnerState, num_updates: int):
+        """Run `num_updates` PPO updates. Returns the new state and stacked metrics.
+
+        On GPU the updates run inside one compiled scan. On CPU (see
+        `unroll_update`) they run as a Python loop over one compiled update,
+        because a scan around the update is slow there too.
+        """
+        if self.unroll_mb == 1:
+            return self._run_scan(runner, num_updates)
+        rows = []
+        for _ in range(num_updates):
+            runner, m = self._update_once(runner)
+            rows.append(m)
+        return runner, jax.tree.map(lambda *x: jnp.stack(x), *rows)
 
 
 def metrics_to_rows(metrics: dict, start_update: int, env_steps_per_update: int) -> list[dict]:

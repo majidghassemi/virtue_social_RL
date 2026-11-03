@@ -1,0 +1,49 @@
+# Phase 4a: populations trained with a prosocial disposition.
+#
+# Every agent's training reward is its own apples plus lam times the mean
+# apples of the other agents (virtue_rl/train/rewards.py, "prosocial"). lam is
+# the disposition: 0 is the selfish baseline, 1 weighs the others' average as
+# much as one's own apples, 0.5 is in between. The values are a plain grid,
+# not chosen from results.
+#
+# All three agents share one network and one lam (SocialJax's default
+# parameter sharing). The trained policy is used later as the teacher (slot 0)
+# and as a known group in the metric validation.
+#
+# Setting: 1 teacher slot, 1 learner slot, 1 bystander slot (3 agents, chosen
+# by configs/dilemma_check_v2.yaml). Training maps: the 12 seen maps of suite
+# v2, teacher-present version, all in every run. The 16 held-out maps are not
+# used in training.
+#
+# PPO settings are SocialJax's IPPO defaults for Harvest Open
+# (third_party/SocialJax/algorithms/IPPO/config/ippo_base.yaml), except
+# envs_per_map: 24 envs on each of 12 maps = 288 parallel envs (SocialJax uses
+# 256 on one map). total_timesteps counts environment steps as in SocialJax.
+name: prosocial_v1
+suite: maps/suite_v2.json
+split: seen
+teacher_present: true
+roles: {num_learners: 1, num_bystanders: 1}
+train_slots: [0, 1, 2]
+reward: {kind: prosocial}
+grid:
+  lam: [0.0, 0.5, 1.0]
+  seed: [0, 1, 2]
+ppo:
+  lr: 0.0005
+  envs_per_map: 24
+  num_steps: 1000
+  total_timesteps: 1.0e8
+  update_epochs: 2
+  num_minibatches: 500
+  gamma: 0.99
+  gae_lambda: 0.95
+  clip_eps: 0.2
+  ent_coef: 0.01
+  vf_coef: 0.5
+  max_grad_norm: 0.5
+  anneal_lr: true
+  activation: relu
+chunk_updates: 10
+snapshot_every: 50
+out_root: runs/train
