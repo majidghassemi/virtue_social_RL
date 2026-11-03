@@ -84,3 +84,21 @@ def test_aux_coef_controls_decoder_training(envs, frozen, aux, changes):
     moved = not np.allclose(p0["aux_fc"]["kernel"], p1["aux_fc"]["kernel"])
     assert moved == changes
     assert not np.allclose(p0["fc"]["kernel"], p1["fc"]["kernel"])        # the rest always trains
+
+
+def test_rolled_loops_match_unrolled(envs, frozen):
+    """The GPU code path (rolled loops, one scan over updates) gives the CPU path's result."""
+    import dataclasses
+    for make in (lambda c: Trainer(envs, c, RewardConfig("prosocial", (1.0,) * 3), train_slots=(0, 1, 2)),
+                 lambda c: SocialTrainer(envs, c, SocialConfig(seq_len=5), RewardConfig("prosocial", (0.0,) * 3),
+                                         train_slots=(1,), frozen={0: frozen, 2: frozen})):
+        outs = []
+        for unroll in (True, False):
+            tr = make(dataclasses.replace(cfg(), unroll_update=unroll))
+            assert (tr.unroll_mb == 1) == (not unroll)
+            r, m = tr.run(tr.init(jax.random.PRNGKey(5)), 2)
+            outs.append((jax.tree.leaves(r.train_state.params), m))
+        (pa, ma), (pb, mb) = outs
+        assert all(np.allclose(a, b, atol=1e-5) for a, b in zip(pa, pb))
+        for k in ma:
+            assert np.allclose(ma[k], mb[k], atol=1e-4), k

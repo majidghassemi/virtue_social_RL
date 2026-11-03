@@ -75,7 +75,7 @@ SocialJax is not packaged upstream, so `pyproject.toml` exposes its `socialjax` 
 | 4. Learned agents | In progress | Code done and tested on CPU: trainer for teachers with a prosocial disposition (4a) and the social learner of Ndousse et al. 2021 (4b). Training runs on GPU next. Later: PPO with harm penalty, behaviour cloning |
 | 5. Analysis | Planned | Figures and a script that regenerates every reported number from raw logs |
 
-Test status: 104 tests pass (`pytest -q`).
+Test status: 105 tests pass (`pytest -q`).
 
 ## Design decisions
 
@@ -263,7 +263,7 @@ Implementation (`src/virtue_rl/train/`):
 * `ppo.py`: independent PPO following SocialJax's IPPO baseline (same network, loss, GAE and learning-rate schedule, SocialJax's Harvest defaults). Adds several maps per run (one group of parallel envs per map), the ethics wrapper, disposition rewards, frozen slots, and chunked, resumable training.
 * `social.py`: recurrent PPO with the auxiliary predictive loss of Ndousse et al. 2021 (conv layers, 192-unit LSTM, decoder that predicts the next observation from the LSTM output and the action, mean absolute error, c_aux = 3). The choices the paper leaves open are listed in the module docstring.
 * `rewards.py`: the prosocial reward above and the SVO reward of McKee et al. 2020 (as an option, not used yet).
-* `scripts/train.py` runs one (condition, seed) or a Slurm array index. `scripts/slurm/train_prosocial.sh` and `train_social.sh` submit all runs.
+* `scripts/train.py` runs one (condition, seed) or a Slurm array index. `scripts/slurm/train_prosocial.sh` and `train_social.sh` submit all runs, `check_gpu.sh` checks a GPU node first. Steps for Alliance (Compute Canada) clusters: `docs/compute_canada.md`.
 
 Measured on this 2-core CPU: one update over the 12 training maps compiles in about 2 minutes and runs at about 460 environment steps per second, so a 1e8-step run needs a GPU. Run `scripts/train.py --bench 3` on a GPU node first to set the job time.
 
