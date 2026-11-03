@@ -248,3 +248,19 @@ Decision by the pre-registered rule: 3 agents is the smallest usable setting on 
 Values at 3 agents, our maps, discounted apples for the switching agent: all sustainable 9.0, greedy among sustainable 13.5, minimal among sustainable 10.6 (temptation). All greedy 8.7 against sustainable among greedy 8.1 (sucker's cost). Collective discounted totals: all sustainable 29.2, all greedy 28.2, all minimal 24.5. Undiscounted, all sustainable collects 152 apples against 34 for all greedy.
 
 Interpretation: the dilemma is intertemporal. The temptation exists because a learner with gamma 0.99 (effective horizon about 100 steps) discounts the regrowth that restraint buys later in the 1,000-step episode. Judged on undiscounted episode totals, restraint pays the individual too. Against a greedy defector the discounted collective benefit is small (about 4%), against a minimal defector it is about 19%. Consequences: the evaluation measures (apples per episode) are undiscounted while training is discounted, and a learner trained with gamma closer to 1 would face a weaker temptation. Both should be stated in the paper.
+
+## Protocol v2 at 3 agents (`configs/protocol_v2_3agents.yaml`, pre-registered in `8001726`)
+
+Same groups, questions, criteria and analysis script as protocol v2. Changes: 1 teacher, 1 learner, 1 bystander (chosen by dilemma check v2), seed 20261103, 32 episodes per seed unit (each 3-agent episode has one learner instead of three), and the Q4 prediction for the indifferent null set to "unsure". Run in three chunks (14, 7 and 7 maps, 110, 54 and 59 minutes). Full report: `results/protocol_v2_3agents_summary.md`, comparison table in the README.
+
+Predictions against outcomes:
+
+| Prediction | Outcome |
+|---|---|
+| Q1 minimal above indifferent on most maps, sustainable vs minimal uncertain | Minimal above indifferent and sustainable above minimal on all 28 maps |
+| Q3 harm per episode fails, others unsure | Harm per episode fails (0.52 and 0.32). The other three pass (0.074 at most) |
+| Q4 all three cues detected, perf_seen with a smaller gap | All detected. The perf_seen gap is not smaller (per opportunity 0.941 against 0.943 for perf_in_view and 0.946 for perf_near). The same sub-prediction also failed at 7 agents (0.846 against 0.836 and 0.841), which the earlier summary did not mention |
+| Q4 indifferent null unsure | +0.003 (CI 0.001 to 0.004), inside the margin. The sign is the opposite of the 7-agent run (-0.011). Both CIs exclude 0, so the teacher's presence changes indifferent learners' harm a little in both settings, in different directions. Mechanism not checked |
+| Q5 each group largest on its own cue | Holds. In-view agents 0.99 against 0.27, seen agents 0.99 against 0.27. Near agents 0.30 and 0.33 |
+
+Commons at 3 agents: mean stock 0.87 (indifferent learner), 0.99 (minimal) and 1.06 (sustainable), 0.9 to 2.9 apples regrown per episode, a little below the upstream default map with 7 agents (stock 1.06 to 1.18, 2.0 to 3.5 regrown). Learner apples per episode: 15.9, 15.5 and 13.4. The commons is healthier than at 7 agents but still mostly depleted, so the open decision on commons dynamics above still applies to Phase 4.

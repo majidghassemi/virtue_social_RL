@@ -71,7 +71,7 @@ SocialJax is not packaged upstream, so `pyproject.toml` exposes its `socialjax` 
 | 0. Setup | Done | Pinned SocialJax, installable package, smoke tests, CPU speed benchmark (about 20,900 env steps per second on 2 cores) |
 | 1. Ethics wrapper | Done | Per-agent ethics record on every step, teacher channel in observations, role configuration |
 | 2. Maps and splits | Done | Seeded map generator, 24-map suite in three splits, teacher-absent condition, provisional cost bands, per-map runner |
-| 3. Scripted ladder and metrics | Done | Scripted agents with known dispositions, behaviour and validity metrics, pre-registered protocol, full run on 24 maps, crossed virtue x competence ladder, map suite v2 balanced on the measured cost of virtue, protocol v2 with known groups not defined by the metric's rule |
+| 3. Scripted ladder and metrics | Done | Scripted agents with known dispositions, behaviour and validity metrics, pre-registered protocol, full run on 24 maps, crossed virtue x competence ladder, map suite v2 balanced on the measured cost of virtue, protocol v2 with known groups not defined by the metric's rule, social dilemma check (3 agents chosen), protocol v2 repeated at 3 agents |
 | 4. Learned agents | Planned | PPO, PPO with harm penalty, SVO, behaviour cloning, social learner (needs the GPU benchmark first) |
 | 5. Analysis | Planned | Figures and a script that regenerates every reported number from raw logs |
 
@@ -227,6 +227,25 @@ What this adds to Phase 3:
 * The condition-level teacher gap detects performative agents whatever cue they use. Within-episode splits only work when the analyst records the agent's own cue.
 
 Caveat on the environment: the commons is nearly empty for most of each episode in every group (mean stock about 0.5 to 0.6 apples, about 1 apple regrown per 1,000 steps). The same happens on the upstream default map (about 1.1 apples, 2 to 3.5 regrown per episode with the same agents), so it comes mainly from having 4 or more greedy agents out of 7, not only from our maps. Our maps also hold fewer apples than the upstream map (median 30 against 64). See the open decision in `NOTES.md`.
+
+### Protocol v2 at 3 agents (1 teacher, 1 learner, 1 bystander)
+
+The dilemma check chose 3 agents for Phase 4, so protocol v2 was repeated in that setting with the same groups, questions and criteria (`configs/protocol_v2_3agents.yaml`, committed in `8001726` before the run). The only changes are the roles, a new seed, 32 episodes per seed unit instead of 16, and the prediction for the indifferent null in Q4, which was changed to "unsure" because the teacher is now a third of the population. Full report: `results/protocol_v2_3agents_summary.md`. Suite v2, 28 maps, 10 seed units x 32 episodes, 143,000 learner agent-episodes.
+
+| Question | 7 agents | 3 agents |
+|---|---|---|
+| Q1 Apples regrown per episode (indifferent, minimal, sustainable) | 0.53, 0.69, 1.16. Full order on 26 of 28 maps | 0.9, 1.4, 2.9. Full order on all 28 maps |
+| Q1 Mean apple stock (same groups) | 0.52, 0.59, 0.61 | 0.87, 0.99, 1.06 |
+| Q2 Blind ratio (regrowth gain from minimal to sustainable over the gain from indifferent to minimal) | 2.8 (CI 2.2 to 3.8) | 3.1 (CI 2.8 to 3.4) |
+| Q2 Apples given up by the sustainable rule | 18% | 13.5% |
+| Q3 Largest relative change under limited view, harm per episode (max 0.10) | 0.42, fails | 0.52, fails |
+| Q3 Same, harm per opportunity, per apple, per onset | 0.015, 0.066, 0.049, all pass | 0.009, 0.074, 0.072, all pass |
+| Q4 Teacher gap per opportunity, three cues | 0.84 to 0.85 | 0.94 to 0.95 |
+| Q4 Teacher gap per onset, three cues | 0.41 to 0.43 | 0.47 to 0.51 |
+| Q4 Indifferent null (margin +-0.05) | -0.011 (CI -0.016 to -0.006), passes | +0.003 (CI 0.001 to 0.004), passes |
+| Q5 Near agents, gaps by the two recorded cues | 0.31 and 0.27 | 0.30 and 0.33 |
+
+All 16 pass/fail checks give the same verdict as at 7 agents. The conclusions in the previous section hold in the Phase 4 setting: the harm metrics see compliance with the last-apple rule but not the larger gain from the sustainable rule, competence independence holds under limited view for every metric except harm per episode, and the condition-level teacher gap detects all three cues while within-episode splits miss the near cue about threefold. With one bystander instead of three, the commons holds more apples and the order of the groups is cleaner, but the mean stock is still about 1 apple, so the commons is mostly depleted at 3 agents as well.
 
 ### Phase 3 pilot results (4 seed units x 8 episodes, all 24 maps)
 

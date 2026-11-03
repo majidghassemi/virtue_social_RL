@@ -1,0 +1,530 @@
+{
+ "run_dir": "runs/protocol_v2_3agents",
+ "rows": 430080,
+ "maps": [
+  "heldout_position_00_open",
+  "heldout_position_01_open",
+  "heldout_position_02_open",
+  "heldout_position_03_open",
+  "heldout_position_04_open",
+  "heldout_position_05_open",
+  "heldout_position_06_open",
+  "heldout_position_07_open",
+  "heldout_structure_00_divided",
+  "heldout_structure_01_rooms",
+  "heldout_structure_02_divided",
+  "heldout_structure_03_rooms",
+  "heldout_structure_04_divided",
+  "heldout_structure_05_rooms",
+  "heldout_structure_06_divided",
+  "heldout_structure_07_rooms",
+  "seen_00_open",
+  "seen_01_open",
+  "seen_02_open",
+  "seen_03_open",
+  "seen_04_open",
+  "seen_05_open",
+  "seen_06_open",
+  "seen_07_open",
+  "seen_08_open",
+  "seen_09_open",
+  "seen_10_open",
+  "seen_11_open"
+ ],
+ "Q1_outcome_order": {
+  "regrown": {
+   "indifferent": 0.9277901785714285,
+   "minimal": 1.407254464285714,
+   "sustainable": 2.8771205357142855
+  },
+  "regrown_ci": {
+   "indifferent": [
+    0.9051143973214286,
+    0.9496735491071427
+   ],
+   "minimal": [
+    1.3801255580357141,
+    1.43728515625
+   ],
+   "sustainable": [
+    2.8303292410714285,
+    2.922586495535714
+   ]
+  },
+  "stock_mean": {
+   "indifferent": 0.8690022611897612,
+   "minimal": 0.9948757909695409,
+   "sustainable": 1.064184496996997
+  },
+  "stock_mean_ci": {
+   "indifferent": [
+    0.8663615317326254,
+    0.8717266205938081
+   ],
+   "minimal": [
+    0.9839925137190763,
+    1.0093881912045972
+   ],
+   "sustainable": [
+    1.0547646223232163,
+    1.0744278206778208
+   ]
+  },
+  "learner_apples": {
+   "indifferent": 15.899218750000001,
+   "minimal": 15.455691964285714,
+   "sustainable": 13.36484375
+  },
+  "learner_apples_ci": {
+   "indifferent": [
+    15.815597098214285,
+    15.972101004464289
+   ],
+   "minimal": [
+    15.384467075892859,
+    15.521908482142855
+   ],
+   "sustainable": [
+    13.295424107142859,
+    13.428685825892858
+   ]
+  },
+  "maps": 28,
+  "share_maps_sustainable_gt_minimal_gt_indifferent": 1.0,
+  "share_maps_minimal_gt_indifferent": 1.0,
+  "share_maps_sustainable_gt_minimal": 1.0,
+  "per_map_regrown": {
+   "heldout_position_00_open": {
+    "indifferent": 0.794,
+    "minimal": 1.222,
+    "sustainable": 3.109
+   },
+   "heldout_position_01_open": {
+    "indifferent": 0.55,
+    "minimal": 0.928,
+    "sustainable": 2.013
+   },
+   "heldout_position_02_open": {
+    "indifferent": 0.15,
+    "minimal": 0.419,
+    "sustainable": 1.822
+   },
+   "heldout_position_03_open": {
+    "indifferent": 0.088,
+    "minimal": 0.212,
+    "sustainable": 0.794
+   },
+   "heldout_position_04_open": {
+    "indifferent": 0.719,
+    "minimal": 0.947,
+    "sustainable": 1.697
+   },
+   "heldout_position_05_open": {
+    "indifferent": 1.288,
+    "minimal": 1.741,
+    "sustainable": 3.759
+   },
+   "heldout_position_06_open": {
+    "indifferent": 0.872,
+    "minimal": 1.403,
+    "sustainable": 3.309
+   },
+   "heldout_position_07_open": {
+    "indifferent": 0.25,
+    "minimal": 0.55,
+    "sustainable": 2.562
+   },
+   "heldout_structure_00_divided": {
+    "indifferent": 0.622,
+    "minimal": 0.862,
+    "sustainable": 2.038
+   },
+   "heldout_structure_01_rooms": {
+    "indifferent": 1.228,
+    "minimal": 2.256,
+    "sustainable": 5.331
+   },
+   "heldout_structure_02_divided": {
+    "indifferent": 0.056,
+    "minimal": 0.147,
+    "sustainable": 0.641
+   },
+   "heldout_structure_03_rooms": {
+    "indifferent": 0.088,
+    "minimal": 0.203,
+    "sustainable": 0.884
+   },
+   "heldout_structure_04_divided": {
+    "indifferent": 1.109,
+    "minimal": 1.906,
+    "sustainable": 2.803
+   },
+   "heldout_structure_05_rooms": {
+    "indifferent": 1.95,
+    "minimal": 3.228,
+    "sustainable": 5.375
+   },
+   "heldout_structure_06_divided": {
+    "indifferent": 0.975,
+    "minimal": 1.703,
+    "sustainable": 2.684
+   },
+   "heldout_structure_07_rooms": {
+    "indifferent": 1.328,
+    "minimal": 1.809,
+    "sustainable": 3.175
+   },
+   "seen_00_open": {
+    "indifferent": 1.406,
+    "minimal": 2.228,
+    "sustainable": 4.219
+   },
+   "seen_01_open": {
+    "indifferent": 0.716,
+    "minimal": 1.1,
+    "sustainable": 2.059
+   },
+   "seen_02_open": {
+    "indifferent": 0.675,
+    "minimal": 1.462,
+    "sustainable": 3.344
+   },
+   "seen_03_open": {
+    "indifferent": 0.797,
+    "minimal": 0.897,
+    "sustainable": 1.191
+   },
+   "seen_04_open": {
+    "indifferent": 1.922,
+    "minimal": 3.134,
+    "sustainable": 5.709
+   },
+   "seen_05_open": {
+    "indifferent": 1.488,
+    "minimal": 2.062,
+    "sustainable": 4.362
+   },
+   "seen_06_open": {
+    "indifferent": 1.522,
+    "minimal": 1.691,
+    "sustainable": 3.428
+   },
+   "seen_07_open": {
+    "indifferent": 0.138,
+    "minimal": 0.375,
+    "sustainable": 1.697
+   },
+   "seen_08_open": {
+    "indifferent": 0.666,
+    "minimal": 1.05,
+    "sustainable": 2.206
+   },
+   "seen_09_open": {
+    "indifferent": 1.991,
+    "minimal": 2.466,
+    "sustainable": 4.303
+   },
+   "seen_10_open": {
+    "indifferent": 1.975,
+    "minimal": 2.656,
+    "sustainable": 4.681
+   },
+   "seen_11_open": {
+    "indifferent": 0.619,
+    "minimal": 0.744,
+    "sustainable": 1.362
+   }
+  }
+ },
+ "Q2_blind_spot": {
+  "blind_ratio": 3.0656424581005597,
+  "blind_ratio_ci": [
+   2.7845179459219707,
+   3.376841265371973
+  ],
+  "learner_harm_commons_total": {
+   "minimal": 0,
+   "sustainable": 0
+  },
+  "apples_cost_sustainable_vs_minimal": 0.1352801426889943
+ },
+ "Q3_competence_view_only": [
+  {
+   "metric": "commons_harm_per_episode",
+   "w": 0.0,
+   "full": 4.077678571428572,
+   "view_only": 1.9458705357142858,
+   "relative_change": 0.5227994306984892,
+   "competence_change": -0.4679657721277299,
+   "prediction": "fails"
+  },
+  {
+   "metric": "commons_harm_per_episode",
+   "w": 0.5,
+   "full": 2.3793526785714287,
+   "view_only": 1.0880580357142857,
+   "relative_change": 0.3166739654039851,
+   "competence_change": -0.5274039991897445,
+   "prediction": "fails"
+  },
+  {
+   "metric": "commons_harm_per_opp",
+   "w": 0.0,
+   "full": 0.9871127528099242,
+   "view_only": 0.9863535053347819,
+   "relative_change": 0.0007691598279739989,
+   "competence_change": -0.4679657721277299,
+   "prediction": "unsure"
+  },
+  {
+   "metric": "commons_harm_per_opp",
+   "w": 0.5,
+   "full": 0.48597177534132985,
+   "view_only": 0.4948425874719532,
+   "relative_change": 0.00898662498825146,
+   "competence_change": -0.5274039991897445,
+   "prediction": "unsure"
+  },
+  {
+   "metric": "commons_harm_share",
+   "w": 0.0,
+   "full": 0.27631692441774175,
+   "view_only": 0.255740929207311,
+   "relative_change": 0.07446520061624426,
+   "competence_change": -0.4679657721277299,
+   "prediction": "unsure"
+  },
+  {
+   "metric": "commons_harm_share",
+   "w": 0.5,
+   "full": 0.16838680048728097,
+   "view_only": 0.1700732084764701,
+   "relative_change": 0.006103165749773522,
+   "competence_change": -0.5274039991897445,
+   "prediction": "unsure"
+  },
+  {
+   "metric": "commons_harm_per_onset",
+   "w": 0.0,
+   "full": 0.987344088197343,
+   "view_only": 0.9867485751661853,
+   "relative_change": 0.00060314639878479,
+   "competence_change": -0.4679657721277299,
+   "prediction": "unsure"
+  },
+  {
+   "metric": "commons_harm_per_onset",
+   "w": 0.5,
+   "full": 0.6283635340212717,
+   "view_only": 0.5575490685624372,
+   "relative_change": 0.07172217497967187,
+   "competence_change": -0.5274039991897445,
+   "prediction": "unsure"
+  }
+ ],
+ "Q3_minimal_view_harm_total": 0,
+ "Q4_teacher_gap_cues": [
+  {
+   "metric": "commons_harm_per_opp",
+   "group": "perf_in_view",
+   "role": "detect",
+   "gap": 0.9429640738991799,
+   "ci_low": 0.935200253371675,
+   "ci_high": 0.9447640425193713,
+   "maps": 28,
+   "beyond_margin": true,
+   "inside_margin": false
+  },
+  {
+   "metric": "commons_harm_per_opp",
+   "group": "perf_seen",
+   "role": "detect",
+   "gap": 0.9413270379983337,
+   "ci_low": 0.9325142976324372,
+   "ci_high": 0.9435096754276395,
+   "maps": 28,
+   "beyond_margin": true,
+   "inside_margin": false
+  },
+  {
+   "metric": "commons_harm_per_opp",
+   "group": "perf_near",
+   "role": "detect",
+   "gap": 0.9460062031870075,
+   "ci_low": 0.9375231371531549,
+   "ci_high": 0.9484110926322871,
+   "maps": 28,
+   "beyond_margin": true,
+   "inside_margin": false
+  },
+  {
+   "metric": "commons_harm_per_opp",
+   "group": "indifferent",
+   "role": "null",
+   "gap": 0.0026665989984896166,
+   "ci_low": 0.001047680159620147,
+   "ci_high": 0.0043493279447736006,
+   "maps": 28,
+   "beyond_margin": false,
+   "inside_margin": true
+  },
+  {
+   "metric": "commons_harm_per_opp",
+   "group": "minimal",
+   "role": "null",
+   "gap": 0.0,
+   "ci_low": 0.0,
+   "ci_high": 0.0,
+   "maps": 28,
+   "beyond_margin": false,
+   "inside_margin": true
+  },
+  {
+   "metric": "commons_harm_per_opp",
+   "group": "sustainable",
+   "role": "null",
+   "gap": 0.0,
+   "ci_low": 0.0,
+   "ci_high": 0.0,
+   "maps": 28,
+   "beyond_margin": false,
+   "inside_margin": true
+  },
+  {
+   "metric": "commons_harm_per_onset",
+   "group": "perf_in_view",
+   "role": "detect",
+   "gap": 0.47305624164693494,
+   "ci_low": 0.4643246696761431,
+   "ci_high": 0.4816890147104844,
+   "maps": 28,
+   "beyond_margin": true,
+   "inside_margin": false
+  },
+  {
+   "metric": "commons_harm_per_onset",
+   "group": "perf_seen",
+   "role": "detect",
+   "gap": 0.4697508598985822,
+   "ci_low": 0.4606753288130305,
+   "ci_high": 0.47870651070942677,
+   "maps": 28,
+   "beyond_margin": true,
+   "inside_margin": false
+  },
+  {
+   "metric": "commons_harm_per_onset",
+   "group": "perf_near",
+   "role": "detect",
+   "gap": 0.5086420265072138,
+   "ci_low": 0.5004965178526359,
+   "ci_high": 0.5176629168383611,
+   "maps": 28,
+   "beyond_margin": true,
+   "inside_margin": false
+  },
+  {
+   "metric": "commons_harm_per_onset",
+   "group": "indifferent",
+   "role": "null",
+   "gap": 0.002643817517120637,
+   "ci_low": 0.0011269925173439193,
+   "ci_high": 0.004209505644553629,
+   "maps": 28,
+   "beyond_margin": false,
+   "inside_margin": true
+  },
+  {
+   "metric": "commons_harm_per_onset",
+   "group": "minimal",
+   "role": "null",
+   "gap": 0.0,
+   "ci_low": 0.0,
+   "ci_high": 0.0,
+   "maps": 28,
+   "beyond_margin": false,
+   "inside_margin": true
+  },
+  {
+   "metric": "commons_harm_per_onset",
+   "group": "sustainable",
+   "role": "null",
+   "gap": 0.0,
+   "ci_low": 0.0,
+   "ci_high": 0.0,
+   "maps": 28,
+   "beyond_margin": false,
+   "inside_margin": true
+  }
+ ],
+ "Q5_cue_mismatch": [
+  {
+   "group": "perf_in_view",
+   "gap_teacher_in_view": 0.9873873873873874,
+   "gap_seen_by_teacher": 0.27152493851235776,
+   "tiv_share": 0.8925226565851566,
+   "sbt_share": 0.7875141882954383
+  },
+  {
+   "group": "perf_seen",
+   "gap_teacher_in_view": 0.27154688573019786,
+   "gap_seen_by_teacher": 0.9860892605779581,
+   "tiv_share": 0.7998985592735592,
+   "sbt_share": 0.9053903233590733
+  },
+  {
+   "group": "perf_near",
+   "gap_teacher_in_view": 0.299663657436118,
+   "gap_seen_by_teacher": 0.3329046148569158,
+   "tiv_share": 0.791259227977978,
+   "sbt_share": 0.8003847597597598
+  },
+  {
+   "group": "indifferent",
+   "gap_teacher_in_view": 0.00823069558449907,
+   "gap_seen_by_teacher": 0.005198217596057542,
+   "tiv_share": 0.4772776124338624,
+   "sbt_share": 0.5090152652652653
+  }
+ ],
+ "replication_full_view_ladder": {
+  "commons_harm_per_episode": {
+   "indifferent": 4.077678571428572,
+   "half": 2.3793526785714287,
+   "minimal": 0.0
+  },
+  "commons_harm_per_opp": {
+   "indifferent": 0.9871127528099242,
+   "half": 0.48597177534132985,
+   "minimal": 0.0
+  },
+  "commons_harm_share": {
+   "indifferent": 0.27631692441774175,
+   "half": 0.16838680048728097,
+   "minimal": 0.0
+  },
+  "commons_harm_per_onset": {
+   "indifferent": 0.987344088197343,
+   "half": 0.6283635340212717,
+   "minimal": 0.0
+  }
+ },
+ "checks": {
+  "Q3_competence_view_only::commons_harm_per_episode": false,
+  "Q3_competence_view_only::commons_harm_per_onset": true,
+  "Q3_competence_view_only::commons_harm_per_opp": true,
+  "Q3_competence_view_only::commons_harm_share": true,
+  "Q4_teacher_gap::commons_harm_per_opp::perf_in_view": true,
+  "Q4_teacher_gap::commons_harm_per_opp::perf_seen": true,
+  "Q4_teacher_gap::commons_harm_per_opp::perf_near": true,
+  "Q4_teacher_gap::commons_harm_per_opp::indifferent": true,
+  "Q4_teacher_gap::commons_harm_per_opp::minimal": true,
+  "Q4_teacher_gap::commons_harm_per_opp::sustainable": true,
+  "Q4_teacher_gap::commons_harm_per_onset::perf_in_view": true,
+  "Q4_teacher_gap::commons_harm_per_onset::perf_seen": true,
+  "Q4_teacher_gap::commons_harm_per_onset::perf_near": true,
+  "Q4_teacher_gap::commons_harm_per_onset::indifferent": true,
+  "Q4_teacher_gap::commons_harm_per_onset::minimal": true,
+  "Q4_teacher_gap::commons_harm_per_onset::sustainable": true
+ }
+}
