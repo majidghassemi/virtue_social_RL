@@ -121,6 +121,7 @@ class Trainer:
         self.obs_shape = tuple(obs.shape[1:])
         self.slots = np.asarray(self.train_slots)        # array index (a tuple would index axes)
         self.network = ActorCritic(envs[0].action_space().n, activation=cfg.activation)
+        self.frozen_network = ActorCritic(envs[0].action_space().n, activation=cfg.activation)
         unroll = cfg.unroll_update if cfg.unroll_update is not None else jax.default_backend() == "cpu"
         self.unroll_mb = cfg.num_minibatches if unroll else 1
         self.unroll_ep = cfg.update_epochs if unroll else 1
@@ -146,6 +147,14 @@ class Trainer:
         return RunnerState(ts, tuple(states), tuple(obs), rng, jnp.int32(0))
 
     # ------------------------------------------------------------ rollout
+    def _frozen_actions(self, obs_all, actions, key):
+        """Fill the frozen slots of `actions` (B, N) by sampling their networks."""
+        for j, (slot, fp) in enumerate(sorted(self.frozen.items())):
+            pj, _ = self.frozen_network.apply(fp, obs_all[:, slot].astype(jnp.float32))
+            actions = actions.at[:, slot].set(
+                pj.sample(seed=jax.random.fold_in(key, j)).astype(jnp.int32))
+        return actions
+
     def _act(self, params, obs_all, key):
         """obs_all (B, N, ...) uint8 -> actions (B, N), plus logp and value of trainable slots."""
         b = obs_all.shape[0]
@@ -156,30 +165,36 @@ class Trainer:
         logp = pi.log_prob(a_train)
         actions = jnp.zeros((b, self.n), jnp.int32)
         actions = actions.at[:, self.slots].set(a_train.reshape(b, -1).astype(jnp.int32))
-        for j, (slot, fp) in enumerate(sorted(self.frozen.items())):
-            pj, _ = self.network.apply(fp, obs_all[:, slot].astype(jnp.float32))
-            actions = actions.at[:, slot].set(
-                pj.sample(seed=jax.random.fold_in(k_frozen, j)).astype(jnp.int32))
-        return actions, a_train, logp, value
+        return self._frozen_actions(obs_all, actions, k_frozen), a_train, logp, value
+
+    def _step_groups(self, states, actions, key):
+        """Step every map group. Returns obs and states (tuples), rewards (B, N), done (B,), ethics."""
+        new_obs, new_states, rews, dones, eths = [], [], [], [], []
+        for i, env in enumerate(self.envs):
+            a = actions[i * self.e:(i + 1) * self.e]
+            o, st, r, d, _, eth = jax.vmap(env.step)(
+                jax.random.split(jax.random.fold_in(key, i), self.e), states[i], a)
+            new_obs.append(o.astype(jnp.uint8))
+            new_states.append(st)
+            rews.append(r)
+            dones.append(d["__all__"])
+            eths.append(eth)
+        eth = jax.tree.map(lambda *x: jnp.concatenate(x, 0), *eths)
+        return (tuple(new_obs), tuple(new_states), jnp.concatenate(rews, 0),
+                jnp.concatenate(dones, 0), eth)
+
+    def _log(self, r_env, shaped, actions, eth):
+        return {"r_env": r_env, "shaped": shaped, "zap": (actions == ZAP),
+                "harm_commons": eth.harm_commons, "opp_commons": eth.opp_commons,
+                "harm_zap": eth.harm_zap, "teacher_in_view": eth.teacher_in_view,
+                "regrown": eth.regrown[:, 0], "stock": eth.stock[:, 0]}
 
     def _env_step(self, carry, _):
         ts, states, obs, rng = carry
         rng, k_act, k_step = jax.random.split(rng, 3)
         obs_all = jnp.concatenate(obs, axis=0)
         actions, a_train, logp, value = self._act(ts.params, obs_all, k_act)
-        new_obs, new_states, rews, dones, eths = [], [], [], [], []
-        for i, env in enumerate(self.envs):
-            a = actions[i * self.e:(i + 1) * self.e]
-            o, s, r, d, _, eth = jax.vmap(env.step)(
-                jax.random.split(jax.random.fold_in(k_step, i), self.e), states[i], a)
-            new_obs.append(o.astype(jnp.uint8))
-            new_states.append(s)
-            rews.append(r)
-            dones.append(d["__all__"])
-            eths.append(eth)
-        r_env = jnp.concatenate(rews, 0)                               # (B, N)
-        done = jnp.concatenate(dones, 0)                               # (B,)
-        eth = jax.tree.map(lambda *x: jnp.concatenate(x, 0), *eths)
+        new_obs, new_states, r_env, done, eth = self._step_groups(states, actions, k_step)
         shaped = R.shape(r_env, self.reward.kind, self.lam, self.svo_w)
         s = len(self.train_slots)
         tr = Transition(
@@ -190,10 +205,7 @@ class Trainer:
             log_prob=logp,
             obs=obs_all[:, self.slots].reshape(-1, *self.obs_shape),
         )
-        log = {"r_env": r_env, "shaped": shaped, "zap": (actions == ZAP),
-               "harm_commons": eth.harm_commons, "opp_commons": eth.opp_commons,
-               "harm_zap": eth.harm_zap, "regrown": eth.regrown[:, 0], "stock": eth.stock[:, 0]}
-        return (ts, tuple(new_states), tuple(new_obs), rng), (tr, log)
+        return (ts, new_states, new_obs, rng), (tr, self._log(r_env, shaped, actions, eth))
 
     # ------------------------------------------------------------ update
     def _loss(self, params, batch, gae, targets):
@@ -248,21 +260,26 @@ class Trainer:
         (ts, rng), losses = jax.lax.scan(epoch, (ts, rng), None, c.update_epochs,
                                           unroll=self.unroll_ep)
 
+        metrics = self._episode_metrics(log)
+        metrics.update({"loss_total": losses[0].mean(), "loss_value": losses[1].mean(),
+                        "loss_actor": losses[2].mean(), "entropy": losses[3].mean()})
+        return RunnerState(ts, states, obs, rng, upd + 1), metrics
+
+    @staticmethod
+    def _episode_metrics(log):
         # One rollout is one episode per environment, so sums over time are per episode.
         ep = lambda x: x.astype(jnp.float32).sum(0).mean(0)            # (T, B, N) -> (N,)
-        metrics = {
+        return {
             "apples": ep(log["r_env"]),
             "shaped_return": ep(log["shaped"]),
             "harm_commons": ep(log["harm_commons"]),
             "opp_commons": ep(log["opp_commons"]),
             "harm_zap": ep(log["harm_zap"]),
             "zaps": ep(log["zap"]),
+            "teacher_in_view": ep(log["teacher_in_view"]),
             "regrown": log["regrown"].astype(jnp.float32).sum(0).mean(),
             "stock": log["stock"].astype(jnp.float32).mean(),
-            "loss_total": losses[0].mean(), "loss_value": losses[1].mean(),
-            "loss_actor": losses[2].mean(), "entropy": losses[3].mean(),
         }
-        return RunnerState(ts, states, obs, rng, upd + 1), metrics
 
     @partial(jax.jit, static_argnums=(0, 2))
     def _run_scan(self, runner: RunnerState, num_updates: int):

@@ -264,3 +264,17 @@ Predictions against outcomes:
 | Q5 each group largest on its own cue | Holds. In-view agents 0.99 against 0.27, seen agents 0.99 against 0.27. Near agents 0.30 and 0.33 |
 
 Commons at 3 agents: mean stock 0.87 (indifferent learner), 0.99 (minimal) and 1.06 (sustainable), 0.9 to 2.9 apples regrown per episode, a little below the upstream default map with 7 agents (stock 1.06 to 1.18, 2.0 to 3.5 regrown). Learner apples per episode: 15.9, 15.5 and 13.4. The commons is healthier than at 7 agents but still mostly depleted, so the open decision on commons dynamics above still applies to Phase 4.
+
+## Phase 4 training design (code in `src/virtue_rl/train/`, not yet trained)
+
+Disposition as an objective: a teacher's ethics is a weight lam on the other agents' apples in its own training reward, u_i = r_i + lam * mean_{j != i} r_j. Nobody writes down which apples to leave, so the behaviour that results is whatever PPO finds. This is the working definition of an intrinsically ethical agent for the thesis. Motive is still not observable, and a lam agent behaves like a consequentialist one, which the paper should state.
+
+The linear form is not McKee et al.'s. Their SVO reward (AAMAS 2020, Eq. 2 and 3) is u_i = r_i - w |theta_target - atan(mean_{j != i} r_j / r_i)|, implemented in `rewards.svo` as an option. SocialJax's `get_svo_rewards` multiplies the penalty by the number of agents, which the paper does not.
+
+Social learner, following Ndousse et al. 2021 (arXiv 2010.00581, checked against the paper): PPO with GAE on the agent's own reward, no access to other agents' states, actions or rewards, conv layers then a 192-unit FC layer and a 192-unit LSTM, two-layer heads, and an auxiliary branch that predicts the next state from the current state and action with mean absolute error, weight c_aux = 3. Paper details that are open or garbled: the auxiliary input (the appendix lists it as "FC (192 + 7.576)"), the target format, and masking at episode ends. Our choices: LSTM output plus one-hot action, sigmoid output on the binary observation channels, loss masked on the last step of each episode. Truncated BPTT on 20-step segments (paper 16, 20 divides the 1,000-step episode). c_V and c_ent are SocialJax's Harvest values (0.5, 0.01), not the paper's (0.1, 1e-5), so teachers and learners share one PPO setup. The paper trains social learners with experts present in every episode by default, and reports that mixing in solo episodes (75% solo, 25% social) kept solo skill. The teacher-absent maps make that mixing possible here later.
+
+Engineering notes:
+
+* SocialJax compiles each map's spawn cells into the environment, and maps differ in the number of apple cells, so a run with 12 maps holds 12 groups of parallel environments stepped one after another inside the rollout. One policy forward pass serves all of them.
+* XLA:CPU runs convolution gradients inside a rolled loop (lax.scan) about 40 times slower than outside one (0.16 s unrolled against 6.9 s rolled for 4 minibatch steps, measured here). On CPU the trainer unrolls the epoch and minibatch loops and loops over updates in Python. On GPU the loops stay rolled, as in SocialJax.
+* Observations are binary, so the rollout buffer stores them as uint8 (a quarter of the float32 memory).

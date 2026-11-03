@@ -1,5 +1,6 @@
 #!/bin/bash
 # Train the 9 prosocial populations (3 lam x 3 seeds) as a Slurm array job.
+# Array index = i_condition * 3 + i_seed (lam0: 0-2, lam0.5: 3-5, lam1: 6-8).
 #
 #   sbatch scripts/slurm/train_prosocial.sh                 # all 9 runs
 #   sbatch --array=0 scripts/slurm/train_prosocial.sh       # one run (lam 0, seed 0)
@@ -12,7 +13,7 @@
 #
 # Edit the account, GPU request and time for your cluster. A run that hits the
 # time limit can be resubmitted with the same array index: it resumes from
-# runs/train/prosocial_v1/lam<lam>_seed<seed>/runner.msgpack.
+# runs/train/prosocial_v1/<condition>_seed<seed>/runner.msgpack.
 #SBATCH --job-name=prosocial_v1
 #SBATCH --array=0-8
 #SBATCH --gpus-per-node=1

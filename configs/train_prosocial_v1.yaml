@@ -26,9 +26,11 @@ teacher_present: true
 roles: {num_learners: 1, num_bystanders: 1}
 train_slots: [0, 1, 2]
 reward: {kind: prosocial}
-grid:
-  lam: [0.0, 0.5, 1.0]
-  seed: [0, 1, 2]
+conditions:
+  lam0: {lam: 0.0}
+  lam0.5: {lam: 0.5}
+  lam1: {lam: 1.0}
+seeds: [0, 1, 2]
 ppo:
   lr: 0.0005
   envs_per_map: 24

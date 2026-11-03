@@ -54,7 +54,7 @@ Both run scripts skip maps that are already finished, so an interrupted run resu
 | Path | Contents |
 |---|---|
 | `third_party/SocialJax` | SocialJax, pinned as a git submodule at commit `18e2171` |
-| `src/virtue_rl` | this project's code (`envs/` holds the ethics wrapper) |
+| `src/virtue_rl` | this project's code (`envs/` ethics wrapper and maps, `agents/` scripted and learned-slot policies, `metrics/`, `train/` PPO trainers) |
 | `scripts/` | runnable entry points |
 | `tests/` | unit tests |
 | `configs/` | YAML configs (roles, environment, map suite) |
@@ -72,10 +72,10 @@ SocialJax is not packaged upstream, so `pyproject.toml` exposes its `socialjax` 
 | 1. Ethics wrapper | Done | Per-agent ethics record on every step, teacher channel in observations, role configuration |
 | 2. Maps and splits | Done | Seeded map generator, 24-map suite in three splits, teacher-absent condition, provisional cost bands, per-map runner |
 | 3. Scripted ladder and metrics | Done | Scripted agents with known dispositions, behaviour and validity metrics, pre-registered protocol, full run on 24 maps, crossed virtue x competence ladder, map suite v2 balanced on the measured cost of virtue, protocol v2 with known groups not defined by the metric's rule, social dilemma check (3 agents chosen), protocol v2 repeated at 3 agents |
-| 4. Learned agents | Planned | PPO, PPO with harm penalty, SVO, behaviour cloning, social learner (needs the GPU benchmark first) |
+| 4. Learned agents | In progress | Code done and tested on CPU: trainer for teachers with a prosocial disposition (4a) and the social learner of Ndousse et al. 2021 (4b). Training runs on GPU next. Later: PPO with harm penalty, behaviour cloning |
 | 5. Analysis | Planned | Figures and a script that regenerates every reported number from raw logs |
 
-Test status: 91 tests pass (`pytest -q`).
+Test status: 104 tests pass (`pytest -q`).
 
 ## Design decisions
 
@@ -246,6 +246,26 @@ The dilemma check chose 3 agents for Phase 4, so protocol v2 was repeated in tha
 | Q5 Near agents, gaps by the two recorded cues | 0.31 and 0.27 | 0.30 and 0.33 |
 
 All 16 pass/fail checks give the same verdict as at 7 agents. The conclusions in the previous section hold in the Phase 4 setting: the harm metrics see compliance with the last-apple rule but not the larger gain from the sustainable rule, competence independence holds under limited view for every metric except harm per episode, and the condition-level teacher gap detects all three cues while within-episode splits miss the near cue about threefold. With one bystander instead of three, the commons holds more apples and the order of the groups is cleaner, but the mean stock is still about 1 apple, so the commons is mostly depleted at 3 agents as well.
+
+### Phase 4: learned teachers and social learners (code ready, not yet trained)
+
+Why: every ethical agent in Phases 3 and protocol v2 follows a hand-written rule, the teacher included. A virtuous disposition is not a rule, so the thesis needs a teacher whose ethics sits in its objective and a learner that is never given that objective.
+
+| Stage | Agent | Training signal | Config |
+|---|---|---|---|
+| 4a teachers | All 3 agents share one network and one disposition lam (0, 0.5 or 1), 3 seeds each | Own apples + lam x mean apples of the other agents | `configs/train_prosocial_v1.yaml` |
+| 4b learners | Slot 1 learns. Slot 0 is a frozen 4a teacher, slot 2 a frozen lam 0 agent | Own apples only (lam 0), plus the auxiliary next-observation loss | `configs/train_social_v1.yaml` (draft) |
+
+Learner conditions: social learner with a lam 1 teacher (main), with a lam 0 teacher (separates acquiring virtue from copying competence), the same network without the auxiliary loss (social learning against plain RL), and with the teacher walled in (no teacher).
+
+Implementation (`src/virtue_rl/train/`):
+
+* `ppo.py`: independent PPO following SocialJax's IPPO baseline (same network, loss, GAE and learning-rate schedule, SocialJax's Harvest defaults). Adds several maps per run (one group of parallel envs per map), the ethics wrapper, disposition rewards, frozen slots, and chunked, resumable training.
+* `social.py`: recurrent PPO with the auxiliary predictive loss of Ndousse et al. 2021 (conv layers, 192-unit LSTM, decoder that predicts the next observation from the LSTM output and the action, mean absolute error, c_aux = 3). The choices the paper leaves open are listed in the module docstring.
+* `rewards.py`: the prosocial reward above and the SVO reward of McKee et al. 2020 (as an option, not used yet).
+* `scripts/train.py` runs one (condition, seed) or a Slurm array index. `scripts/slurm/train_prosocial.sh` and `train_social.sh` submit all runs.
+
+Measured on this 2-core CPU: one update over the 12 training maps compiles in about 2 minutes and runs at about 460 environment steps per second, so a 1e8-step run needs a GPU. Run `scripts/train.py --bench 3` on a GPU node first to set the job time.
 
 ### Phase 3 pilot results (4 seed units x 8 episodes, all 24 maps)
 

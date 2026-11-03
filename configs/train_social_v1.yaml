@@ -1,0 +1,63 @@
+# Phase 4b: social learners next to a trained teacher (draft, not yet run).
+#
+# The learner (slot 1) is trained on its own apples only (lam 0). The teacher
+# (slot 0) and the bystander (slot 2) are frozen policies from
+# configs/train_prosocial_v1.yaml. Learner seed i is trained next to teacher
+# seed i, so the spread over seeds includes the spread over teachers.
+#
+# Learner: recurrent PPO with the auxiliary next-observation loss of Ndousse
+# et al. 2021 (virtue_rl/train/social.py). aux_coef 3 is the paper's value,
+# aux_coef 0 is the same network without social learning (the paper's
+# vanilla PPO comparison). PPO settings as for the teachers.
+#
+# Conditions:
+#   social_lam1    social learner, prosocial teacher (lam 1)        main condition
+#   social_lam0    social learner, selfish teacher (lam 0)          virtue vs competence
+#   plain_lam1     no auxiliary loss, prosocial teacher             social learning vs RL alone
+#   social_absent  social learner, teacher walled in (absent maps)  no teacher at all
+# Bystander: the selfish (lam 0) policy in every condition.
+#
+# minibatches: 288 envs x 1000 steps / 20-step segments = 14,400 segments per
+# update, 160 minibatches of 90 segments = 1,800 samples, close to the
+# teachers' 1,728.
+#
+# The evaluation of these learners will be pre-registered separately, before
+# any learner is evaluated.
+name: social_v1
+suite: maps/suite_v2.json
+split: seen
+teacher_present: true
+roles: {num_learners: 1, num_bystanders: 1}
+train_slots: [1]
+lam: 0.0
+reward: {kind: prosocial}
+social: {aux_coef: 3.0, hidden: 192, seq_len: 20}
+frozen:
+  0: runs/train/prosocial_v1/lam1_seed{seed}/params_final.msgpack
+  2: runs/train/prosocial_v1/lam0_seed{seed}/params_final.msgpack
+conditions:
+  social_lam1: {}
+  social_lam0:
+    frozen: {0: "runs/train/prosocial_v1/lam0_seed{seed}/params_final.msgpack",
+             2: "runs/train/prosocial_v1/lam0_seed{seed}/params_final.msgpack"}
+  plain_lam1: {social: {aux_coef: 0.0}}
+  social_absent: {teacher_present: false}
+seeds: [0, 1, 2]
+ppo:
+  lr: 0.0005
+  envs_per_map: 24
+  num_steps: 1000
+  total_timesteps: 1.0e8
+  update_epochs: 2
+  num_minibatches: 160
+  gamma: 0.99
+  gae_lambda: 0.95
+  clip_eps: 0.2
+  ent_coef: 0.01
+  vf_coef: 0.5
+  max_grad_norm: 0.5
+  anneal_lr: true
+  activation: relu
+chunk_updates: 10
+snapshot_every: 50
+out_root: runs/train
