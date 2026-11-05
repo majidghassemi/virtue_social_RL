@@ -34,5 +34,8 @@ else
     if [[ "$out" != *"backend gpu"* ]]; then echo "JAX does not see a GPU"; exit 1; fi
     echo "GPU found with the cuda module"
 fi
-.venv/bin/python -m pytest -q tests/test_train.py tests/test_social.py
+# Tests at deterministic GPU settings. A failure is reported but does not stop
+# the benchmark below, which uses the normal (fast) settings of training.
+XLA_FLAGS="--xla_gpu_deterministic_ops=true" .venv/bin/python -m pytest -q -rA tests/test_train.py tests/test_social.py \
+    || echo "SOME TESTS FAILED (see above). Continuing with the benchmark."
 .venv/bin/python scripts/train.py --config configs/train_prosocial_v1.yaml --bench 3

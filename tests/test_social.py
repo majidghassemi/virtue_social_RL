@@ -87,18 +87,31 @@ def test_aux_coef_controls_decoder_training(envs, frozen, aux, changes):
 
 
 def test_rolled_loops_match_unrolled(envs, frozen):
-    """The GPU code path (rolled loops, one scan over updates) gives the CPU path's result."""
+    """The GPU code path (rolled loops, one scan over updates) gives the CPU path's result.
+
+    Run at full float32 precision: on GPUs the default precision of matrix
+    products and convolutions is reduced (TF32 on H100), which by itself makes
+    two differently compiled programs drift apart over many PPO steps. With
+    --xla_gpu_deterministic_ops=true (set by scripts/slurm/check_gpu.sh) the
+    comparison is then exact up to rounding.
+    """
     import dataclasses
-    for make in (lambda c: Trainer(envs, c, RewardConfig("prosocial", (1.0,) * 3), train_slots=(0, 1, 2)),
-                 lambda c: SocialTrainer(envs, c, SocialConfig(seq_len=5), RewardConfig("prosocial", (0.0,) * 3),
-                                         train_slots=(1,), frozen={0: frozen, 2: frozen})):
+    for name, make in (
+            ("feedforward", lambda c: Trainer(envs, c, RewardConfig("prosocial", (1.0,) * 3),
+                                              train_slots=(0, 1, 2))),
+            ("social", lambda c: SocialTrainer(envs, c, SocialConfig(seq_len=5),
+                                               RewardConfig("prosocial", (0.0,) * 3),
+                                               train_slots=(1,), frozen={0: frozen, 2: frozen}))):
         outs = []
-        for unroll in (True, False):
-            tr = make(dataclasses.replace(cfg(), unroll_update=unroll))
-            assert (tr.unroll_mb == 1) == (not unroll)
-            r, m = tr.run(tr.init(jax.random.PRNGKey(5)), 2)
-            outs.append((jax.tree.leaves(r.train_state.params), m))
+        with jax.default_matmul_precision("highest"):
+            for unroll in (True, False):
+                tr = make(dataclasses.replace(cfg(), unroll_update=unroll))
+                assert (tr.unroll_mb == 1) == (not unroll)
+                r, m = tr.run(tr.init(jax.random.PRNGKey(5)), 2)
+                outs.append((jax.tree.leaves(r.train_state.params), m))
         (pa, ma), (pb, mb) = outs
-        assert all(np.allclose(a, b, atol=1e-5) for a, b in zip(pa, pb))
+        diff = max(float(np.max(np.abs(np.asarray(a) - np.asarray(b)))) for a, b in zip(pa, pb))
+        print(f"{name}: largest parameter difference rolled vs unrolled {diff:.2e}")
+        assert all(np.allclose(a, b, atol=1e-5) for a, b in zip(pa, pb)), f"{name}: max diff {diff:.2e}"
         for k in ma:
-            assert np.allclose(ma[k], mb[k], atol=1e-4), k
+            assert np.allclose(ma[k], mb[k], atol=1e-4), (name, k)
